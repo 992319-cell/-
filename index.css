@@ -110,13 +110,25 @@
     top: 50%;
     right: 10%;
     transform: translateY(-50%);
-    width: 460px;
+    width: 500px;
+    height: 160px;
 }
 .spectrum .card li{
-    border-radius: 5px;
-    border: 1px solid;
+    position: absolute;
     width: 100%;
     padding: 20px;
+    border-radius: 5px;
+    border: 1px solid var(--line);
+    background: var(--white);;
+}
+.spectrum .card li:nth-child(1) {
+    transform: rotate(3deg);
+}
+.spectrum .card li:nth-child(2) {
+    transform: rotate(-1.5deg);
+}
+.spectrum .card li:nth-child(3) {
+    transform: rotate(0deg);
 }
 
 /* timeline */
