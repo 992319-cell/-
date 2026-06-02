@@ -1,0 +1,196 @@
+/* hero */
+.hero{
+    position: relative;
+    overflow: hidden;
+    min-height: 100svh;
+    padding: 60px 120px;
+}
+.hero::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-image: url('https://images.unsplash.com/photo-1706675804644-c8fa831038ad?w=1600&auto=format&fit=crop&q=80');
+    background-size: cover;
+    background-position: center;
+    z-index: -2;
+    opacity: 0.8;
+}
+.hero::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: 
+    linear-gradient(to right, rgba(10,12,16,0.95) 55%, rgba(10,12,16,0.35) 100%),
+    linear-gradient(to top, rgba(10,12,16,0.8) 0%, transparent 45%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.hero .title h2{
+    color: var(--white);
+    font-size: var(--fs-price);
+    margin-bottom: 28px;
+}
+.hero .title h2 span{
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.8);
+}
+.hero .title h3{
+    color: var(--white);
+    font-size: var(--fs-body);
+}
+.hero .content{
+    display: flex;
+    gap: 20px;
+    align-items: flex-end;
+    margin-top: 48px;
+}
+.hero .content p{
+    color: var(--muted-light);
+    font-size: var(--fs-sm);
+    letter-spacing: 0.1em;
+}
+.hero .footer{
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.hero .footer span{
+    display: block;
+    text-align: center;
+
+}
+.hero .footer p{
+    border: 1px solid;
+    flex:1;
+    font-size: var(--fs-amount);
+    padding: 12px 0;
+}
+
+.hero .footer p span:first-child{
+    font-family: 'Cormorant Garamond', serif;
+
+}
+
+.hero .footer p span:last-child{
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: var(--fs-body);
+}
+
+/* 光譜儀 */
+.spectrum,
+.timeline,
+.waitlist{
+    padding: 120px;
+    min-height: 100svh;
+}
+.spectrum .title h3{
+    text-indent: 1.5em;
+    margin-bottom: 20px;
+}
+.spectrum .content{
+    margin-block: 40px;
+    position: relative;
+}
+.spectrum .content p{
+    color: var(--muted);
+}
+.spectrum .card {
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    transform: translateY(-50%);
+    width: 460px;
+}
+.spectrum .card li{
+    border-radius: 5px;
+    border: 1px solid;
+    width: 100%;
+    padding: 20px;
+}
+
+/* timeline */
+.timeline{
+    background-image: url('https://images.unsplash.com/photo-1706675804644-c8fa831038ad?w=1600&auto=format&fit=crop&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+}
+.timeline::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.3);
+    z-index: 0;
+}
+.timeline > * {
+    position: relative;
+    z-index: 1;
+}
+.timeline .title h2,
+.waitlist .title h2{
+    color: var(--white);
+}
+.timeline .title h3,
+.waitlist .title h3{
+    color: var(--muted-light);
+}
+.timeline .title .btn-secondary{
+    color: var(--white);
+}
+.card{
+    margin-block: 20px;
+    align-items: center;
+}
+.timeline .card li {
+    background: var(--white);
+    padding: 20px;
+    margin-bottom: 12px;
+    width: 360px;
+}
+
+.timeline .card li:nth-child(even) {
+    margin-left: auto;
+}
+/* waitlist */
+.waitlist{
+    background-color: var(--dark);
+}
+.waitlist .content{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.waitlist .content .txt{
+    margin-block: 40px;
+    color: var(--line);
+    display: flex;
+    align-items: flex-end;
+    gap: 28px;
+}
+.waitlist .content .txt p{
+    font-size: var(--fs-sm);
+    letter-spacing: 0.1em;
+}
+.waitlist .content .svg-logo{
+    color: var(--white);
+    width: 400px;
+    height: 400px;
+}
+
+
+
+
+
+
