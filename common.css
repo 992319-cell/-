@@ -8,13 +8,15 @@
     --white: #fff;
     --ink: #0f0f0f;
     --muted: #777;
-    --muted-light: #aaa;
+    --muted-light: #cbcaca;
     --line: #e6e6e6;
     --bg-off: #f8f8f8;
-    --accent: #1E3F8A;
+    --accent: #5275c6;
     --accent-deep: #0F2D6E;
-    --accent-glow: rgba(15, 45, 110, 0.1);
-    --dark: #141820;
+    --accent-glow: rgba(10, 37, 94, 0.906);
+    --yellow: #fac23f;
+    --yellow-dark: #cb9820;
+    --dark: #1a1f2a;
 
     /* 文字尺寸 */
     --fs-hero: 86px;
@@ -96,7 +98,7 @@ nav{
     color: var(--muted-light);
 }
 h2 {
-    font-family: 'Cormorant Garamond', serif;
+    /* font-family: 'Cormorant Garamond', serif; */
     font-weight: 400;
     font-size: var(--fs-title);
     margin-block: 20px;
@@ -113,7 +115,7 @@ h3 {
 .btn-primary{
     width: 124px;
     display: block;
-    background-color: var(--white);
+    background-color: var(--yellow);
     padding: 12px 20px;
     display: flex;
     justify-content: space-between;
@@ -123,23 +125,24 @@ h3 {
     transition: background .2s;
 }
 .btn-primary:hover{
-    background-color: var(--muted);
+    background-color: var(--yellow-dark);
 }
 
 .btn-secondary{
-    width: 92px;
+    width: 124px;
     display: block;
-    padding: 12px 4px;
+    padding: 12px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 4px;
-    border-radius: 2px;
+    border-radius: 3px;
     transition: border .2s;
-    border-bottom: 1px solid;
+    background-color: var(--accent-deep);
+    color: var(--white);
 }
 .btn-secondary:hover{
-    border-bottom: 2px solid var(--accent);
+    background-color: var(--accent-glow);
 
 }
 
@@ -147,7 +150,7 @@ h3 {
 .spectrum .content p:first-child span{
     color: var(--ink);
     font-size: var(--fs-title);
-    font-family: 'DM Serif Display', sans-serif;
+    /* font-family: 'DM Sans Display', sans-serif; */
 }
 .spectrum .labels{
     max-width: 540px;
@@ -168,7 +171,7 @@ h3 {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: var(--accent);
+    background: var(--accent-deep);
 }
 .spectrum .dot::after {
     content: "";
@@ -178,7 +181,7 @@ h3 {
     transform: translateX(-50%);
     width: 1px;
     height: 16px;
-    background: var(--accent);
+    background: var(--accent-deep);
 }
 
 .spectrum .line {
@@ -187,7 +190,7 @@ h3 {
     left: 0;
     width: 40%;
     height: 1px;
-    background: var(--accent);
+    background: var(--accent-deep);
 }
 
 .spectrum .labels-txt {
@@ -203,6 +206,31 @@ h3 {
     display: flex;
     flex-direction: column;
     width: 100%;
+}
+.card-title h3{
+    color: var(--accent-deep);
+}
+.card-title p{
+    color: var(--dark);
+    font-size: var(--fs-sm);
+}
+.card-title p span{
+    font-size: var(--fs-amount);
+    color:var(--ink)
+}
+.tags span{
+    margin-right: 12px;
+    padding: 4px;
+    display: inline-block;
+    font-size: var(--fs-xs);
+    background-color: var(--accent);
+    border-radius: 3px;
+    color: var(--line);
+}
+.card-content p{
+    color: var(--accent-deep);
+    margin-top: 12px;
+    font-size: var(--fs-xs);
 }
 
 /* footer */

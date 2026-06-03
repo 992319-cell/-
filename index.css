@@ -35,25 +35,25 @@
 .hero .title h2{
     color: var(--white);
     font-size: var(--fs-price);
-    margin-bottom: 28px;
+    margin-bottom: 20px;
 }
 .hero .title h2 span{
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.8);
+    color: var(--accent)
+    /* -webkit-text-stroke: 1px rgba(255, 255, 255, 0.8); */
 }
 .hero .title h3{
     color: var(--white);
     font-size: var(--fs-body);
 }
 .hero .content{
+    margin-top: 20px;
     display: flex;
-    gap: 20px;
-    align-items: flex-end;
-    margin-top: 48px;
+    flex-direction: column;
+    gap:20px;
 }
 .hero .content p{
     color: var(--muted-light);
-    font-size: var(--fs-sm);
+    font-size: var(--fs-xs);
     letter-spacing: 0.1em;
 }
 .hero .footer{
@@ -73,7 +73,7 @@
 .hero .footer p{
     border: 1px solid;
     flex:1;
-    font-size: var(--fs-amount);
+    font-size: var(--fs-date);
     padding: 12px 0;
 }
 
@@ -97,18 +97,16 @@
 .spectrum .title h3{
     text-indent: 1.5em;
     margin-bottom: 20px;
+    color: var(--muted);
 }
 .spectrum .content{
     margin-block: 40px;
     position: relative;
 }
-.spectrum .content p{
-    color: var(--muted);
-}
 .spectrum .card {
     position: absolute;
     top: 50%;
-    right: 10%;
+    right: 0;
     transform: translateY(-50%);
     width: 500px;
     height: 160px;
@@ -118,7 +116,7 @@
     width: 100%;
     padding: 20px;
     border-radius: 5px;
-    border: 1px solid var(--line);
+    border: 1.5px solid var(--line);
     background: var(--white);;
 }
 .spectrum .card li:nth-child(1) {
@@ -130,6 +128,10 @@
 .spectrum .card li:nth-child(3) {
     transform: rotate(0deg);
 }
+.spectrum .footer{
+    padding-top: 20px;
+}
+
 
 /* timeline */
 .timeline{
@@ -154,12 +156,13 @@
 .waitlist .title h2{
     color: var(--white);
 }
-.timeline .title h3,
+
+.timeline .title:first-child h3,
 .waitlist .title h3{
     color: var(--muted-light);
 }
 .timeline .title .btn-secondary{
-    color: var(--white);
+    margin-top: 20px;
 }
 .card{
     margin-block: 20px;
@@ -179,26 +182,29 @@
 .waitlist{
     background-color: var(--dark);
 }
+.waitlist .title h3{
+    color: var(--muted-light);
+}
 .waitlist .content{
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
 }
 .waitlist .content .txt{
-    margin-block: 40px;
-    color: var(--line);
     display: flex;
-    align-items: flex-end;
-    gap: 28px;
+    flex-direction: column;
+    gap: 24px;
 }
 .waitlist .content .txt p{
-    font-size: var(--fs-sm);
+    color: var(--muted-light);
+    margin-top: 60px;
+    font-size: var(--fs-xs);
     letter-spacing: 0.1em;
 }
 .waitlist .content .svg-logo{
     color: var(--white);
-    width: 400px;
-    height: 400px;
+    width: 280px;
+    height: 280px;
 }
 
 
