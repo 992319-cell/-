@@ -39,7 +39,6 @@
 }
 .hero .title h2 span{
     color: var(--accent)
-    /* -webkit-text-stroke: 1px rgba(255, 255, 255, 0.8); */
 }
 .hero .title h3{
     color: var(--white);
@@ -181,9 +180,6 @@
 /* waitlist */
 .waitlist{
     background-color: var(--dark);
-}
-.waitlist .title h3{
-    color: var(--muted-light);
 }
 .waitlist .content{
     display: flex;
