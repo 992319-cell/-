@@ -98,7 +98,7 @@
     margin-bottom: 20px;
     color: var(--muted);
 }
-.spectrum .content{
+.spectrum-content{
     margin-block: 40px;
     position: relative;
 }

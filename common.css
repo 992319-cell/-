@@ -85,10 +85,11 @@ nav{
 .links{
     display: flex;
     align-items: center;
+    gap: 16px;
 }
 .links a{
     display: block;
-    padding: 4px;
+    padding: 4px 8px;
     letter-spacing: 1.5px;
     color: var(--white);
     transition: color .2s;
@@ -98,7 +99,6 @@ nav{
     color: var(--muted-light);
 }
 h2 {
-    /* font-family: 'Cormorant Garamond', serif; */
     font-weight: 400;
     font-size: var(--fs-title);
     margin-block: 20px;
@@ -147,23 +147,21 @@ h3 {
 }
 
 /* 光譜儀 */
-.spectrum .content p:first-child span{
+.spectrum-content p span{
     color: var(--ink);
     font-size: var(--fs-title);
-    /* font-family: 'DM Sans Display', sans-serif; */
 }
-.spectrum .labels{
+.labels{
     max-width: 540px;
 }
-.spectrum .track {
+.track {
     position: relative;
     height: 1px;
     background: var(--line);
     margin-bottom: 20px;
 }
 
-.spectrum .dot {
-    position: absolute;
+.track-dot {
     position: relative;
     top: 50%;
     left: 40%;
@@ -173,7 +171,7 @@ h3 {
     border-radius: 50%;
     background: var(--accent-deep);
 }
-.spectrum .dot::after {
+.track-dot::after {
     content: "";
     position: absolute;
     top: 100%;
@@ -184,7 +182,7 @@ h3 {
     background: var(--accent-deep);
 }
 
-.spectrum .line {
+.track-line {
     position: absolute;
     top: 0;
     left: 0;
@@ -193,7 +191,7 @@ h3 {
     background: var(--accent-deep);
 }
 
-.spectrum .labels-txt {
+.labels-txt {
     display: flex;
     gap: 36px;
     font-size: var(--fs-xs);
