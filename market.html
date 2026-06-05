@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>查行情</title>
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="market.css">
+</head>
+<body>
+    <div class="wrap">
+        <nav>
+            <div class="logo">
+                <h1>
+                    <a href="#">
+                        <svg width="160" height="32" viewBox="0 0 160 32" fill="none" class="svg-logo-text">
+                            <line x1="4" y1="4" x2="20" y2="20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                <line x1="20" y1="4" x2="4" y2="20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                <circle cx="12" cy="12" r="2.5" fill="currentColor"/>
+                                <text x="32" y="17" font-family="'Noto Serif TC', serif" font-size="13" font-weight="500" letter-spacing="3" fill="currentColor" >明前知行</text>
+                        </svg>
+                    </a></h1>
+            </div>
+            <ul class="links">
+                <li><a href="#">查行情</a></li>
+                <li><a href="#">車歷</a></li>
+                <li><a href="#">登入</a></li>
+            </ul>
+        </nav>
+        <div class="market-header">
+            <h2>掌握行情 從這裡開始</h2>
+        </div>
+        <div class="search">
+            <h3>填入車款與需求</h3>
+            <div class="search-filter">
+                <button class="filter-btn active">機車</button>
+                <button class="filter-btn">汽車</button>
+            </div>
+            <form action="">
+                <div class="search-field">
+                    <label for="model">車款</label>
+                        <select name="model" id="model">
+                            <option value="">請選擇</option>
+                            <option value="yamaha-bwsr">YAMAHA BWS'R</option>
+                            <option value="yamaha-cuxi">YAMAHA CUXI</option>
+                            <option value="kymco-many">光陽 Many 125</option>
+                            <option value="kymco-racing">光陽 Racing S</option>
+                            <option value="sym-jet">三陽 Jet SL</option>
+                        </select>
+                </div>
+                <div class="search-field">
+                    <label for="city">城市</label>
+                        <select name="city" id="city">
+                            <option value="">請選擇</option>
+                            <option value="taipei">台北市</option>
+                            <option value="newtaipei">新北市</option>
+                            <option value="taichung">台中市</option>
+                            <option value="tainan">台南市</option>
+                            <option value="kaohsiung">高雄市</option>
+                        </select>
+                </div>
+                <div class="search-field">
+                    <label for="service">保養項目</label>
+                        <select name="service" id="service">
+                            <option value="">請選擇</option>
+                            <option value="oil">機油更換</option>
+                            <option value="airfilter">空濾清洗</option>
+                            <option value="brake">煞車皮更換</option>
+                            <option value="sparkplug">火星塞更換</option>
+                            <option value="tire">輪胎更換</option>
+                        </select>
+                </div>
+                    <button type="submit" class="btn-primary">查詢</button>
+                </form>
+        </div>
+        <div class="market-content">
+            <div class="spectrum-content">
+                <h3>你的行情報告</h3>
+                <p>$<span>240</span></p>
+                <div class="labels">
+                    <div class="track">
+                        <div class="track-dot"></div>
+                        <div class="track-line"></div>
+                    </div>
+                    <ul class="labels-txt">
+                        <li>極低</li>
+                        <li>偏低</li>
+                        <li>合理</li>
+                        <li>偏高</li>
+                        <li>極高</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="price-verdict">
+                <p>價格偏高</p>
+                <button type="button" class="btn-secondary">
+                    複製到 LINE
+                    <img src="./icon/external-link.png" alt="link-icon">
+                </button>
+            </div>
+        </div>
+        <footer>
+            <p>© 2026 明前知行　版權所有</p>
+            <a href="mailto:992319@gmail.com">992319@gmail.com</a>
+        </footer>
+    </div>
+</body>
+</html>

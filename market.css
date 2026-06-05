@@ -1,0 +1,97 @@
+.links li:first-child a{
+    border-bottom: 1px solid var(--muted);
+}
+.market-header{
+    padding: 140px 120px 60px;
+    background-color: var(--accent-deep);
+}
+.market-header h2{
+    color: var(--bg-off);
+}
+/* search */
+.search{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px 72px;
+    gap: 20px;
+}
+.search h3{
+    font-size: var(--fs-label);
+}
+.search-filter{
+    border-bottom: .5px solid var(--muted-light);
+    padding-block: 4px;
+}
+.filter-btn{
+    padding: 12px;
+    margin-right: 20px;
+    border: none;
+    color: var(--muted);
+    background: none;
+    font-size: var(--fs-body);
+    transition: color .2s;
+}
+.filter-btn:hover{
+    color: var(--accent-deep);
+    font-weight: 500;
+}
+/* 串js切換 */
+.filter-btn.active{
+    color: var(--accent);
+    font-weight: 600;
+}
+.search form{
+    display: flex;
+    gap: 20px;
+}
+.search-field{
+    flex: 1;
+}
+.search-field select{
+    width: 60%;
+}
+.search-field label{
+    display: block;
+}
+.search form .btn-primary{
+    font-size: var(--fs-body);
+    justify-content: center;
+    border: none;
+}
+/* market-content */
+.market-content{
+    padding: 40px 80px;
+    min-height: 400px;
+    background-color: var(--bg-off);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.market-content h3{
+    font-size: var(--fs-label);
+    margin-bottom: 36px;
+}
+.price-verdict{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 20px;
+    margin-right: 60px;
+}
+.price-verdict p:first-child{
+    color: var(--accent-deep);
+    font-size: var(--fs-label);
+}
+.price-verdict .btn-secondary{
+    border: none;
+    width: 144px;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: var(--fs-sm);
+}
+.price-verdict .btn-secondary img{
+    width: 20px;
+    height: 20px;
+    filter: brightness(0) invert(1);
+}
