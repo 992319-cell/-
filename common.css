@@ -113,6 +113,10 @@ h3 {
 }
 
 /* btn */
+button{
+    border: none;
+    background: none;
+}
 .btn-primary{
     width: 124px;
     display: block;
@@ -224,7 +228,7 @@ h3 {
     font-size: var(--fs-xs);
     background-color: var(--accent);
     border-radius: 3px;
-    color: var(--line);
+    color: var(--bg-off);
 }
 .card-content p{
     color: var(--accent-deep);

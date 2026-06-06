@@ -1,0 +1,165 @@
+.links li:nth-child(2){
+    border-bottom: 1px solid var(--muted);
+}
+/* header */
+.history-header{
+    padding: 60px 40px;
+    background-color: var(--white);
+}
+.history-header h2{
+    font-size: var(--fs-amount);
+}
+.history-stats{
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.vehicle-list{
+    position: relative;
+    width: 180px;
+    font-size: var(--fs-amount);
+    color: var(--accent-deep);
+}
+.vehicle-list li{
+    cursor: pointer;
+    transition: transform .2s,color .2s;
+}
+.vehicle-list li:hover,
+.vehicle-current:hover{
+    transform: translateX(4px);
+    color: var(--accent);
+}
+/* 控制vehicle-list的狀態 */
+.vehicle-current::after{
+    content: "▷";
+    display: inline-block;
+    font-size: .6em;
+    vertical-align: middle;
+    margin-left: 8px;
+    transition: rotate .3s;
+}
+.vehicle-list.open .vehicle-current::after{
+    rotate: 90deg;
+}
+.vehicle-options {
+    display: none;
+    position: absolute;
+    text-align: center;
+    top: 100%;
+    left: 0;
+    min-width: 100%;
+    background-color: var(--white);
+}
+.vehicle-list.open .vehicle-options {
+    display: block;
+}
+
+.history-totals{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 36px;
+}
+.history-totals p{
+    font-size: var(--fs-date);
+    text-align: center;
+    color: var(--accent-deep);
+    font-weight: 500;
+}
+.history-totals span{
+    display: block;
+    font-size: var(--fs-sm);
+}
+/* content */
+.history-sort-controls{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #a3b5dc4f;
+    padding:20px 40px;
+}
+.history-sort{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.history-sort label{
+    font-size: var(--fs-label);
+}
+.history-sort select{
+    padding: 8px;
+    border: none;
+    border-radius: 3px;
+}
+.history-sort-actions{
+    display: flex;
+    gap: 32px;
+}
+.history-sort-actions img{
+    width: 28px;
+    height: 28px;
+}
+/* history-list */
+.history-list{
+    padding: 20px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: var(--white);
+}
+.history-item{
+    border: .5px solid var(--accent-glow);
+    border-radius: 3px;
+    padding: 24px;
+    transition: background .2s, border-color .2s;
+    cursor: pointer;
+}
+.history-item:hover{
+    background-color: var(--bg-off);
+    border-color: var(--accent);
+}
+.history-summary{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.history-date{
+    font-size: var(--fs-body);
+    color: var(--muted);
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.history-date::after{
+    content: "▷";
+    display: inline-block;
+    font-size: .6em;
+    transition: rotate .3s;
+}
+.history-item.open .history-date::after{
+    transform: rotate(90deg);
+}
+
+.history-info h3{
+    font-size: var(--fs-label);
+    font-weight: 400;
+}
+.history-price{
+    font-size: var(--fs-amount);
+    color: var(--accent-deep);
+    font-weight: 500;
+}
+.history-detail{
+    display: none;
+    padding: 20px 20px 20px 136px;
+    border-top: 1px solid var(--line);
+    background-color: var(--bg-off);
+    font-size: var(--fs-sm);
+    color: var(--muted);
+}
+.history-item.open .history-detail{
+    display: block;
+}

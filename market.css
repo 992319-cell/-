@@ -84,9 +84,7 @@
     font-size: var(--fs-label);
 }
 .price-verdict .btn-secondary{
-    border: none;
     width: 144px;
-    flex-wrap: wrap;
     align-items: center;
     font-size: var(--fs-sm);
 }

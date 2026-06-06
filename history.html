@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>車歷</title>
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="history.css">
+</head>
+<body>
+    <div class="wrap">
+        <nav>
+            <div class="logo">
+                <h1>
+                    <a href="#">
+                        <svg width="160" height="32" viewBox="0 0 160 32" fill="none" class="svg-logo-text">
+                            <line x1="4" y1="4" x2="20" y2="20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            <line x1="20" y1="4" x2="4" y2="20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            <circle cx="12" cy="12" r="2.5" fill="currentColor"/>
+                            <text x="32" y="17" font-family="'Noto Serif TC', serif" font-size="13" font-weight="500" letter-spacing="3" fill="currentColor" >明前知行</text>
+                        </svg>
+                    </a>
+                </h1>
+            </div>
+            <ul class="links">
+                <li><a href="#">查行情</a></li>
+                <li><a href="#">車歷</a></li>
+                <li><a href="#">登入</a></li>
+            </ul>
+        </nav>
+        <div class="history-header">
+            <h2>我的車歷</h2>
+            <div class="history-stats">
+                <div class="vehicle-list">
+                    <div class="vehicle-current">狗熊</div>
+                        <ul class="vehicle-options">
+                            <li>XYZ-5678</li>
+                            <li>XYZ-5698</li>
+                        </ul>
+                </div>
+                <div class="history-totals">
+                    <p>$2350<span>總花費</span></p>
+                    <p>3<span>筆紀錄</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="history-content">
+            <div class="history-sort-controls">
+                <div class="history-sort">
+                    <label for="sort">排列方式</label>
+                    <select name="sort" id="sort">
+                        <option value="newest">最新到最舊</option>
+                        <option value="oldest">最舊到最新</option>
+                        <option value="price-high">金額高到低</option>
+                        <option value="price-low">金額低到高</option>
+                    </select>
+                </div>
+                <div class="history-sort-actions">
+                    <button type="button">
+                        <img src="./icon/square-plus (1).png"  alt="square-plus-icon">
+                    </button>
+                    <button type="button">
+                        <img src="./icon/dots.png" alt="dots.icon">
+                    </button>
+                </div>
+            </div>
+            <ul class="history-list">
+                <li class="history-item">
+                    <div class="history-summary">
+                        <div class="history-date">
+                            <p>2025.11.04</p>
+                        </div>
+                        <div class="history-info">
+                            <h3>光陽機車行 · 台北信義</h3>
+                        </div>
+                        <p class="history-price">380元</p>
+                    </div>
+                    <div class="history-detail">
+                        <div class="tags">
+                            <span>機油更換</span>
+                            <span>空濾清洗</span>
+                        </div>
+                        <p>32,140 km</p>
+                        <p>備註：無</p>
+                    </div>
+                </li>
+                <li class="history-item">
+                    <div class="history-summary">
+                        <div class="history-date">
+                            <p>2025.11.04</p>
+                        </div>
+                        <div class="history-info">
+                            <h3>光陽機車行 · 台北信義</h3>
+                        </div>
+                        <p class="history-price">380元</p>
+                    </div>
+                    <div class="history-detail">
+                        <div class="tags">
+                            <span>機油更換</span>
+                            <span>空濾清洗</span>
+                        </div>
+                        <p>32,140 km</p>
+                        <p>備註：無</p>
+                    </div>
+                </li>
+                <li class="history-item">
+                    <div class="history-summary">
+                        <div class="history-date">
+                            <p>2025.11.04</p>
+                        </div>
+                        <div class="history-info">
+                            <h3>光陽機車行 · 台北信義</h3>
+                        </div>
+                        <p class="history-price">380元</p>
+                    </div>
+                    <div class="history-detail">
+                        <div class="tags">
+                            <span>機油更換</span>
+                            <span>空濾清洗</span>
+                        </div>
+                        <p>32,140 km</p>
+                        <p>備註：無</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <footer>
+            <p>© 2026 明前知行　版權所有</p>
+            <a href="mailto:992319@gmail.com">992319@gmail.com</a>
+        </footer>
+    </div>
+    <script src="history.js"></script>
+</body>
+</html>
