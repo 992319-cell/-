@@ -97,6 +97,12 @@
     display: flex;
     gap: 32px;
 }
+.history-sort-actions a{
+    display: block;
+}
+.history-sort-actions button:hover{
+    cursor: pointer;
+}
 .history-sort-actions img{
     width: 28px;
     height: 28px;
