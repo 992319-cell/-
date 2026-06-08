@@ -1,9 +1,6 @@
-.links li:nth-child(2){
-    border-bottom: 1px solid var(--muted);
-}
 /* header */
 .ticket-header{
-    padding: 100px 40px;
+    padding: 100px var(--pad-x-section);
 }
 .ticket-header h2 {
     margin-bottom: 40px;
@@ -87,7 +84,7 @@
 /* form */
 .ticket-form{
     margin-block: 48px;
-    padding-inline: 40px;
+    padding-inline: var(--pad-x-section);
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -128,7 +125,6 @@
     padding-block: 8px;
     font-size: var(--fs-body);
     font-family: inherit;
-    color: var(--ink);
 }
 
 .ticket-field:focus-within {

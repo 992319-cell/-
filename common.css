@@ -23,6 +23,7 @@
     --fs-title: 58px;
     --fs-price: 96px;
     --fs-date: 48px;
+    --fs-page-title: 40px;
     --fs-amount: 32px;
     --fs-label: 24px;
     --fs-lg: 20px;
@@ -30,6 +31,10 @@
     --fs-sm: 14px;
     --fs-xs: 12px;
     --fs-2xs: 10px;
+     /* 間距 */
+    --pad-x-page: 120px; 
+    --pad-x-section: 40px; 
+    --pad-y-section: 60px;
 }
 
 /* rest */
@@ -79,6 +84,9 @@ nav{
     z-index: 1;
     transition: background 0.3s, border-color 0.3s;
 }
+.logo svg {
+    display: block;
+}
 .logo h1{
     font-size: var(--fs-body);
     line-height: 1;
@@ -100,9 +108,12 @@ nav{
 .links a:hover{
     color: var(--muted-light);
 }
+.links .is-current a {
+    border-bottom: 1px solid var(--muted);
+}
 h2 {
     font-weight: 400;
-    font-size: var(--fs-title);
+    font-size: var(--fs-page-title);
     margin-block: 20px;
 }
 
@@ -239,7 +250,7 @@ button{
 
 /* footer */
 footer {
-    padding: 40px 120px;
+    padding: 40px var(--pad-x-page);
     background: var(--dark);
     color: var(--muted);
     display: flex;

@@ -1,14 +1,9 @@
-.links li:nth-child(2){
-    border-bottom: 1px solid var(--muted);
-}
 /* header */
 .history-header{
-    padding: 60px 40px;
+    padding: var(--pad-y-section) var(--pad-x-section);
     background-color: var(--white);
 }
-.history-header h2{
-    font-size: var(--fs-amount);
-}
+
 .history-stats{
     margin-top: 40px;
     display: flex;
@@ -78,7 +73,7 @@
     justify-content: space-between;
     align-items: center;
     background-color: #a3b5dc4f;
-    padding:20px 40px;
+    padding: 20px var(--pad-x-section);
 }
 .history-sort{
     display: flex;
