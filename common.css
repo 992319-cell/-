@@ -19,7 +19,6 @@
     --dark: #1a1f2a;
 
     /* 文字尺寸 */
-    --fs-hero: 86px;
     --fs-title: 58px;
     --fs-price: 96px;
     --fs-date: 48px;
@@ -30,7 +29,6 @@
     --fs-body: 16px;
     --fs-sm: 14px;
     --fs-xs: 12px;
-    --fs-2xs: 10px;
      /* 間距 */
     --pad-x-page: 120px; 
     --pad-x-section: 40px; 
@@ -63,7 +61,6 @@ body {
 .wrap{
     max-width: 1440px;
     margin: auto;
-    border: 0.5px solid black;
 }
 
 /* nav */

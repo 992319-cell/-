@@ -27,7 +27,7 @@
     transition: border-color .2s
 }
 .ticket-entry-card:hover,
-.ticket-entry-card.active{
+.ticket-entry-card.is-active{
     border-color: var(--accent);
 }
 .ticket-entry-card img{
@@ -73,7 +73,7 @@
     align-items: center;
     justify-content: center;
 }
-.ticket-step.active .ticket-step-num{
+.ticket-step.is-active .ticket-step-num{
     background-color: var(--accent-deep);
     color: var(--white);
 }

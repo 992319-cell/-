@@ -34,7 +34,7 @@
     font-weight: 500;
 }
 /* 串js切換 */
-.filter-btn.active{
+.filter-btn.is-active{
     color: var(--accent);
     font-weight: 600;
 }
@@ -58,34 +58,90 @@
 }
 /* market-content */
 .market-content{
-    margin-top: var(--pad-y-section);
     padding: var(--pad-y-section) var(--pad-x-section);
-    min-height: 400px;
     background-color: var(--bg-off);
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    gap: 60px;
 }
-.market-content h3{
+.spectrum-content{
+    flex: 2;
+}
+.spectrum-content>h3{
     font-size: var(--fs-label);
     margin-bottom: 36px;
 }
-.price-verdict{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 20px;
-}
-.price-verdict p:first-child{
+.spectrum-content > p:last-of-type{
     color: var(--accent-deep);
     font-size: var(--fs-label);
+    margin-top: 16px;
 }
-.price-verdict .btn-secondary{
-    width: 144px;
-    align-items: center;
-    font-size: var(--fs-sm);
+.market-evidence{
+    flex: 1;
+    padding-left: 40px;
+    border-left: .5px solid var(--line);
 }
-.price-verdict .btn-secondary img{
+.market-evidence h4{
+    font-size: var(--fs-xs);
+    color: var(--muted);
+    letter-spacing: .2em;
+    font-weight: 400;
+    margin-bottom: 24px;
+}
+.market-evidence-stats{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+.market-evidence-stats p{
+    font-size: var(--fs-xs);
+    color: var(--muted);
+    letter-spacing: .1em;
+}
+.market-evidence-stats span{
+    display: block;
+    font-size: var(--fs-amount);
+    color: var(--ink);
+    font-weight: 500;
+    font-family: 'DM Serif Display', serif;
+}
+.market-evidence > p:last-child{
+    font-size: var(--fs-xs);
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+/* market-footer */
+.market-footer{
+    padding: var(--pad-y-section) var(--pad-x-section);
+    background-color: var(--white);
+}
+.market-footer > h3{
+    font-size: var(--fs-label);
+    font-weight: 400;
+    margin-bottom: 24px;
+}
+.market-footer .card{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+.market-footer .card li{
+    border: .5px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    background-color: var(--white);
+}
+.market-actions{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 40px;
+}
+.market-actions .btn-secondary{
+    width: 148px;
+    padding-block: 16px;
+}
+.market-actions .btn-secondary img{
     width: 20px;
     height: 20px;
     filter: brightness(0) invert(1);
