@@ -167,6 +167,14 @@
     border-radius: 3px;
     margin-bottom: 12px;
 }
+.vehicle-history-list li {
+    background-image: 
+        linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.92) 45%, rgba(255,255,255,0.4) 100%),
+        url('./img/scooter-workshop.jpg');
+    background-size: cover;
+    background-position: center right;
+    background-repeat: no-repeat;
+}
 /* main-footer */
 .vehicle-main-footer {
     display: flex;
