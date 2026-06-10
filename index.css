@@ -232,7 +232,6 @@
     font-size: var(--fs-amount);
     font-weight: 500;
     color: var(--accent-deep);
-    font-family: 'DM Serif Display', serif;
     line-height: 1;
 }
 .wsp-label {
