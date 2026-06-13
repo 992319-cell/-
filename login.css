@@ -40,16 +40,8 @@ nav {
     flex-direction: column;
     align-items: center;
 }
-.wordmark {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: var(--fs-sm);
-    letter-spacing: 0.4em;
-    color: rgba(250, 194, 63, 0.7);
-    margin-bottom: 16px;
-}
-.logo-big {
-    margin-bottom: 8px;
-}
+
+.logo-big { width: 100px; height: 100px; margin-bottom: 16px; }
 .page-title {
     font-family: 'Noto Serif TC', serif;
     font-size: 56px;
@@ -87,7 +79,7 @@ nav {
 }
 .tab {
     flex: 1;
-    padding: 10px 0;
+    padding-block: 10px;
     text-align: center;
     font-size: var(--fs-sm);
     color: #999;
@@ -213,10 +205,11 @@ nav {
 
 
 /* ===== 忘記密碼 ===== */
+.fld-forgot {
+    text-align: right;
+    margin-bottom: 14px;
+}
 .forgot {
-    position: absolute;
-    top: -22px;
-    right: 0;
     font-size: var(--fs-xs);
     color: var(--accent);
 }
