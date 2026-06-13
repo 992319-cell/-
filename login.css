@@ -1,82 +1,341 @@
-.login{
-    display: flex;
-    min-height: 100svh;
-    padding-top: 61px;
-    justify-content: center;
+/* ════════════════════════════════════════
+   login.css
+   依賴：common.css（顏色/字型/.btn-primary/footer）
+   覆寫：nav 改成玻璃感
+   ════════════════════════════════════════ */
+
+
+/* ===== nav 改成玻璃感（覆寫 common.css）===== */
+nav {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
-/* visual */
-.visual{
-    flex: 1;
-    background-image: url(./img/hero-background.avif);
+.links a {
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+.links a:hover {
+    color: var(--yellow);
+}
+
+
+/* ════════════════════════════════════════
+   背景照片：換照片改下面的 url() 路徑
+   太亮 → rgba 透明度調大；太暗 → 調小
+   ════════════════════════════════════════ */
+.login-bg {
+    min-height: 100vh;
+    background-image:
+        linear-gradient(135deg, rgba(15, 45, 110, 0.85) 0%, rgba(10, 28, 74, 0.92) 100%),
+        url('./img/login-bg.jpg');
     background-size: cover;
-    padding: 20px 40px;
+    background-position: center;
+    background-attachment: fixed;
 }
-.visual h2{
-    color: var(--white);
-    letter-spacing: .5px;
-    
-}
-/* panel */
-.panel{
-    flex: 1;
+
+
+/* ===== 主內容區 ===== */
+.login-main {
+    padding: 120px 24px 80px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    gap: 20px;
-    min-width: 500px;
-    padding: 20px;
 }
-.panel h3{
-    font-size: var(--fs-date);
+.wordmark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: var(--fs-sm);
+    letter-spacing: 0.4em;
+    color: rgba(250, 194, 63, 0.7);
+    margin-bottom: 16px;
+}
+.logo-big {
+    margin-bottom: 8px;
+}
+.page-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 56px;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: 6px;
+    line-height: 1.1;
+    margin: 16px 0 10px;
+    text-shadow: 0 2px 24px rgba(0, 0, 0, 0.3);
+}
+.page-sub {
+    font-size: var(--fs-sm);
+    color: rgba(255, 255, 255, 0.65);
+    letter-spacing: 1.5px;
+    margin-bottom: 36px;
+}
 
-}
-/* form */
-.form-group{
-    margin-bottom: 20px;
-    position: relative;
-}
-#email,#password{
+
+/* ===== 卡片 ===== */
+.login-card {
     width: 100%;
+    max-width: 420px;
+    background: var(--white);
     border-radius: 3px;
-    padding: 20px 12px 8px;
-    border: 1px solid var(--line);
-    outline: none;
-    font-size: var(--fs-body);
+    padding: 32px 36px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
 }
-.form-group label{
-    position: absolute;
-    top: 8px;
-    left: 12px;
-    font-size: var(--fs-body);
-    color: var(--muted);
-    transition: all .2s;
-    pointer-events: none;
-}
-/* label效果 */
-.form-group input:focus+label,
-.form-group input:not(:placeholder-shown)+label{
-    top: 4px;
-    font-size: var(--fs-xs);
-}
-/* actions */
-.actions [class^=btn]{
-    width: 100%;
+
+
+/* ===== Email/手機 tab ===== */
+.tabs {
+    display: flex;
+    border-bottom: 1px solid var(--line);
     margin-bottom: 20px;
+}
+.tab {
+    flex: 1;
+    padding: 10px 0;
+    text-align: center;
+    font-size: var(--fs-sm);
+    color: #999;
+    font-family: inherit;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.tab.is-active {
+    color: var(--accent-deep);
+    border-bottom-color: var(--accent-deep);
+    font-weight: 500;
+}
+
+
+/* ===== Google OAuth ===== */
+.btn-oauth {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--white);
+    font-size: var(--fs-body);
+    font-family: inherit;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid;
+    gap: 10px;
+    margin-bottom: 18px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
 }
-.actions button:last-child{
-    background-color: var(--white);
+.btn-oauth:hover {
+    border-color: var(--accent);
+    background: var(--bg-off);
 }
-.actions button:last-child:hover{
-    background-color: var(--muted-light);
+
+
+/* ===== 分隔線 ===== */
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+    color: #aaa;
+    font-size: var(--fs-xs);
+    letter-spacing: 0.2em;
 }
-/* form-footer */
-.form-footer h3{
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+}
+
+
+/* ===== 表單欄位 floating label ===== */
+.fld {
+    position: relative;
+    margin-bottom: 14px;
+}
+.fld input {
     width: 100%;
+    height: 56px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 22px 14px 8px;
+    font-size: var(--fs-body);
+    font-family: inherit;
+    outline: none;
+    background: var(--white);
+    transition: border-color 0.2s;
+}
+.fld input:focus {
+    border-color: var(--accent);
+}
+.fld label {
+    position: absolute;
+    top: 18px;
+    left: 14px;
     font-size: var(--fs-sm);
-    margin-bottom: 20px;
+    color: var(--muted);
+    pointer-events: none;
+    transition: all 0.2s;
+}
+.fld input:focus + label,
+.fld input:not(:placeholder-shown) + label {
+    top: 6px;
+    font-size: var(--fs-xs);
+    color: var(--accent);
+    letter-spacing: 0.05em;
+}
+
+
+/* ===== 密碼眼睛 ===== */
+.eye {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 2;
+    transition: color 0.2s;
+}
+.eye:hover {
+    color: var(--accent-deep);
+}
+.eye svg {
+    width: 18px;
+    height: 18px;
+}
+
+
+/* ===== 忘記密碼 ===== */
+.forgot {
+    position: absolute;
+    top: -22px;
+    right: 0;
+    font-size: var(--fs-xs);
+    color: var(--accent);
+}
+.forgot:hover {
+    color: var(--accent-deep);
+    text-decoration: underline;
+}
+
+
+/* ===== 手機 +886 prefix ===== */
+.fld.phone .phone-prefix {
+    position: absolute;
+    top: 26px;
+    left: 14px;
+    font-size: var(--fs-body);
+    color: var(--muted);
+    z-index: 1;
+    pointer-events: none;
+    display: none;
+}
+.fld.phone.has-value .phone-prefix {
+    display: block;
+}
+.fld.phone input {
+    padding-left: 56px;
+}
+
+
+/* ===== 記住我 + 登入 ===== */
+.remember {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: var(--fs-sm);
+    color: var(--muted);
+    margin: 8px 0 20px;
+    cursor: pointer;
+}
+.remember input {
+    accent-color: var(--accent-deep);
+}
+.btn-submit {
+    width: 100%;
+    padding: 14px;
+    background: var(--yellow);
+    border: none;
+    border-radius: 3px;
+    font-size: var(--fs-body);
+    font-family: inherit;
+    letter-spacing: 0.2em;
+    color: var(--ink);
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.btn-submit:hover {
+    background: var(--yellow-dark);
+}
+
+
+/* ===== 卡片下方 ===== */
+.signup-prompt {
+    margin-top: 28px;
+    font-size: var(--fs-sm);
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 0.5px;
+}
+.signup-prompt a {
+    color: var(--yellow);
+    font-weight: 500;
+    margin-left: 5px;
+    border-bottom: 1px solid rgba(250, 194, 63, 0.5);
+    padding-bottom: 1px;
+}
+
+
+/* 雙入口切換 */
+.role-switch {
+    margin-top: 28px;
+    padding-top: 22px;
+    width: 280px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.15);
+    text-align: center;
+    font-size: var(--fs-xs);
+    color: rgba(255, 255, 255, 0.55);
+}
+.role-switch a {
+    color: var(--yellow);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    margin-left: 6px;
+}
+
+
+/* 法律小字 */
+.legal {
+    margin-top: 20px;
+    font-size: var(--fs-xs);
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 0.5px;
+}
+.legal a {
+    text-decoration: underline;
+}
+
+
+/* ===== 工具 class ===== */
+.is-hidden {
+    display: none !important;
+}
+
+
+/* ===== RWD ===== */
+@media (max-width: 600px) {
+    .page-title {
+        font-size: 40px;
+        letter-spacing: 4px;
+    }
+    .login-card {
+        padding: 24px 22px;
+    }
 }
