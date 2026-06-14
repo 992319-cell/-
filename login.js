@@ -6,11 +6,18 @@ const oauthBtn = document.getElementById("oauth-btn");
 const divider = document.querySelector(".divider");
 const emailInput = document.getElementById("email");
 const phoneInput = document.getElementById("phone");
+const passwordInput = document.getElementById("password");
 
 tabs.forEach((tab) => {
   tab.addEventListener("click", () => {
     tabs.forEach((t) => t.classList.remove("is-active"));
     tab.classList.add("is-active");
+
+    // 共用:每次切 tab 都清空所有欄位
+    emailInput.value = "";
+    phoneInput.value = "";
+    passwordInput.value = "";
+    fldPhone.classList.remove("has-value");
 
     if (tab.dataset.tab === "email") {
       fldEmail.classList.remove("is-hidden");
@@ -22,7 +29,6 @@ tabs.forEach((tab) => {
     } else {
       fldEmail.classList.add("is-hidden");
       fldPhone.classList.remove("is-hidden");
-      // 手機 tab 不顯示 Google 登入（業界慣例）
       oauthBtn.classList.add("is-hidden");
       divider.classList.add("is-hidden");
       emailInput.removeAttribute("required");
@@ -40,7 +46,6 @@ phoneInput.addEventListener("input", () => {
 const eyeToggle = document.getElementById("eye-toggle");
 const eyeClosed = document.getElementById("eye-closed");
 const eyeOpen = document.getElementById("eye-open");
-const passwordInput = document.getElementById("password");
 
 eyeToggle.addEventListener("click", () => {
   const isHidden = passwordInput.type === "password";
