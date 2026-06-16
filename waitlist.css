@@ -1,6 +1,6 @@
 /* hero */
 .waitlist-hero{
-    padding: calc(62px + var(--pad-y-section)) var(--pad-x-section) var(--pad-y-section);
+    padding: calc(var(--nav-h) + var(--pad-y-section)) var(--pad-x-section) var(--pad-y-section);
     background-color: var(--white);
 }
 .waitlist-hero h2{

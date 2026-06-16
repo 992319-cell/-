@@ -33,6 +33,9 @@
     --pad-x-page: 120px; 
     --pad-x-section: 40px; 
     --pad-y-section: 60px;
+
+    /* nav 高度 */
+    --nav-h: 62px;
 }
 
 /* rest */
@@ -69,7 +72,7 @@ nav{
     justify-content: space-between;
     align-items: center;
     padding:4px 20px;
-    height: 62px;
+    height: var(--nav-h);
     background-color: rgba(10,12,16,0.82);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -102,11 +105,97 @@ nav{
     transition: color .2s;
     font-size: var(--fs-sm);
 }
-.links a:hover{
+.links a:active{
     color: var(--muted-light);
+}
+@media (hover: hover) {
+    .links a:hover{
+        color: var(--muted-light);
+    }
 }
 .links .is-current a {
     border-bottom: 1px solid var(--muted);
+}
+
+/* 漢堡按鈕（手機才顯示）*/
+.nav-toggle {
+    display: none;
+    width: 44px;
+    height: 44px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--white);
+    align-items: center;
+    justify-content: center;
+}
+.nav-toggle svg {
+    width: 24px;
+    height: 24px;
+    display: block;
+}
+.nav-toggle .icon-close { display: none; }
+nav.is-open .nav-toggle .icon-open { display: none; }
+nav.is-open .nav-toggle .icon-close { display: block; }
+
+/* nav RWD：≤768px 漢堡選單 ─────────────────
+   走法 3 車主端：選單推下去（不蓋住內容）+ 動畫慢 + 雜誌感字體
+   ───────────────────────────────────────── */
+@media (max-width: 768px) {
+    nav {
+        flex-wrap: wrap;
+        padding: 0 16px;
+        height: auto;
+        min-height: var(--nav-h);
+        transition: background 0.3s, border-color 0.3s;
+    }
+    nav > .logo,
+    nav > .nav-toggle {
+        height: var(--nav-h);
+        display: flex;
+        align-items: center;
+    }
+    .nav-toggle {
+        display: flex;
+    }
+    .links {
+        order: 99;
+        flex-basis: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        max-height: 0;
+        overflow: hidden;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        transition: max-height .5s ease, opacity .4s ease;
+        opacity: 0;
+    }
+    nav.is-open .links {
+        max-height: 80vh;
+        opacity: 1;
+        padding-block: 4px 16px;
+        border-top: 0.5px solid rgba(255,255,255,0.08);
+    }
+    .links li {
+        border-bottom: 0.5px solid rgba(255,255,255,0.06);
+    }
+    .links li:last-child {
+        border-bottom: none;
+    }
+    .links a {
+        font-family: 'Noto Serif TC', serif;
+        font-size: 17px;
+        padding: 18px 8px;
+        letter-spacing: .15em;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+    }
+    .links .is-current a {
+        border-bottom: none;
+        color: var(--yellow);
+    }
 }
 h2 {
     font-weight: 400;
@@ -138,8 +227,13 @@ button{
     border-radius: 2px;
     transition: background .2s;
 }
-.btn-primary:hover{
+.btn-primary:active{
     background-color: var(--yellow-dark);
+}
+@media (hover: hover) {
+    .btn-primary:hover{
+        background-color: var(--yellow-dark);
+    }
 }
 
 .btn-secondary{
@@ -155,9 +249,13 @@ button{
     background-color: var(--accent-deep);
     color: var(--white);
 }
-.btn-secondary:hover{
+.btn-secondary:active{
     background-color: var(--accent-glow);
-
+}
+@media (hover: hover) {
+    .btn-secondary:hover{
+        background-color: var(--accent-glow);
+    }
 }
 
 /* 光譜儀 */
@@ -260,6 +358,8 @@ footer a {
     color: var(--muted);
     transition: color .2s;
 }
-footer a:hover {
-    color: var(--white);
+@media (hover: hover) {
+    footer a:hover {
+        color: var(--white);
+    }
 }

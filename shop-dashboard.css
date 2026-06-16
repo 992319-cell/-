@@ -1,0 +1,630 @@
+/* ====================================================
+   shop-dashboard.css
+   車行後台 dashboard 樣式
+   依賴：common.css（顏色/字型/nav/btn/footer）
+   ==================================================== */
+
+
+/* ===== nav 內車行專屬元素 ===== */
+.shop-dashboard nav {
+    justify-content: flex-start;
+    gap: 16px;
+}
+
+/* .links 是手機漢堡選單用的，桌機隱藏 */
+.shop-dashboard nav > .links {
+    display: none;
+}
+@media (max-width: 768px) {
+    .shop-dashboard nav > .links {
+        display: flex;
+    }
+}
+
+.shop-tools {
+    margin-left: auto;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding-right: 16px;
+    border-right: 1px solid rgba(255,255,255,.12);
+}
+.shop-tools :is(button, a) {
+    width: 30px;
+    height: 30px;
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 50%;
+    background: transparent;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,.75);
+    cursor: pointer;
+    transition: all .2s;
+    text-decoration: none;
+}
+.shop-tools :is(button, a):active {
+    border-color: var(--accent);
+    color: var(--white);
+}
+@media (hover: hover) {
+    .shop-tools :is(button, a):hover {
+        border-color: var(--accent);
+        color: var(--white);
+    }
+}
+
+/* shop-badge dropdown trigger */
+.shop-account {
+    position: relative;
+}
+.shop-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: border-color .2s;
+    color: var(--white);
+    background: transparent;
+    font-family: inherit;
+}
+.shop-badge:active { border-color: var(--accent); }
+@media (hover: hover) {
+    .shop-badge:hover { border-color: var(--accent); }
+}
+.shop-badge::after {
+    content: "▾";
+    font-size: 9px;
+    color: rgba(255,255,255,.6);
+    margin-left: 2px;
+    transition: transform .2s;
+}
+.shop-badge[aria-expanded="true"]::after {
+    transform: rotate(180deg);
+}
+.shop-name {
+    font-size: var(--fs-sm);
+    letter-spacing: .05em;
+}
+
+/* dropdown menu */
+.shop-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 180px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    box-shadow: 0 8px 24px rgba(15, 45, 110, 0.12);
+    padding: 6px 0;
+    margin: 0;
+    list-style: none;
+    z-index: 100;
+}
+.shop-menu[hidden] { display: none; }
+.shop-menu a {
+    display: block;
+    padding: 10px 16px;
+    font-size: var(--fs-sm);
+    color: var(--ink);
+    text-decoration: none;
+    transition: background .15s;
+    letter-spacing: .03em;
+}
+.shop-menu a:hover { background: var(--bg-off); }
+.shop-menu [role="separator"] {
+    height: 1px;
+    background: var(--line);
+    margin: 6px 0;
+}
+
+
+/* ===== dashboard 主體 ===== */
+.dash {
+    padding: calc(var(--nav-h) + var(--pad-y-section)) var(--pad-x-section) var(--pad-y-section);
+    background: var(--bg-off);
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    min-height: 100vh;
+}
+
+.sec-eyebrow {
+    font-size: var(--fs-xs);
+    color: var(--muted);
+    letter-spacing: .25em;
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+
+/* ===== 頂部雙卡 ===== */
+.dash-top {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 20px;
+}
+
+.kpi-hero,
+.kpi-alerts {
+    padding: 28px 32px;
+    border-radius: 3px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    box-shadow: 0 1px 2px rgba(15, 45, 110, 0.04);
+}
+.kpi-hero {
+    border-top: 2px solid var(--accent);
+}
+.kpi-hero h3,
+.kpi-alerts h3 {
+    font-size: var(--fs-xs);
+    letter-spacing: .25em;
+    color: var(--muted);
+    font-weight: 500;
+    margin-bottom: 16px;
+}
+.kpi-hero strong {
+    display: block;
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 1;
+    margin-bottom: 12px;
+    color: var(--accent-deep);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+}
+.kpi-hero p {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--fs-sm);
+    color: #1d9e75;
+    font-weight: 500;
+    letter-spacing: .03em;
+}
+
+.alert-row {
+    display: grid;
+    grid-template-columns: 36px 1fr auto;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px dashed var(--line);
+    font-size: var(--fs-sm);
+}
+.alert-row:last-child { border-bottom: none; }
+.alert-row strong {
+    font-size: var(--fs-amount);
+    color: var(--accent-deep);
+    line-height: 1;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+}
+.alert-row a {
+    font-size: var(--fs-xs);
+    color: var(--accent);
+    letter-spacing: .05em;
+    transition: color .2s;
+}
+.alert-row a:hover { color: var(--accent-deep); }
+
+
+/* ===== 四宮格 KPI ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+.kpi-cell {
+    background: var(--white);
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-top: 2px solid var(--accent);
+    border-radius: 3px;
+    box-shadow: 0 1px 2px rgba(15, 45, 110, 0.04);
+}
+.kpi-cell h3 {
+    font-size: var(--fs-xs);
+    color: var(--muted);
+    letter-spacing: .2em;
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+.kpi-cell strong {
+    display: block;
+    font-size: var(--fs-date);
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+}
+.kpi-cell p {
+    font-size: var(--fs-xs);
+    color: var(--muted);
+}
+
+
+/* ===== box 容器（趨勢圖、工單）===== */
+.box {
+    background: var(--white);
+    padding: 32px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    box-shadow: 0 1px 2px rgba(15, 45, 110, 0.04);
+}
+.box > header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+.box h3 {
+    font-size: var(--fs-label);
+    font-weight: 400;
+    color: var(--ink);
+}
+
+
+/* ===== 趨勢圖 ===== */
+.trend-tabs {
+    display: flex;
+    gap: 4px;
+    background: var(--bg-off);
+    padding: 4px;
+    border-radius: 3px;
+}
+.trend-tabs button {
+    padding: 6px 16px;
+    font-size: var(--fs-sm);
+    color: var(--muted);
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all .2s;
+    font-family: inherit;
+    border: none;
+    background: none;
+}
+.trend-tabs button.is-active {
+    background: var(--white);
+    color: var(--accent-deep);
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+.trend-chart { width: 100%; height: 240px; display: block; }
+.trend-xaxis {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+    font-size: var(--fs-xs);
+    color: var(--muted);
+    letter-spacing: .05em;
+}
+
+
+/* ===== 工單管理 tabs ===== */
+.otabs {
+    display: flex;
+    gap: 24px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+.otabs::-webkit-scrollbar { display: none; }
+.otab {
+    padding: 10px 0;
+    font-size: var(--fs-sm);
+    color: var(--muted);
+    cursor: pointer;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: inherit;
+    transition: all .2s;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+.otab.is-active {
+    color: var(--accent-deep);
+    border-bottom-color: var(--accent-deep);
+    font-weight: 500;
+}
+.ticket-badge {
+    background: var(--accent);
+    color: var(--white);
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 500;
+}
+.ticket-badge.gray {
+    background: var(--muted-light);
+    color: var(--muted);
+}
+
+
+/* ===== 工單卡片 ===== */
+.order {
+    display: grid;
+    grid-template-columns: 80px 70px 1fr auto auto;
+    gap: 18px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: opacity .35s ease, transform .35s ease;
+}
+.order:last-of-type { border-bottom: none; }
+.order.is-hidden { display: none; }
+.order.is-leaving {
+    opacity: 0;
+    transform: translateX(40px);
+    pointer-events: none;
+}
+
+/* 愛車照頭貼 / 剪影 fallback */
+.bike-photo,
+.bike-silhouette {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 2px solid var(--white);
+    box-shadow: 0 0 0 1px var(--line);
+}
+.bike-photo { background: var(--bg-off); }
+.bike-silhouette {
+    background: linear-gradient(135deg, #e8eef8 0%, #d4def0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bike-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.bike-silhouette img {
+    width: 55%;
+    height: 55%;
+    object-fit: contain;
+    opacity: .7;
+}
+
+.odate {
+    text-align: center;
+    padding-right: 18px;
+    border-right: 1px solid var(--line);
+}
+.odate p:first-child {
+    font-size: var(--fs-lg);
+    color: var(--accent-deep);
+    line-height: 1;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+}
+.odate p:last-child {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: .15em;
+    margin-top: 4px;
+}
+
+.oinfo h4 {
+    font-size: var(--fs-body);
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 8px;
+}
+.oinfo .tags { margin-bottom: 8px; }
+.oinfo p {
+    font-size: var(--fs-xs);
+    color: var(--muted);
+    letter-spacing: .05em;
+}
+
+.oprice {
+    font-size: var(--fs-amount);
+    color: var(--ink);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+}
+
+.oact {
+    display: flex;
+    gap: 8px;
+}
+
+/* 按鈕：核准 / 駁回 / 填寫完工 / 客人未到 */
+.bapp, .brej, .bfill, .bnoshow {
+    padding: 8px 16px;
+    font-size: var(--fs-sm);
+    border-radius: 3px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all .2s;
+    border: none;
+}
+.bapp {
+    background: var(--accent-deep);
+    color: var(--white);
+}
+.bapp:active { background: var(--accent); }
+@media (hover: hover) {
+    .bapp:hover { background: var(--accent); }
+}
+.brej,
+.bnoshow {
+    background: var(--white);
+    color: var(--muted);
+    border: 1px solid var(--muted-light);
+}
+.brej:active,
+.bnoshow:active {
+    border-color: #c64545;
+    color: #c64545;
+}
+@media (hover: hover) {
+    .brej:hover,
+    .bnoshow:hover {
+        border-color: #c64545;
+        color: #c64545;
+    }
+}
+.bfill {
+    background: var(--yellow);
+    color: var(--ink);
+    font-weight: 500;
+    letter-spacing: .05em;
+}
+.bfill:active { background: var(--yellow-dark); }
+@media (hover: hover) {
+    .bfill:hover { background: var(--yellow-dark); }
+}
+
+
+/* ===== 工單狀態 pill ===== */
+.ostatus {
+    display: inline-block;
+    padding: 6px 14px;
+    font-size: var(--fs-xs);
+    border-radius: 20px;
+    letter-spacing: .05em;
+    white-space: nowrap;
+}
+.ostatus.is-completed {
+    background: rgba(15, 45, 110, .06);
+    color: var(--accent-deep);
+    border: 1px solid rgba(15, 45, 110, .2);
+}
+.ostatus.is-rejected {
+    background: var(--bg-off);
+    color: var(--muted);
+    border: 1px solid var(--muted-light);
+}
+
+
+/* ===== 空狀態 ===== */
+.orders-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px;
+    text-align: center;
+}
+.orders-empty[hidden] { display: none; }
+.orders-empty svg {
+    color: var(--muted-light);
+    margin-bottom: 20px;
+    opacity: .7;
+}
+.orders-empty h3 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: var(--fs-label);
+    color: var(--muted);
+    letter-spacing: .15em;
+    margin-bottom: 8px;
+    font-weight: 400;
+}
+.orders-empty p {
+    font-size: var(--fs-sm);
+    color: var(--muted-light);
+    letter-spacing: .1em;
+}
+
+
+/* ===== RWD ===== */
+@media (max-width: 768px) {
+    .shop-tools {
+        gap: 8px;
+        padding-right: 12px;
+    }
+    .shop-badge {
+        padding: 4px;
+    }
+    .shop-badge::after,
+    .shop-name {
+        display: none;
+    }
+
+    /* 車行端 nav 漢堡選單：覆寫 common.css 的車主端風格
+       工具感 = 動畫快 + 無襯線 + 字小 + 行距緊 */
+    .shop-dashboard .links {
+        transition: max-height .25s ease, opacity .2s ease;
+    }
+    .shop-dashboard .links a {
+        font-family: 'Noto Sans TC', sans-serif;
+        font-size: var(--fs-sm);
+        padding: 12px 8px;
+        letter-spacing: .05em;
+    }
+
+    /* shop-tools / shop-account 整塊塞進漢堡選單時隱藏 */
+    .shop-dashboard nav .shop-tools,
+    .shop-dashboard nav .shop-account {
+        display: none;
+    }
+
+    .dash {
+        padding: calc(var(--nav-h) + 32px) 16px 32px;
+        gap: 24px;
+    }
+    .dash-top { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: 1fr 1fr; }
+    .box { padding: 20px; }
+    .kpi-hero strong { font-size: 56px; }
+
+    .order {
+        grid-template-columns: 70px 1fr;
+        gap: 14px;
+    }
+    .order .odate {
+        grid-row: 1;
+        grid-column: 2;
+        text-align: left;
+        padding-right: 0;
+        border-right: none;
+        display: flex;
+        align-items: baseline;
+        gap: 6px;
+    }
+    .order .odate p:first-child { font-size: var(--fs-body); }
+    .order .odate p:last-child { margin-top: 0; }
+    .oinfo {
+        grid-row: 2;
+        grid-column: 1 / -1;
+    }
+    .oprice {
+        grid-row: 3;
+        grid-column: 1;
+        font-size: var(--fs-lg);
+    }
+    .oact {
+        grid-row: 3;
+        grid-column: 2;
+        justify-content: flex-end;
+    }
+    .bike-photo,
+    .bike-silhouette {
+        width: 70px;
+        height: 70px;
+    }
+    .oact .ostatus {
+        font-size: 11px;
+        padding: 4px 10px;
+    }
+}
