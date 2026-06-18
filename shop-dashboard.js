@@ -15,7 +15,7 @@ tabs.forEach((tab) => {
   tab.addEventListener("click", () => {
     tabs.forEach((t) => t.classList.remove("is-active"));
     tab.classList.add("is-active");
-    currentTab = tab.dataset.tab;
+    currentTab = tab.dataset.status;
     renderOrders();
   });
 });
@@ -26,7 +26,7 @@ function renderOrders() {
   let visibleCount = 0;
   orders.forEach((order) => {
     const shouldShow = order.dataset.status === currentTab;
-    order.style.display = shouldShow ? "" : "none";
+    order.classList.toggle("is-hidden", !shouldShow);
     if (shouldShow) visibleCount++;
   });
   emptyState.hidden = visibleCount > 0;

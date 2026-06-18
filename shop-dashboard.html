@@ -13,12 +13,10 @@
         <div class="logo">
             <h1>
                 <a href="index.html" aria-label="明前知行首頁">
-                    <svg width="112" height="32" viewBox="0 0 112 32" fill="none" class="svg-logo-text" aria-hidden="true">
-                        <line x1="4" y1="8" x2="20" y2="24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                        <line x1="20" y1="8" x2="4" y2="24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                        <circle cx="12" cy="16" r="2.5" fill="currentColor"/>
-                        <text x="32" y="21" font-family="'Noto Serif TC', serif" font-size="13" font-weight="500" letter-spacing="3" fill="currentColor">明前知行</text>
-                    </svg>
+                    <span class="logo-mark">
+                        <img src="./icon/logo-mark拷貝2.png" alt="" aria-hidden="true">
+                        <span class="logo-text">明前知行</span>
+                    </span>
                 </a>
             </h1>
         </div>
@@ -39,10 +37,10 @@
         </div>
 
         <div class="shop-account">
-            <button type="button" class="shop-badge" aria-haspopup="menu" aria-expanded="false">
+            <button type="button" class="shop-badge" aria-haspopup="menu" aria-expanded="false" aria-controls="shop-dropdown-menu">
                 <span class="shop-name">光陽機車行</span>
             </button>
-            <ul class="shop-menu" role="menu" hidden>
+            <ul class="shop-menu" id="shop-dropdown-menu" role="menu" hidden>
                 <li role="none"><a role="menuitem" href="#account">帳號設定</a></li>
                 <li role="none"><a role="menuitem" href="#help">說明中心</a></li>
                 <li role="none"><a role="menuitem" href="#notif-settings">通知設定</a></li>
@@ -135,29 +133,17 @@
 
         <section class="box">
             <header>
-                <h3>近 30 天營收趨勢</h3>
+                <h3 id="trend-title">近 30 天營收趨勢</h3>
                 <div class="trend-tabs">
-                    <button type="button" class="is-active">營收</button>
-                    <button type="button">工單數</button>
-                    <button type="button">評價</button>
+                    <button type="button" class="is-active" data-metric="revenue">營收</button>
+                    <button type="button" data-metric="orders">工單數</button>
+                    <button type="button" data-metric="ratings">評價</button>
                 </div>
             </header>
-            <svg class="trend-chart" viewBox="0 0 815 240" preserveAspectRatio="none" aria-hidden="true">
-                <line x1="0" y1="60" x2="800" y2="60" stroke="#e6e6e6" stroke-width="1" stroke-dasharray="2,4"/>
-                <line x1="0" y1="120" x2="800" y2="120" stroke="#e6e6e6" stroke-width="1" stroke-dasharray="2,4"/>
-                <line x1="0" y1="180" x2="800" y2="180" stroke="#e6e6e6" stroke-width="1" stroke-dasharray="2,4"/>
-                <defs>
-                    <linearGradient id="trendGrad" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stop-color="#5275c6" stop-opacity=".25"/>
-                        <stop offset="100%" stop-color="#5275c6" stop-opacity="0"/>
-                    </linearGradient>
-                </defs>
-                <path d="M0,180 L60,160 L120,170 L180,140 L240,150 L300,110 L360,130 L420,95 L480,115 L540,80 L600,100 L660,60 L720,75 L800,50 L800,240 L0,240 Z" fill="url(#trendGrad)"/>
-                <path d="M0,180 L60,160 L120,170 L180,140 L240,150 L300,110 L360,130 L420,95 L480,115 L540,80 L600,100 L660,60 L720,75 L800,50" fill="none" stroke="#0F2D6E" stroke-width="2"/>
-                <circle cx="800" cy="50" r="5" fill="#fac23f" stroke="#0F2D6E" stroke-width="2"/>
-            </svg>
-            <div class="trend-xaxis">
-                <span>5/14</span><span>5/21</span><span>5/28</span><span>6/04</span><span>6/11</span>
+            <div class="trend-chart-wrap">
+                <div class="trend-chart-inner">
+                    <canvas id="trend-chart"></canvas>
+                </div>
             </div>
         </section>
 
@@ -173,7 +159,7 @@
                 <button type="button" class="otab" data-status="rejected">已駁回 <span class="ticket-badge gray" data-count="rejected">1</span></button>
             </div>
 
-            <div class="orders-wrap">
+            <div class="orders-wrap" aria-live="polite">
 
                 <div class="order" data-status="pending">
                     <div class="bike-photo">
@@ -184,9 +170,9 @@
                         <p>2025</p>
                     </div>
                     <div class="oinfo">
-                        <h4>SUZUKI Swish 125 · 狗熊</h4>
+                        <h4>SUZUKI Swish 125　狗熊</h4>
                         <div class="tags"><span>機油更換</span><span>空濾清洗</span></div>
-                        <p>32,140 km · 工單 #20251104-03</p>
+                        <p>32,140 km　工單 #20251104-03</p>
                     </div>
                     <div class="oprice">$380</div>
                     <div class="oact">
@@ -204,9 +190,9 @@
                         <p>2025</p>
                     </div>
                     <div class="oinfo">
-                        <h4>YAMAHA CUXI · 陳*</h4>
+                        <h4>YAMAHA CUXI　陳*</h4>
                         <div class="tags"><span>機油更換</span><span>更換皮帶</span></div>
-                        <p>28,600 km · 工單 #20251103-07</p>
+                        <p>28,600 km　工單 #20251103-07</p>
                     </div>
                     <div class="oprice">$1,250</div>
                     <div class="oact">
@@ -224,9 +210,9 @@
                         <p>2025</p>
                     </div>
                     <div class="oinfo">
-                        <h4>TOYOTA Altis · 大灰</h4>
+                        <h4>TOYOTA Altis　大灰</h4>
                         <div class="tags"><span>定期保養</span><span>輪胎調位</span></div>
-                        <p>68,200 km · 工單 #20251102-12</p>
+                        <p>68,200 km　工單 #20251102-12</p>
                     </div>
                     <div class="oprice">$3,800</div>
                     <div class="oact">
@@ -244,9 +230,9 @@
                         <p>2025</p>
                     </div>
                     <div class="oinfo">
-                        <h4>YAMAHA BWS'R · 小黑</h4>
+                        <h4>YAMAHA BWS'R　小黑</h4>
                         <div class="tags"><span>火星塞更換</span><span>輪胎更換</span></div>
-                        <p>42,500 km · 工單 #20251101-15</p>
+                        <p>42,500 km　工單 #20251101-15</p>
                     </div>
                     <div class="oprice">$2,180</div>
                     <div class="oact">
@@ -264,9 +250,9 @@
                         <p>2025</p>
                     </div>
                     <div class="oinfo">
-                        <h4>HONDA Fit · 張*</h4>
+                        <h4>HONDA Fit　張*</h4>
                         <div class="tags"><span>機油更換</span><span>煞車油</span></div>
-                        <p>52,100 km · 工單 #20251030-22</p>
+                        <p>52,100 km　工單 #20251030-22</p>
                     </div>
                     <div class="oprice">$1,650</div>
                     <div class="oact">
@@ -284,9 +270,9 @@
                         <p>2025</p>
                     </div>
                     <div class="oinfo">
-                        <h4>KYMCO Many 125 · 黃*</h4>
+                        <h4>KYMCO Many 125　黃*</h4>
                         <div class="tags"><span>機油更換</span><span>空濾清洗</span></div>
-                        <p>18,400 km · 工單 #20251028-09</p>
+                        <p>18,400 km　工單 #20251028-09</p>
                     </div>
                     <div class="oprice">$420</div>
                     <div class="oact">
@@ -304,9 +290,9 @@
                         <p>2025</p>
                     </div>
                     <div class="oinfo">
-                        <h4>SYM Jet SL · 小銀</h4>
+                        <h4>SYM Jet SL　小銀</h4>
                         <div class="tags"><span>煞車皮更換</span></div>
-                        <p>25,800 km · 工單 #20251026-04</p>
+                        <p>25,800 km　工單 #20251026-04</p>
                     </div>
                     <div class="oprice">$680</div>
                     <div class="oact">
@@ -316,17 +302,17 @@
                 </div>
 
                 <div class="order" data-status="in_progress">
-                    <div class="bike-silhouette">
-                        <img src="./icon/silhouette-car.png" alt="汽車">
+                    <div class="bike-photo">
+                        <img src="./img/bike-avatar-02.jpg" alt="愛車">
                     </div>
                     <div class="odate">
                         <p>10.24</p>
                         <p>2025</p>
                     </div>
                     <div class="oinfo">
-                        <h4>MAZDA 3 · 吳*</h4>
+                        <h4>MAZDA 3　吳*</h4>
                         <div class="tags"><span>定期保養</span><span>四輪定位</span></div>
-                        <p>71,500 km · 工單 #20251024-18</p>
+                        <p>71,500 km　工單 #20251024-18</p>
                     </div>
                     <div class="oprice">$4,200</div>
                     <div class="oact">
@@ -344,9 +330,9 @@
                         <p>2025</p>
                     </div>
                     <div class="oinfo">
-                        <h4>YAMAHA Force · 閃電</h4>
+                        <h4>YAMAHA Force　閃電</h4>
                         <div class="tags"><span>機油更換</span><span>火星塞更換</span></div>
-                        <p>36,200 km · 工單 #20251020-06 · 已簽收</p>
+                        <p>36,200 km　工單 #20251020-06　已簽收</p>
                     </div>
                     <div class="oprice">$520</div>
                     <div class="oact">
@@ -355,17 +341,17 @@
                 </div>
 
                 <div class="order" data-status="completed">
-                    <div class="bike-silhouette">
-                        <img src="./icon/silhouette-bike.png" alt="機車">
+                    <div class="bike-photo">
+                        <img src="./img/bike-avatar-01.jpg" alt="愛車">
                     </div>
                     <div class="odate">
                         <p>10.18</p>
                         <p>2025</p>
                     </div>
                     <div class="oinfo">
-                        <h4>KYMCO Racing S · 鄭*</h4>
+                        <h4>KYMCO Racing S　鄭*</h4>
                         <div class="tags"><span>輪胎更換</span></div>
-                        <p>14,800 km · 工單 #20251018-02 · 已簽收</p>
+                        <p>14,800 km　工單 #20251018-02　已簽收</p>
                     </div>
                     <div class="oprice">$2,400</div>
                     <div class="oact">
@@ -374,17 +360,17 @@
                 </div>
 
                 <div class="order" data-status="rejected">
-                    <div class="bike-silhouette">
-                        <img src="./icon/silhouette-bike.png" alt="機車">
+                    <div class="bike-photo">
+                        <img src="./img/bike-avatar-02.jpg" alt="愛車">
                     </div>
                     <div class="odate">
                         <p>10.22</p>
                         <p>2025</p>
                     </div>
                     <div class="oinfo">
-                        <h4>YAMAHA Cygnus · 蔡*</h4>
+                        <h4>YAMAHA Cygnus　蔡*</h4>
                         <div class="tags"><span>機油更換</span></div>
-                        <p>里程資料不符 · 工單 #20251022-11</p>
+                        <p>里程資料不符　工單 #20251022-11</p>
                     </div>
                     <div class="oprice">$280</div>
                     <div class="oact">
@@ -413,6 +399,8 @@
         <a href="mailto:992319@gmail.com">992319@gmail.com</a>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="trend-chart.js"></script>
     <script src="nav.js"></script>
     <script src="shop-dashboard.js"></script>
 </body>
