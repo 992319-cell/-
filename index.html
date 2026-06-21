@@ -1,215 +1,340 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>明前知行｜台灣保養透明化平台</title>
-    <link rel="stylesheet" href="common.css">
-    <link rel="stylesheet" href="index.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>明前知行　Ming-Qian Zhi-Xing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="spectrum.css">
+<link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <div class="wrap">
-        <nav>
-            <div class="logo">
-                <h1>
-                    <a href="index.html">
-                        <span class="logo-mark">
-                            <img src="./icon/logo-mark拷貝2.png" alt="" aria-hidden="true">
-                            <span class="logo-text">明前知行</span>
-                        </span>
-                    </a>
-                </h1>
-            </div>
-            <ul class="links">
-                <li><a href="market.html">查行情</a></li>
-                <li><a href="appointments.html">我的預約</a></li>
-                <li><a href="vehicle.html">車庫</a></li>
-                <li><a href="login.html">登入</a></li>
-            </ul>
-                    <button type="button" class="nav-toggle" aria-expanded="false" aria-label="開啟選單">
-                <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <line x1="4" y1="6" x2="20" y2="6"/>
-                    <line x1="4" y1="12" x2="20" y2="12"/>
-                    <line x1="4" y1="18" x2="20" y2="18"/>
-                </svg>
-                <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <line x1="6" y1="6" x2="18" y2="18"/>
-                    <line x1="18" y1="6" x2="6" y2="18"/>
-                </svg>
-            </button>
-        </nav>
-        <section class="wrap-hero">
-            <div class="hero-title">
-                <h2>保養不該是<span>賭注</span></h2>
-                <h3>讓行情回到你手上</h3>
-            </div>
-            <div class="hero-content">
-                <p><span>38</span><span>種車款覆蓋</span></p>
-                <p><span>5</span><span>座主要城市</span></p>
-                <p><span>4,200+ </span><span>筆真實回報</span></p>
-            </div>
-            <div class="hero-footer">
-                <p>不需登入免費使用</p>
-                <a href="market.html" class="btn-primary">
-                    立即查詢
-                    <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
-                    <path d="M2 7H12M8 3L12 7L8 11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </a>
-            </div>
-        </section>
-        <section class="spectrum">
-            <div class="spectrum-title">
-                <h2>報價合不合理<br>數據說了算</h2>
-                <h3>你的車款　你的行情</h3>
-            </div>
-            <div class="spectrum-content">
-                <p>$<span>240</span></p>
-                <div class="labels">
-                <div class="track">
-                    <div class="track-dot"></div>
-                    <div class="track-line"></div>
-                </div>
-                <ul class="labels-txt">
-                    <li>極低</li>
-                    <li>偏低</li>
-                    <li>合理</li>
-                    <li>偏高</li>
-                    <li>極高</li>
-                </ul>
-                </div>
-                <ul class="card">
-                <li>
-                    <div class="card-title">
-                    <h3>光陽機車行 · 台北信義</h3>
-                    <p><span>380</span>元</p>
-                    </div>
-                    <div class="card-content">
-                    <div class="tags">
-                        <span>機油更換</span>
-                        <span>空濾清洗</span>
-                    </div>
-                    <p>2025.11.04 · 32,140 km</p>
-                    </div>
-                </li>
-                <li>
-                    <div class="card-title">
-                    <h3>光陽機車行 · 台北信義</h3>
-                    <p><span>380</span>元</p>
-                    </div>
-                    <div class="card-content">
-                    <div class="tags">
-                        <span>機油更換</span>
-                        <span>空濾清洗</span>
-                    </div>
-                    <p>2025.11.04 · 32,140 km</p>
-                    </div>
-                </li>
-                <li>
-                    <div class="card-title">
-                    <h3>光陽機車行 · 台北信義</h3>
-                    <p><span>380</span>元</p>
-                    </div>
-                    <div class="card-content">
-                    <div class="tags">
-                        <span>機油更換</span>
-                        <span>空濾清洗</span>
-                    </div>
-                    <p>2025.11.04 · 32,140 km</p>
-                    </div>
-                </li>
-                </ul>
-            </div>
-            <div class="spectrum-footer">
-                <a href="market.html" class="btn-secondary">
-                    立即查詢
-                    <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
-                    <path d="M2 7H12M8 3L12 7L8 11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </a>
-            </div>
-        </section>
-        <section class="timeline">
-            <div class="timeline-title">
-                <h2>你的車歷你的資產</h2>
-                <h3>每一筆記錄　都在說話</h3>
-                <a href="history.html" class="btn-secondary">
-                        開始建立
-                        <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
-                        <path d="M2 7H12M8 3L12 7L8 11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        </a>
-            </div>
-            <div class="timeline-content">
-                <ul class="card">
-                <li>
-                    <div class="card-title">
-                    <h3>光陽機車行 · 台北信義</h3>
-                    <p><span>380</span>元</p>
-                    </div>
-                    <div class="card-content">
-                    <div class="tags">
-                        <span>機油更換</span>
-                        <span>空濾清洗</span>
-                    </div>
-                    <p>2025.11.04 · 32,140 km</p>
-                    </div>
-                </li>
-                <li>
-                    <div class="card-title">
-                    <h3>光陽機車行 · 台北信義</h3>
-                    <p><span>380</span>元</p>
-                    </div>
-                    <div class="card-content">
-                    <div class="tags">
-                        <span>機油更換</span>
-                        <span>空濾清洗</span>
-                    </div>
-                    <p>2025.11.04 · 32,140 km</p>
-                    </div>
-                </li>
-                <li>
-                    <div class="card-title">
-                    <h3>光陽機車行 · 台北信義</h3>
-                    <p><span>380</span>元</p>
-                    </div>
-                    <div class="card-content">
-                    <div class="tags">
-                        <span>機油更換</span>
-                        <span>空濾清洗</span>
-                    </div>
-                    <p>2025.11.04 · 32,140 km</p>
-                    </div>
-                </li>
-                </ul>
-            </div>
-        </section>
-        <section class="waitlist">
-            <div class="waitlist-inner">
-                <div class="waitlist-txt">
-                    <h2>分享車歷<br>透明度由你決定</h2>
-                    <p class="waitlist-desc">個資自動遮蔽功能即將上線<br>安心分享保養紀錄，不擔心個人資料外洩。</p>
-                    <div class="waitlist-social-proof">
-                        <span class="wsp-num">238</span>
-                        <span class="wsp-label">人已登記等候上線</span>
-                    </div>
-                    <a href="waitlist.html" class="btn-primary">
-                        了解更多
-                        <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
-                            <path d="M2 7H12M8 3L12 7L8 11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </a>
-                </div>
-                <div class="waitlist-ticket">
-                    <img src="./img/ticket-preview.jpg" alt="工單預覽">
-                </div>
-            </div>
-        </section>
-        <footer>
-            <p>© 2026 明前知行 版權所有</p>
-            <a href="mailto:992319@gmail.com">992319@gmail.com</a>
-        </footer>
+
+<nav>
+  <a href="index.html" class="logo">明前知行</a>
+  <button class="nav-toggle" aria-label="開啟選單" aria-expanded="false">
+    <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+      <line x1="4" y1="9" x2="20" y2="9"/>
+      <line x1="4" y1="15" x2="20" y2="15"/>
+    </svg>
+    <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+      <line x1="6" y1="6" x2="18" y2="18"/>
+      <line x1="18" y1="6" x2="6" y2="18"/>
+    </svg>
+  </button>
+  <ul class="links">
+    <li><a href="market.html">查行情</a></li>
+    <li><a href="appointments.html">我的預約</a></li>
+    <li><a href="vehicle.html">車歷</a></li>
+    <li><a href="login.html">登入</a></li>
+  </ul>
+</nav>
+
+<!-- ====== 1. HERO ====== -->
+<section class="hero">
+  <div class="hero-bg"><img src="./圖片素材/shop/hero.png" alt=""></div>
+  <div class="hero-content">
+    <h1>你的保養費<br>憑什麼是這個價格</h1>
+    <p class="hero-sub">查保養行情　比較車行報價　留下完整車歷<br>讓每一次進廠　都有依據</p>
+    <div class="hero-cta-row">
+      <button class="cta-pill yellow">查我的行情 →</button>
     </div>
-    <script src="nav.js"></script>
+  </div>
+  <div class="hero-scroll-hint">Scroll</div>
+</section>
+
+<!-- ====== 2. PROBLEM ====== -->
+<section class="problem" id="problem">
+  <header>
+    <h2>同樣的機油<br>六倍的價差</h2>
+    <p class="lede">這不是調查　也不是估計<br>是 <strong>142 家車行親手填的真實工單</strong>　每一筆都經車主簽名確認</p>
+  </header>
+
+  <!-- 大 6× -->
+  <div class="spread-hero">
+    <div class="x"><span data-count-to="6">6</span><small>×</small></div>
+    <div class="label">全台車行價差</div>
+    <div class="extremes">
+      <div class="extreme">
+        <div class="price">$80</div>
+        <div class="caption">最低</div>
+        <div class="shop-name">永和機車行　新北永和</div>
+      </div>
+      <div class="extreme">
+        <div class="price">$480</div>
+        <div class="caption">最高</div>
+        <div class="shop-name">原廠服務廠　台北信義</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- spectrum -->
+  <div class="spectrum-block">
+    <div id="spec"></div>
+  </div>
+  <p class="spec-footnote">每筆資料皆來自已完成且簽名確認的工單　每月更新</p>
+</section>
+
+<!-- ====== 3. 車行回報 ====== -->
+<section class="coverage">
+  <header>
+    <h2>142 家車行<br>真實回報</h2>
+    <p class="lede">每一筆報價都來自<strong>實際完工的工單</strong><br>經車主<strong>當場簽名確認</strong>後才進入行情池</p>
+  </header>
+
+  <!-- 三個指標數字 -->
+  <div class="coverage-stats">
+    <div class="coverage-stat">
+      <div class="v"><span data-count-to="142">142</span></div>
+      <div class="k">家車行已加入</div>
+      <div class="note">分布北中南六大城市　持續擴增</div>
+    </div>
+    <div class="coverage-stat">
+      <div class="v"><span data-count-to="4200" data-count-format="comma">4,200</span><small style="font-size:.5em">+</small></div>
+      <div class="k">筆已完成工單</div>
+      <div class="note">皆經車主當場簽名確認</div>
+    </div>
+    <div class="coverage-stat">
+      <div class="v"><span data-count-to="38">38</span></div>
+      <div class="k">款車型覆蓋</div>
+      <div class="note">機車 24 款　汽車 14 款</div>
+    </div>
+  </div>
+
+  <!-- 真實車行卡片 — 顯示最近一筆實際工單 -->
+  <div class="coverage-grid">
+    <div class="coverage-card">
+      <div class="photo"><img src="./圖片素材/shop/shop-2.jpg" alt=""></div>
+      <div class="body">
+        <div class="head">
+          <div class="city">新北　三重區</div>
+          <div class="name">三益車業</div>
+        </div>
+        <div class="last-ticket">
+          <div class="label">最近一筆</div>
+          <div class="row">
+            <span class="item">機油更換　5W-30</span>
+            <span class="price">$172</span>
+          </div>
+          <div class="date">06 / 18　SYM Jet SR</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="coverage-card">
+      <div class="photo"><img src="./圖片素材/shop/alley-day.jpg" alt=""></div>
+      <div class="body">
+        <div class="head">
+          <div class="city">台北　大同區</div>
+          <div class="name">大同機車行</div>
+        </div>
+        <div class="last-ticket">
+          <div class="label">最近一筆</div>
+          <div class="row">
+            <span class="item">機油 + 機油芯</span>
+            <span class="price">$185</span>
+          </div>
+          <div class="date">06 / 20　Yamaha Cygnus</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="coverage-card">
+      <div class="photo"><img src="./圖片素材/shop/car-repair-2.jpg" alt=""></div>
+      <div class="body">
+        <div class="head">
+          <div class="city">台中　北屯區</div>
+          <div class="name">慶順汽車</div>
+        </div>
+        <div class="last-ticket">
+          <div class="label">最近一筆</div>
+          <div class="row">
+            <span class="item">前輪剎車片更換</span>
+            <span class="price">$1,200</span>
+          </div>
+          <div class="date">06 / 19　Toyota Altis</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="coverage-card">
+      <div class="photo"><img src="./圖片素材/shop/shop-4.jpg" alt=""></div>
+      <div class="body">
+        <div class="head">
+          <div class="city">台南　中西區</div>
+          <div class="name">洪大車行</div>
+        </div>
+        <div class="last-ticket">
+          <div class="label">最近一筆</div>
+          <div class="row">
+            <span class="item">六萬公里大保養</span>
+            <span class="price">$3,800</span>
+          </div>
+          <div class="date">06 / 17　Honda Civic</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="coverage-foot">— 接下來　看看怎麼運作 —</p>
+</section>
+
+<!-- ====== 4. 三步驟流程 ====== -->
+<section class="flow">
+  <header>
+    <h2>知道行情之後<br>下一步更重要</h2>
+    <p class="lede">查行情　預約進廠　留車歷<br>三件事　一條動線</p>
+  </header>
+
+  <!-- Step 1 -->
+  <div class="feature-block">
+    <div class="feature-inner">
+      <div class="feature-text">
+        <div class="num">Step 01</div>
+        <h3>先看行情<br>再決定去哪</h3>
+        <p class="body">輸入車款與項目，立即看到全台車行的報價光譜。哪些落在合理區間、哪些偏高，一眼分辨，不再憑感覺。</p>
+      </div>
+      <div class="feature-visual">
+        <img src="./圖片素材/shop/car-repair.jpg" alt="">
+        <div class="feature-overlay overlay-prices">
+          <h6>Toyota Altis　機油更換</h6>
+          <div class="row"><span class="shop">慶順汽車</span><span class="p green">$172<span class="badge">合理</span></span></div>
+          <div class="row"><span class="shop">育豐保修廠</span><span class="p green">$188</span></div>
+          <div class="row"><span class="shop">三和車業</span><span class="p">$210</span></div>
+          <div class="row"><span class="shop">原廠服務廠</span><span class="p">$320</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 2 -->
+  <div class="feature-block reverse">
+    <div class="feature-inner">
+      <div class="feature-text">
+        <div class="num">Step 02</div>
+        <h3>選定車行<br>線上預約</h3>
+        <p class="body">不用打電話來回確認，線上挑時段、選服務。預約資訊自動寄到信箱，進廠當天直接到場即可。</p>
+      </div>
+      <div class="feature-visual">
+        <img src="./圖片素材/shop/car-repair-2.jpg" alt="">
+        <div class="feature-overlay overlay-booking">
+          <h6>線上預約　慶順汽車</h6>
+          <div class="sub">2026 / 06 / 24　週三</div>
+          <div class="field">
+            <label>服務項目</label>
+            <div class="input">機油更換　5W-30</div>
+          </div>
+          <div class="field">
+            <label>時段</label>
+            <div class="input">14:00　–　15:30</div>
+          </div>
+          <span class="submit">送出預約 →</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 3 -->
+  <div class="feature-block">
+    <div class="feature-inner">
+      <div class="feature-text">
+        <div class="num">Step 03</div>
+        <h3>每一次進廠<br>都是車的履歷</h3>
+        <p class="body">車行完工填寫、你當場簽名確認，工單自動歸檔進你的車歷。三年後賣車或回頭查問題，完整紀錄一鍵調出，不用翻收據盒。</p>
+      </div>
+      <div class="feature-visual">
+        <img src="./圖片素材/shop/shop-2.jpg" alt="">
+        <div class="feature-overlay overlay-history">
+          <h6>車歷紀錄</h6>
+          <div class="sub">自動歸檔　共 14 筆</div>
+          <div class="entry">
+            <div class="dot"></div>
+            <div>
+              <div class="meta">2026 / 03 / 14　慶順</div>
+              <div class="what">機油 + 機油芯</div>
+            </div>
+          </div>
+          <div class="entry">
+            <div class="dot"></div>
+            <div>
+              <div class="meta">2025 / 11 / 02　育豐</div>
+              <div class="what">前輪剎車片</div>
+            </div>
+          </div>
+          <div class="entry">
+            <div class="dot"></div>
+            <div>
+              <div class="meta">2025 / 08 / 19　三和</div>
+              <div class="what">變速箱油</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 5. Payoff ====== -->
+<section class="payoff">
+  <div class="payoff-image">
+    <img src="./圖片素材/shop/car-sell.png" alt="">
+  </div>
+  <div class="payoff-content">
+    <h2>當買家問起車況<br>你拿得出證據嗎</h2>
+    <p class="body">每一次保養、維修都能整理成完整車歷。賣車時一鍵匯出紀錄，讓買家看見車況脈絡——而不是只能相信你說的話。談價格時，也更有依據。</p>
+
+    <div class="payoff-card">
+      <div class="head">
+        <span class="car">Toyota Altis 1.8　2019</span>
+        <span class="plate">ABC-8821</span>
+      </div>
+      <div class="row"><span class="date">2026 / 03 / 14</span><span class="item">機油 + 機油芯</span><span class="price">$1,980</span></div>
+      <div class="row"><span class="date">2025 / 11 / 02</span><span class="item">前輪剎車片更換</span><span class="price">$3,400</span></div>
+      <div class="row"><span class="date">2025 / 08 / 19</span><span class="item">變速箱油更換</span><span class="price">$4,200</span></div>
+      <div class="row"><span class="date">2025 / 04 / 07</span><span class="item">六萬公里大保養</span><span class="price">$8,600</span></div>
+      <div class="foot">
+        <span>共計</span>
+        <span><strong>14</strong> 筆紀錄</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 6. Waitlist ====== -->
+<section class="waitlist">
+  <div class="container">
+    <div class="eyebrow-w">Coming Soon</div>
+    <h2>下次該回廠的日子<br>LINE 提醒你</h2>
+    <p class="lede">機油里程　大保養週期<br>驗車　強制險　時間到自動發提醒</p>
+
+    <div class="waitlist-form">
+      <div class="wl-row">
+        <input type="email" placeholder="你的 Email">
+        <button>加入候補</button>
+      </div>
+      <p class="wl-trust">不寄垃圾信　隨時可退訂</p>
+      <div class="wl-count">
+        <strong>238</strong>
+        <span>人已加入候補名單</span>
+      </div>
+      <a href="waitlist.html" class="wl-more">了解更多 →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+    <p>© 2026 明前知行　版權所有</p>
+    <a href="mailto:992319@gmail.com">992319@gmail.com</a>
+</footer>
+
+<script src="nav.js"></script>
+<script src="spectrum.js"></script>
+<script>
+  Spectrum.render('#spec', null, { variant: 'shock' });
+</script>
+<script src="index.js"></script>
+
 </body>
 </html>

@@ -98,10 +98,13 @@ nav{
     gap: 10px;
 }
 .logo-mark img {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     display: block;
     object-fit: contain;
+    /* 不用 drop-shadow（會白光暈把黃色稀釋）
+       改用 contrast + saturate 強化對比飽和：黃更黃、白更白、線條視覺更實 */
+    filter: contrast(1.2) saturate(1.4) brightness(1.05);
 }
 .logo-text {
     font-family: 'Noto Serif TC', serif;
@@ -112,7 +115,7 @@ nav{
     white-space: nowrap;
 }
 @media (max-width: 480px) {
-    .logo-mark img { width: 34px; height: 34px; }
+    .logo-mark img { width: 38px; height: 38px; }
     .logo-text { font-size: 16px; }
 }
 .links{
@@ -279,59 +282,6 @@ button{
     .btn-secondary:hover{
         background-color: var(--accent-glow);
     }
-}
-
-/* 光譜儀 */
-.spectrum-content p span{
-    color: var(--ink);
-    font-size: var(--fs-title);
-}
-.labels{
-    max-width: 540px;
-}
-.track {
-    position: relative;
-    height: 1px;
-    background: var(--line);
-    margin-bottom: 20px;
-}
-
-.track-dot {
-    position: relative;
-    top: 50%;
-    left: 40%;
-    transform: translate(-50%, -50%);
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--accent-deep);
-}
-.track-dot::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 1px;
-    height: 16px;
-    background: var(--accent-deep);
-}
-
-.track-line {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 40%;
-    height: 1px;
-    background: var(--accent-deep);
-}
-
-.labels-txt {
-    display: flex;
-    gap: 36px;
-    font-size: var(--fs-xs);
-    color: var(--muted);
-    letter-spacing: 0.1em;
 }
 
 /* card */

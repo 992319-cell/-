@@ -1,15 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>新增工單</title>
+    <title>預約保養｜明前知行</title>
     <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="ticket.css">
 </head>
 <body>
-    <div class="wrap">
-        <nav>
+    <!-- ───── SVG icon sprite ───── -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <defs>
+            <symbol id="ic-oil" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3 C 8.5 8, 6 12, 6 15.5 a 6 6 0 0 0 12 0 C 18 12, 15.5 8, 12 3 z"/>
+                <ellipse cx="10" cy="15" rx="1.4" ry="2.2" fill="currentColor" opacity=".25" stroke="none"/>
+            </symbol>
+            <symbol id="ic-airfilter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3.5" y="6" width="17" height="12" rx="1.2"/>
+                <path d="M3.5 9.5 H 20.5 M3.5 12.5 H 20.5 M3.5 15.5 H 20.5"/>
+                <path d="M8 6 V 18 M12 6 V 18 M16 6 V 18" opacity=".4"/>
+            </symbol>
+            <symbol id="ic-sparkplug" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="2.5" width="6" height="4.5" rx=".5"/>
+                <path d="M9 7 H 15 L 14 10 H 10 Z"/>
+                <rect x="10" y="10" width="4" height="6"/>
+                <path d="M11 16 L 11 20 M13 16 L 13 19 M11 19 L 13 19" opacity=".7"/>
+                <path d="M10.5 4.7 L 13.5 4.7" opacity=".5"/>
+            </symbol>
+            <symbol id="ic-brake" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="7.5"/>
+                <circle cx="12" cy="12" r="2.5"/>
+                <rect x="3.2" y="10.2" width="4.5" height="3.6" rx=".4" fill="currentColor" stroke="none" opacity=".75"/>
+                <rect x="16.3" y="10.2" width="4.5" height="3.6" rx=".4" fill="currentColor" stroke="none" opacity=".75"/>
+                <path d="M9.5 12 L 14.5 12" opacity=".35"/>
+            </symbol>
+            <symbol id="ic-tire" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9"/>
+                <circle cx="12" cy="12" r="3.2"/>
+                <path d="M12 3 V 6 M12 18 V 21 M3 12 H 6 M18 12 H 21" />
+                <path d="M5.6 5.6 L 7.8 7.8 M16.2 16.2 L 18.4 18.4 M18.4 5.6 L 16.2 7.8 M7.8 16.2 L 5.6 18.4" opacity=".55"/>
+            </symbol>
+            <symbol id="ic-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M8 12 L 11 15 L 16 9"/>
+            </symbol>
+            <symbol id="ic-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3.5" y="5" width="17" height="15" rx="1.5"/>
+                <path d="M3.5 9.5 H 20.5 M8 3 V 7 M16 3 V 7"/>
+            </symbol>
+        </defs>
+    </svg>
+
+    <nav>
             <div class="logo">
                 <h1>
                     <a href="index.html">
@@ -22,12 +65,11 @@
             </div>
             <ul class="links">
                 <li><a href="market.html">查行情</a></li>
-                <li><a href="appointments.html">我的預約</a></li>
-                <li class="is-current"><a href="vehicle.html">車庫</a>
-                </li>
+                <li class="is-current"><a href="appointments.html">我的預約</a></li>
+                <li><a href="vehicle.html">車庫</a></li>
                 <li><a href="login.html">登入</a></li>
             </ul>
-                    <button type="button" class="nav-toggle" aria-expanded="false" aria-label="開啟選單">
+            <button type="button" class="nav-toggle" aria-expanded="false" aria-label="開啟選單">
                 <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <line x1="4" y1="6" x2="20" y2="6"/>
                     <line x1="4" y1="12" x2="20" y2="12"/>
@@ -39,86 +81,286 @@
                 </svg>
             </button>
         </nav>
-        <div class="ticket-header">
-            <h2>新增工單</h2>
-            <div class="ticket-entry">
-                <button type="button" class="ticket-entry-card is-active">
-                    <img src="./icon/pencil-plus.png" alt="pencil.icon">
-                    <p>手動填寫</p>
-                </button>
-                <button type="button" class="ticket-entry-card">
-                    <img src="./icon/camera-plus.png" alt="camera.icon">
-                    <p>拍照上傳</p>
-                </button>
+
+        <header class="tk-header">
+            <h2>預約保養</h2>
+            <p class="tk-header-sub">選擇車行、填寫需求，由車行確認後成立</p>
+        </header>
+
+        <div class="tk-steps">
+            <div class="tk-step is-active" data-step="1">
+                <span class="tk-step-num">1</span>
+                <span class="tk-step-label">預約資訊</span>
+            </div>
+            <div class="tk-step" data-step="2">
+                <span class="tk-step-num">2</span>
+                <span class="tk-step-label">保養需求</span>
+            </div>
+            <div class="tk-step" data-step="3">
+                <span class="tk-step-num">3</span>
+                <span class="tk-step-label">確認送出</span>
             </div>
         </div>
-        <div class="ticket-content">
-            <div class="ticket-steps">
-                <div class="ticket-step is-active">
-                    <div class="ticket-step-num">1</div>
-                    <p>基本資料</p>
+
+        <div class="tk-layout">
+        <form class="tk-form" novalidate>
+
+            <!-- Step 1 -->
+            <section class="tk-panel is-active" data-panel="1">
+                <div class="tk-section-head">
+                    <span class="tk-section-num" aria-hidden="true">01</span>
+                    <div class="tk-section-title-wrap">
+                        <span class="tk-section-rule" aria-hidden="true"></span>
+                        <h3 class="tk-section-title">預約資訊</h3>
+                        <span class="tk-section-caption" aria-hidden="true">SELECT TIME &amp; PLACE</span>
+                    </div>
                 </div>
-                <div class="ticket-step">
-                    <div class="ticket-step-num">2</div>
-                    <p>保養項目</p>
+
+                <div class="tk-field">
+                    <span class="tk-label">機車</span>
+                    <p class="tk-vehicle">狗熊</p>
+                    <input type="hidden" name="vehicle_id" value="xyz-5678">
                 </div>
-                <div class="ticket-step">
-                    <div class="ticket-step-num">3</div>
-                    <p>確認送出</p>
+
+                <div class="tk-field">
+                    <label for="date" class="tk-label">希望日期</label>
+                    <div class="tk-date-wrap">
+                        <svg class="tk-date-icon" aria-hidden="true"><use href="#ic-cal"/></svg>
+                        <input type="text" name="date" id="date" placeholder="請選擇日期" readonly required>
+                    </div>
                 </div>
+
+                <div class="tk-field">
+                    <span class="tk-label">希望時段</span>
+                    <ul class="tk-slots" role="radiogroup" aria-label="希望時段">
+                        <li><button type="button" class="tk-slot" data-slot="09" role="radio" aria-checked="false">09:00</button></li>
+                        <li><button type="button" class="tk-slot" data-slot="10" role="radio" aria-checked="false">10:00</button></li>
+                        <li><button type="button" class="tk-slot" data-slot="11" role="radio" aria-checked="false">11:00</button></li>
+                        <li><button type="button" class="tk-slot is-full" data-slot="14" disabled aria-disabled="true">14:00</button></li>
+                        <li><button type="button" class="tk-slot" data-slot="15" role="radio" aria-checked="false">15:00</button></li>
+                        <li><button type="button" class="tk-slot" data-slot="16" role="radio" aria-checked="false">16:00</button></li>
+                        <li><button type="button" class="tk-slot" data-slot="17" role="radio" aria-checked="false">17:00</button></li>
+                        <li><button type="button" class="tk-slot" data-slot="18" role="radio" aria-checked="false">18:00</button></li>
+                    </ul>
+                    <p class="tk-slots-legend">
+                        <span><span class="tk-legend-dot is-selected"></span>已選</span>
+                        <span><span class="tk-legend-dot is-full"></span>已額滿</span>
+                    </p>
+                    <input type="hidden" name="slot" id="slot" required>
+                </div>
+
+                <div class="tk-field tk-field-row">
+                    <div class="tk-half">
+                        <label for="city" class="tk-label">城市</label>
+                        <div class="tk-select-wrap">
+                            <select name="city" id="city" required>
+                                <option value="">請選擇</option>
+                                <option value="taipei">台北市</option>
+                                <option value="newtaipei">新北市</option>
+                                <option value="taichung">台中市</option>
+                                <option value="tainan">台南市</option>
+                                <option value="kaohsiung">高雄市</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="tk-half">
+                        <label for="district" class="tk-label">區</label>
+                        <div class="tk-select-wrap">
+                            <select name="district" id="district" required disabled>
+                                <option value="">請先選擇城市</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tk-field">
+                    <span class="tk-label">車行</span>
+                    <div class="tk-shops" id="shop-list">
+                        <p class="tk-shops-empty">請先選擇城市與區</p>
+                    </div>
+                    <input type="hidden" name="shop" id="shop" required>
+                </div>
+
+                <div class="tk-actions">
+                    <button type="button" class="btn-primary btn-wide js-next" data-next="2">下一步</button>
+                </div>
+            </section>
+
+            <!-- Step 2 -->
+            <section class="tk-panel" data-panel="2">
+                <div class="tk-panel-banner" aria-hidden="true"></div>
+                <div class="tk-section-head">
+                    <span class="tk-section-num" aria-hidden="true">02</span>
+                    <div class="tk-section-title-wrap">
+                        <span class="tk-section-rule" aria-hidden="true"></span>
+                        <h3 class="tk-section-title">保養需求</h3>
+                        <span class="tk-section-caption" aria-hidden="true">WHAT NEEDS CARE</span>
+                    </div>
+                </div>
+
+                <div class="tk-field">
+                    <span class="tk-label">希望項目（可複選）</span>
+                    <ul class="tk-services">
+                        <li>
+                            <label class="tk-service-card">
+                                <input type="checkbox" name="services" value="oil">
+                                <svg class="tk-service-icon" aria-hidden="true"><use href="#ic-oil"/></svg>
+                                <span class="tk-service-info">
+                                    <span class="tk-service-name">機油更換</span>
+                                    <span class="tk-service-price">中位價 $190</span>
+                                </span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="tk-service-card">
+                                <input type="checkbox" name="services" value="airfilter">
+                                <svg class="tk-service-icon" aria-hidden="true"><use href="#ic-airfilter"/></svg>
+                                <span class="tk-service-info">
+                                    <span class="tk-service-name">空濾</span>
+                                    <span class="tk-service-price">中位價 $80</span>
+                                </span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="tk-service-card">
+                                <input type="checkbox" name="services" value="sparkplug">
+                                <svg class="tk-service-icon" aria-hidden="true"><use href="#ic-sparkplug"/></svg>
+                                <span class="tk-service-info">
+                                    <span class="tk-service-name">火星塞</span>
+                                    <span class="tk-service-price">中位價 $150</span>
+                                </span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="tk-service-card">
+                                <input type="checkbox" name="services" value="brake">
+                                <svg class="tk-service-icon" aria-hidden="true"><use href="#ic-brake"/></svg>
+                                <span class="tk-service-info">
+                                    <span class="tk-service-name">煞車皮</span>
+                                    <span class="tk-service-price">中位價 $320</span>
+                                </span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="tk-service-card">
+                                <input type="checkbox" name="services" value="tire">
+                                <svg class="tk-service-icon" aria-hidden="true"><use href="#ic-tire"/></svg>
+                                <span class="tk-service-info">
+                                    <span class="tk-service-name">輪胎更換</span>
+                                    <span class="tk-service-price">中位價 $1,200</span>
+                                </span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="tk-field">
+                    <label for="symptom" class="tk-label">症狀描述</label>
+                    <textarea name="symptom" id="symptom" rows="5"
+                        placeholder="例：最近怠速會抖、雨天煞車有異音⋯"></textarea>
+                    <p class="tk-hint">非必填，但描述得越清楚，車行越好準備</p>
+                </div>
+
+                <div class="tk-actions tk-actions-row">
+                    <button type="button" class="btn-secondary btn-wide js-prev" data-prev="1">上一步</button>
+                    <button type="button" class="btn-primary btn-wide js-next" data-next="3">下一步</button>
+                </div>
+            </section>
+
+            <!-- Step 3 -->
+            <section class="tk-panel" data-panel="3">
+                <div class="tk-section-head">
+                    <span class="tk-section-num" aria-hidden="true">03</span>
+                    <div class="tk-section-title-wrap">
+                        <span class="tk-section-rule" aria-hidden="true"></span>
+                        <h3 class="tk-section-title">確認送出</h3>
+                        <span class="tk-section-caption" aria-hidden="true">REVIEW &amp; SUBMIT</span>
+                    </div>
+                </div>
+
+                <dl class="tk-summary">
+                    <div class="tk-sum-row">
+                        <dt>機車</dt>
+                        <dd data-sum="vehicle" class="tk-sum-serif">狗熊</dd>
+                    </div>
+                    <div class="tk-sum-row">
+                        <dt>希望時間</dt>
+                        <dd data-sum="when">—</dd>
+                    </div>
+                    <div class="tk-sum-row">
+                        <dt>預約車行</dt>
+                        <dd data-sum="place">—</dd>
+                    </div>
+                    <div class="tk-sum-row">
+                        <dt>希望項目</dt>
+                        <dd data-sum="services" class="tk-sum-tags">—</dd>
+                    </div>
+                    <div class="tk-sum-row" data-sum-row="symptom" hidden>
+                        <dt>症狀描述</dt>
+                        <dd data-sum="symptom">—</dd>
+                    </div>
+                </dl>
+
+                <p class="tk-note">送出後狀態為「待接單」，由車行確認後正式成立。可至「我的預約」查看進度。</p>
+
+                <div class="tk-actions tk-actions-row">
+                    <button type="button" class="btn-secondary btn-wide js-prev" data-prev="2">上一步</button>
+                    <button type="submit" class="btn-primary btn-wide js-submit">送出預約</button>
+                </div>
+            </section>
+
+            <!-- Step 4：送出後 -->
+            <section class="tk-panel tk-done" data-panel="4">
+                <div class="tk-done-card">
+                    <svg class="tk-done-check" aria-hidden="true"><use href="#ic-check"/></svg>
+                    <h3 class="tk-done-title">預約已送出</h3>
+                    <p class="tk-done-sub" data-done="shopline">等候車行確認</p>
+                    <p class="tk-done-status">
+                        <span class="tk-done-dot"></span>
+                        <span>狀態 · 待接單</span>
+                    </p>
+                </div>
+                <div class="tk-actions">
+                    <a href="appointments.html" class="btn-primary btn-wide btn-as-link">前往我的預約</a>
+                </div>
+            </section>
+
+        </form>
+
+        <aside class="tk-aside">
+            <div class="tk-aside-card">
+                <span class="tk-aside-caption">YOUR BOOKING</span>
+                <div class="tk-aside-shop" id="aside-shop">
+                    <div class="tk-aside-shop-placeholder">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true" style="width:32px;height:32px;opacity:.5;">
+                            <path d="M3 9 L 12 3 L 21 9 V 20 H 3 Z"/><path d="M9 20 V 13 H 15 V 20"/>
+                        </svg>
+                        <span>請於左側選擇車行</span>
+                    </div>
+                </div>
+                <dl class="tk-aside-list">
+                    <div class="tk-aside-row">
+                        <dt>日期</dt><dd data-aside="date">—</dd>
+                    </div>
+                    <div class="tk-aside-row">
+                        <dt>時段</dt><dd data-aside="slot">—</dd>
+                    </div>
+                    <div class="tk-aside-row">
+                        <dt>項目</dt><dd data-aside="services" class="tk-aside-tags">—</dd>
+                    </div>
+                </dl>
             </div>
-            <form action="" class="ticket-form">
-                <div class="ticket-field">
-                    <p class="ticket-field-label">機車</p>
-                    <p class="ticket-vehicle">狗熊</p>
-                    <!-- <input type="hidden" name="vehicle_id" value="xyz-5678"> -->
-                </div>
-                <div class="ticket-field-row">
-                    <div class="ticket-field">
-                        <label for="date">日期</label>
-                        <input type="date" name="date" id="date" required>
-                    </div>
-                    <div class="ticket-field">
-                        <label for="mileage">里程</label>
-                        <input type="number" name="mileage" id="mileage" min="0" required>
-                    </div>
-                </div>
-                <div class="ticket-field">
-                    <label for="shop-type">店型</label>
-                    <select name="shop_type" id="shop-type" required>
-                        <option value="">請選擇</option>
-                        <option value="general">一般車行（個人/在地）</option>
-                        <option value="chain">連鎖店</option>
-                        <option value="official">原廠</option>
-                    </select>
-                </div>
-                <div class="ticket-field ticket-field-hidden">
-                    <label for="shop-name">保養廠名稱</label>
-                    <input type="text" name="shop_name" id="shop-name" required>
-                </div>
-                <div class="ticket-field">
-                    <label for="city">城市</label>
-                    <select name="city" id="city" required>
-                        <option value="">請選擇</option>
-                        <option value="taipei">台北市</option>
-                        <option value="newtaipei">新北市</option>
-                        <option value="taichung">台中市</option>
-                        <option value="tainan">台南市</option>
-                        <option value="kaohsiung">高雄市</option>
-                    </select>
-                </div>
-                <div class="ticket-actions">
-                    <button type="button" class="btn-primary">
-                        下一步
-                    </button>
-                </div>
-            </form>
+        </aside>
         </div>
+
         <footer>
             <p>© 2026 明前知行　版權所有</p>
             <a href="mailto:992319@gmail.com">992319@gmail.com</a>
         </footer>
-    </div>
+
     <script src="nav.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/zh-tw.js"></script>
+    <script src="ticket.js"></script>
 </body>
 </html>

@@ -1,0 +1,425 @@
+/* ============================================================
+   光譜儀元件 spectrum.css
+   依賴：common.css 的 CSS 變數（--accent-deep / --yellow / --ink / --muted / --line / --bg-off）
+   命名：.spec-* 前綴避免全站撞名
+   變體：.spec--shock（首頁震撼版）/ .spec--detail（market 細節版）
+   動畫：初始狀態藏起來，外層加 .is-ready 觸發進場
+   ============================================================ */
+
+.spec {
+  /* 元件內專屬色（common.css 沒有的） */
+  --spec-track: #ebedf2;
+  --spec-iqr: #c8e3d2;
+  --spec-iqr-edge: rgba(29, 158, 117, 0.4);
+  --spec-green: #1d9e75;
+  --spec-warn: #a8442a;
+
+  font-family: 'Inter', 'Noto Sans TC', sans-serif;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+/* ─── wrap：散點 + bar ─── */
+.spec-wrap {
+  position: relative;
+  padding-top: 100px;
+}
+
+/* ─── beeswarm 散點區 ─── */
+.spec-swarm {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 22px;
+  height: 72px;
+}
+.spec-dot {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-deep);
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition-delay: calc(var(--i, 0) * 14ms);
+  cursor: pointer;
+}
+.spec.is-ready .spec-dot {
+  opacity: 0.32;
+  transform: translate(-50%, -50%) scale(1);
+}
+.spec-dot:hover {
+  opacity: 1 !important;
+  transform: translate(-50%, -50%) scale(1.8) !important;
+  z-index: 10;
+  transition-delay: 0s;
+}
+.spec-dot:hover::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ink);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 3px;
+  font-size: 12px;
+  white-space: nowrap;
+  letter-spacing: 0.05em;
+}
+
+/* ─── 主 bar ─── */
+.spec-track {
+  position: relative;
+  height: 14px;
+  background: var(--spec-track);
+  border-radius: 7px;
+  overflow: visible;
+}
+
+/* IQR 主流區間 */
+.spec-iqr {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: var(--spec-iqr);
+  border-radius: 7px;
+  border-left: 1px solid var(--spec-iqr-edge);
+  border-right: 1px solid var(--spec-iqr-edge);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: 0.15s;
+}
+.spec.is-ready .spec-iqr {
+  transform: scaleX(1);
+}
+
+/* median 細線 */
+.spec-median {
+  position: absolute;
+  top: -8px;
+  bottom: -8px;
+  width: 2px;
+  background: var(--accent-deep);
+  transform: translateX(-50%) scaleY(0);
+  transform-origin: top;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: 0.55s;
+  z-index: 3;
+}
+.spec.is-ready .spec-median {
+  transform: translateX(-50%) scaleY(1);
+}
+
+/* 你的位置 flag */
+.spec-you {
+  position: absolute;
+  top: 0;
+  bottom: -12px;
+  width: 2px;
+  background: var(--yellow);
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  transition-delay: 0.75s;
+  z-index: 4;
+}
+.spec.is-ready .spec-you {
+  opacity: 1;
+}
+.spec-you-flag {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-12px);
+  background: var(--yellow);
+  color: var(--accent-deep);
+  padding: 8px 14px 7px;
+  border-radius: 3px;
+  white-space: nowrap;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-align: center;
+  line-height: 1.3;
+  font-variant-numeric: tabular-nums;
+  opacity: 0;
+  transition:
+    opacity 0.35s ease,
+    transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition-delay: 0.85s;
+}
+.spec.is-ready .spec-you-flag {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+.spec-you-num {
+  font-size: 16px;
+  display: block;
+}
+.spec-you-tag {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--spec-warn);
+  font-weight: 500;
+  display: block;
+  margin-top: 1px;
+}
+.spec-you-flag::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: var(--yellow);
+}
+
+/* ─── MIN / MAX 錨點 ─── */
+.spec-anchors {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 18px;
+  padding: 0 2px;
+}
+.spec-anchor {
+  text-align: left;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  transition-delay: 0.4s;
+}
+.spec.is-ready .spec-anchor {
+  opacity: 1;
+  transform: translateY(0);
+}
+.spec-anchor--end {
+  text-align: right;
+  transition-delay: 0.45s;
+}
+.spec-cap {
+  display: block;
+  font-family: 'Inter', 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.spec-val {
+  font-family: 'Inter', 'Noto Sans TC', sans-serif;
+  font-variant-numeric: tabular-nums;
+  font-size: 24px;
+  color: var(--ink);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.spec-shop {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0;
+  margin-top: 6px;
+}
+
+/* ─── 五段標籤（位置對齊百分位，不再等分） ─── */
+.spec-zones {
+  position: relative;
+  height: 18px;
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--muted-light);
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  transition-delay: 0.5s;
+}
+.spec.is-ready .spec-zones {
+  opacity: 1;
+}
+.spec-zones span {
+  position: absolute;
+  top: 16px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+.spec-zones .ok {
+  color: var(--spec-green);
+  font-weight: 500;
+}
+
+/* ─── summary 數字整合列 ─── */
+.spec-summary {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  margin-top: 32px;
+  padding: 18px 22px;
+  background: var(--bg-off);
+  border-radius: 3px;
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition-delay: 0.6s;
+}
+.spec.is-ready .spec-summary {
+  opacity: 1;
+  transform: translateY(0);
+}
+.spec-sum-item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.spec-sum-lbl {
+  font-family: 'Inter', 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+.spec-sum-val {
+  font-family: 'Inter', 'Noto Sans TC', sans-serif;
+  font-variant-numeric: tabular-nums;
+  font-size: 20px;
+  color: var(--ink);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.spec-sum-val--green { color: var(--spec-green); }
+.spec-sum-val--warn { color: var(--spec-warn); }
+.spec-sum-sep {
+  color: var(--muted-light);
+  font-size: 10px;
+}
+
+/* ─── foot 註解 ─── */
+.spec-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  transition-delay: 0.7s;
+}
+.spec.is-ready .spec-foot {
+  opacity: 1;
+}
+.spec-foot-l {
+  font-family: 'Inter', 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  font-weight: 500;
+}
+.spec-foot-l strong {
+  font-family: 'Inter', 'Noto Sans TC', sans-serif;
+  font-variant-numeric: tabular-nums;
+  font-size: 16px;
+  color: var(--ink);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0 3px;
+}
+.spec-foot-r {
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  font-weight: 500;
+}
+
+/* ─── 細節版調整 ─── */
+.spec--detail .spec-wrap {
+  padding-top: 90px;
+}
+.spec--detail .spec-swarm {
+  height: 56px;
+}
+.spec--detail .spec-summary {
+  background: var(--white);
+  border: 1px solid var(--line);
+}
+
+/* ─── 觸控裝置 tooltip：用 .is-active 取代 :hover ─── */
+@media (hover: none) {
+  /* 觸控時 :hover 會卡住，改用 click 切換 .is-active */
+  .spec-dot:hover {
+    background: var(--accent-deep);
+    opacity: 0.32;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  .spec-dot:hover::after { content: none; }
+  .spec.is-ready .spec-dot.is-active {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.8);
+    z-index: 10;
+  }
+  .spec-dot.is-active::after {
+    content: attr(data-label);
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--ink);
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 3px;
+    font-size: 12px;
+    white-space: nowrap;
+    letter-spacing: 0.05em;
+  }
+}
+
+/* ─── 平板 769–1024（跟 nav 漢堡選單斷點同步） ─── */
+@media (max-width: 1024px) {
+  .spec-wrap { padding-top: 94px; }
+  .spec-swarm { height: 64px; }
+  .spec-val { font-size: 22px; }
+  .spec-sum-val { font-size: 18px; }
+}
+
+/* ─── RWD 手機 ≤768 ─── */
+@media (max-width: 768px) {
+  .spec-wrap { padding-top: 86px; }
+  .spec-swarm { height: 54px; bottom: 18px; }
+  .spec-dot { width: 6px; height: 6px; }
+  .spec-you-flag { padding: 7px 11px 6px; font-size: 12px; }
+  .spec-you-num { font-size: 14px; }
+  .spec-you-tag { font-size: 10px; }
+  .spec-cap { font-size: 12px; }
+  .spec-val { font-size: 20px; }
+  .spec-shop { font-size: 12px; }
+  .spec-zones { font-size: 12px; letter-spacing: 0.02em; }
+  .spec-summary {
+    padding: 14px 14px;
+    gap: 6px 14px;
+  }
+  .spec-sum-val { font-size: 17px; }
+  .spec-sum-lbl { font-size: 12px; letter-spacing: 0.02em; }
+  .spec-sum-sep { display: none; }
+  .spec-foot { flex-direction: column; gap: 6px; align-items: flex-start; }
+  .spec-foot-l, .spec-foot-r { font-size: 12px; }
+  .spec-foot-l strong { font-size: 14px; }
+}
+
+/* ─── 再更窄 ≤420 ─── */
+@media (max-width: 420px) {
+  .spec-wrap { padding-top: 78px; }
+  .spec-swarm { height: 44px; bottom: 16px; }
+}

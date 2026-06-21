@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>spectrum.js 整合測試 — 明前知行</title>
+<link rel="stylesheet" href="./common.css">
+<link rel="stylesheet" href="./spectrum.css">
+<style>
+/* demo 頁專屬樣式（之後整合進 index.css 不用這段） */
+body {
+  background: var(--white);
+  color: var(--ink);
+  margin: 0;
+}
+.meta-bar {
+  background: var(--accent-deep);
+  color: white;
+  padding: 14px 24px;
+  text-align: center;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+}
+.meta-bar strong { color: var(--yellow); }
+
+.demo-section {
+  padding: 80px 32px;
+}
+.demo-section--alt { background: var(--bg-off); }
+.demo-inner { max-width: 1100px; margin: 0 auto; }
+.demo-divider { height: 1px; background: var(--line); max-width: 1100px; margin: 0 auto; }
+
+.demo-eyebrow {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 22px;
+}
+.demo-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-size: 28px;
+  color: var(--yellow);
+}
+.demo-rule { width: 32px; height: 1px; background: var(--yellow); }
+.demo-tag {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-size: 14px;
+  letter-spacing: 0.25em; color: var(--muted);
+  text-transform: uppercase;
+}
+.demo-h2 {
+  font-family: 'Noto Serif TC', serif;
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 1.25;
+  color: var(--accent-deep);
+  margin: 0 0 12px 0;
+  letter-spacing: 0.01em;
+}
+.demo-h2 .num {
+  color: var(--accent);
+  font-weight: 700;
+  position: relative;
+  display: inline-block;
+  padding: 0 4px;
+}
+.demo-h2 .num::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 4px;
+  height: 12px;
+  background: var(--yellow);
+  z-index: -1;
+  opacity: 0.55;
+}
+.demo-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--muted);
+  margin: 0 0 56px 0;
+  letter-spacing: 0.05em;
+}
+
+.demo-h3 {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 28px;
+  color: var(--accent-deep);
+  margin: 0 0 6px 0;
+  font-weight: 500;
+}
+.demo-h3-sub {
+  color: var(--muted);
+  margin: 0 0 32px 0;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 768px) {
+  .demo-section { padding: 56px 18px; }
+  .demo-h2 { font-size: 26px; }
+  .demo-h2 br { display: none; }
+  .demo-sub { font-size: 13px; margin-bottom: 32px; }
+  .demo-h3 { font-size: 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="meta-bar">
+  spectrum.js v2 · 100 筆假資料 · YOU 跳動 · 觸控 click tooltip · <strong>請在手機/桌機都試</strong>
+</div>
+
+<!-- ─── 震撼版（index Section 2 用，無 YOU flag） ─── -->
+<section class="demo-section">
+  <div class="demo-inner">
+    <div class="demo-eyebrow">
+      <span class="demo-num">02</span>
+      <span class="demo-rule"></span>
+      <span class="demo-tag">The Problem</span>
+    </div>
+    <h2 class="demo-h2">同一款機油，<br>全台價差最多 <span class="num">6 倍</span></h2>
+    <p class="demo-sub">— 取自 100 筆樣本工單（production 將擴至 4,200+）</p>
+
+    <div id="spec-shock"></div>
+  </div>
+</section>
+
+<div class="demo-divider"></div>
+
+<!-- ─── 細節版（market.html 用，有 YOU flag） ─── -->
+<section class="demo-section demo-section--alt">
+  <div class="demo-inner">
+    <div class="demo-eyebrow">
+      <span class="demo-tag">Market Detail</span>
+    </div>
+    <h3 class="demo-h3">你的行情報告</h3>
+    <p class="demo-h3-sub">SUZUKI Swish 125 · 機油更換 · 全台 100 筆同條件工單</p>
+
+    <div id="spec-detail"></div>
+  </div>
+</section>
+
+<script src="./spectrum.js"></script>
+<script>
+  // 震撼版 — 不傳 yourPrice 就不畫 YOU flag
+  Spectrum.render('#spec-shock', null, {
+    variant: 'shock'
+  });
+
+  // 細節版 — 傳 yourPrice 觸發 YOU flag
+  Spectrum.render('#spec-detail', null, {
+    variant: 'detail',
+    yourPrice: 290
+  });
+</script>
+
+</body>
+</html>

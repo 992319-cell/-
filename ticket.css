@@ -1,138 +1,886 @@
-/* header */
-.ticket-header{
-    padding: 100px var(--pad-x-section);
-}
-.ticket-header h2 {
-    margin-bottom: 40px;
-}
-.ticket-entry{
-    display: flex;
-    align-items: center;
-    gap: 28px;
-}
-.ticket-entry p{
-    font-size: var(--fs-lg);
-}
-.ticket-entry-card{
-    padding: 20px;
-    border: 1px solid var(--muted-light);
-    border-radius: 3px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    background: var(--white);
-    cursor: pointer;
-    transition: border-color .2s
-}
-.ticket-entry-card:hover,
-.ticket-entry-card.is-active{
-    border-color: var(--accent);
-}
-.ticket-entry-card img{
-    width: 56px;
-    height: 56px;
-    display: block;
-}
-/* ticket-content */
+/* ============================================
+   ticket.css — 預約保養（A+ 全裝飾版）
+   ============================================ */
 
-/* steps */
-.ticket-steps{
+/* ───── 通用按鈕加寬版（覆寫 common.css 的 124px）─── */
+.btn-wide {
+    width: 100%;
+    justify-content: center;
+    font-size: var(--fs-lg);
+    border-radius: 3px;
+    padding: 14px 20px;
+}
+.btn-as-link {
+    text-decoration: none;
+    color: var(--ink);
+}
+
+/* ───── header ───── */
+.tk-header {
+    padding: calc(var(--nav-h) + 60px) var(--pad-x-section) 32px;
+    text-align: center;
+}
+.tk-header h2 {
+    font-family: 'Noto Serif TC', serif;
+    margin-bottom: 6px;
+}
+.tk-header-sub {
+    color: var(--muted);
+    font-size: var(--fs-sm);
+    letter-spacing: .05em;
+}
+
+/* ───── stepper ───── */
+.tk-steps {
     background-color: var(--bg-off);
     display: flex;
-    padding-block: 32px;
-    justify-content: space-around;
+    padding: 24px var(--pad-x-section);
+    justify-content: center;
+    gap: 0;
     align-items: center;
     position: relative;
 }
-.ticket-steps::before{
+.tk-step {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-inline: 18px;
+    color: var(--muted);
+    position: relative;
+}
+.tk-step:not(:last-child)::after {
     content: "";
-    position: absolute;
-    top: 50%;
-    left: 18%;
-    right: 18%;
+    width: 60px;
     height: 1px;
     background: var(--muted-light);
+    margin-left: 18px;
 }
-.ticket-step{
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    z-index: 1;
-    background-color: var(--bg-off);
-    padding-inline: 4px;
-
-}
-.ticket-step-num{
-    border: 1px solid var(--muted);
-    border-radius: 50%;
+.tk-step-num {
     width: 30px;
     height: 30px;
+    border-radius: 50%;
+    border: 1px solid var(--muted-light);
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: var(--white);
+    transition: background-color .25s, color .25s, border-color .25s;
+    font-size: var(--fs-sm);
 }
-.ticket-step.is-active .ticket-step-num{
+.tk-step-label {
+    font-size: var(--fs-sm);
+    letter-spacing: .08em;
+}
+.tk-step.is-active { color: var(--ink); }
+.tk-step.is-active .tk-step-num {
     background-color: var(--accent-deep);
     color: var(--white);
+    border-color: var(--accent-deep);
 }
-.ticket-step.done .ticket-step-num{
-    background-color: var(--accent);
+.tk-step.done .tk-step-num {
+    background-color: #1d9e75;
     color: var(--white);
+    border-color: #1d9e75;
 }
-/* form */
-.ticket-form{
-    margin-block: 48px;
+
+/* ───── layout：雙欄（表單 + 摘要側邊） ───── */
+.tk-layout {
+    max-width: 1100px;
+    margin: 48px auto;
     padding-inline: var(--pad-x-section);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 40px;
+    align-items: start;
+}
+.tk-layout.is-done {
+    grid-template-columns: minmax(0, 720px);
+    justify-content: center;
+}
+.tk-layout.is-done .tk-aside {
+    display: none;
+}
+
+/* ───── form 容器（清掉舊的 max-width / margin，交給 layout） ───── */
+.tk-form {
+    margin: 0;
+    padding: 0;
+    max-width: none;
+    min-width: 0;
+}
+
+/* ───── 預約摘要側邊 ───── */
+.tk-aside {
+    position: sticky;
+    top: calc(var(--nav-h) + 24px);
+}
+.tk-aside-card {
+    background: var(--white);
+    border: 1px solid var(--muted-light);
+    border-radius: 3px;
+    padding: 18px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 14px;
 }
-.ticket-field{
+.tk-aside-caption {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    letter-spacing: .2em;
+    font-size: var(--fs-xs);
+    color: var(--muted);
+    text-transform: uppercase;
+}
+.tk-aside-shop {
+    height: 130px;
+    border-radius: 3px;
+    background-color: var(--bg-off);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 12px;
+    color: var(--white);
+    overflow: hidden;
+}
+.tk-aside-shop-placeholder {
+    margin: auto;
+    color: var(--muted);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    font-size: var(--fs-sm);
+    text-align: center;
+}
+.tk-aside-shop-name {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 500;
+    font-size: var(--fs-lg);
+    line-height: 1.4;
+    margin-bottom: 2px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.7);
+}
+.tk-aside-shop-meta {
+    font-size: var(--fs-sm);
+    opacity: .92;
+    letter-spacing: .05em;
+}
+.tk-aside-list {
+    display: flex;
+    flex-direction: column;
+}
+.tk-aside-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--muted-light);
+    font-size: var(--fs-sm);
+}
+.tk-aside-row:last-child { border-bottom: none; }
+.tk-aside-row dt {
+    color: var(--muted);
+    letter-spacing: .05em;
+    flex: 0 0 auto;
+}
+.tk-aside-row dd {
+    color: var(--ink);
+    text-align: right;
+    flex: 1 1 auto;
+}
+.tk-aside-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: flex-end;
+}
+.tk-aside-tags .tag {
+    background: var(--bg-off);
+    color: var(--accent-deep);
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: var(--fs-xs);
+}
+
+/* ───── Step 2 panel banner（service-work 寬帶） ───── */
+.tk-panel-banner {
+    height: 160px;
+    margin-bottom: 28px;
+    border-radius: 3px;
+    background-image: linear-gradient(180deg, rgba(0,0,0,.05) 0%, rgba(0,0,0,.35) 100%), url('./圖片素材/shop/service-work.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+/* ───── panel 切換 ───── */
+.tk-panel {
+    display: none;
+    flex-direction: column;
+}
+.tk-panel.is-active {
+    display: flex;
+}
+
+/* ───── editorial section head ───── */
+.tk-section-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    margin-bottom: 24px;
+}
+.tk-section-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 48px;
+    line-height: .9;
+    color: var(--yellow);
+}
+.tk-section-title-wrap {
+    padding-top: 6px;
+}
+.tk-section-rule {
+    display: block;
+    width: 32px;
+    height: 2px;
+    background: var(--yellow);
+    margin-bottom: 8px;
+}
+.tk-section-title {
+    font-family: 'Noto Serif TC', serif;
+    font-weight: 400;
+    font-size: 24px;
+    color: var(--accent-deep);
+    letter-spacing: .05em;
+}
+.tk-section-caption {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: var(--fs-xs);
+    color: var(--muted);
+    letter-spacing: .15em;
+    display: block;
+    margin-top: 2px;
+}
+
+/* ───── field 基礎 ───── */
+.tk-field {
+    padding-block: 18px;
+    border-bottom: 0.5px solid var(--muted-light);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.tk-field-row {
+    flex-direction: row;
+    gap: 20px;
+    align-items: stretch;
+}
+.tk-field-row .tk-half {
+    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 4px;
-    padding-block: 20px;
-    border-bottom: 1px solid var(--muted-light);
 }
-.ticket-field-row > .ticket-field {
-    flex: 1;
-}
-.ticket-vehicle{
-    font-size: var(--fs-lg)
-}
-.ticket-field-row{
-    display: flex;
-    gap: 20px;
-    align-items: center;
-}
-.ticket-field label,
-.ticket-field-label {
+.tk-label {
     font-size: var(--fs-sm);
     color: var(--muted);
+    letter-spacing: .08em;
 }
-/* 串js
-.ticket-field-hidden{
-    display: none;
-} */
-.ticket-field input,
-.ticket-field select {
+.tk-vehicle {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 22px;
+    color: var(--ink);
+    margin-top: 2px;
+}
+.tk-hint {
+    font-size: var(--fs-xs);
+    color: var(--muted);
+    margin-top: 4px;
+}
+
+/* ───── 日期框 ───── */
+.tk-date-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border: 0.5px solid var(--muted-light);
+    border-radius: 3px;
+    transition: border-color .2s;
+    max-width: 280px;
+}
+.tk-date-wrap:focus-within,
+.tk-date-wrap.is-filled {
+    border-color: var(--accent);
+}
+.tk-date-icon {
+    width: 18px;
+    height: 18px;
+    color: var(--accent);
+    flex-shrink: 0;
+}
+.tk-date-wrap input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: var(--fs-body);
+    color: var(--ink);
+    width: 100%;
+    cursor: pointer;
+}
+
+/* ───── 時段按鈕 grid ───── */
+.tk-slots {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-top: 4px;
+}
+.tk-slot {
+    padding: 10px 0;
+    border: 0.5px solid var(--muted-light);
+    border-radius: 3px;
+    background: var(--white);
+    color: var(--ink);
+    font-size: var(--fs-body);
+    font-family: inherit;
+    cursor: pointer;
+    transition: all .2s;
+    width: 100%;
+}
+.tk-slot:hover:not(:disabled):not(.is-selected) {
+    border-color: var(--accent);
+    color: var(--accent-deep);
+}
+.tk-slot.is-selected {
+    background: var(--accent-deep);
+    color: var(--white);
+    border-color: var(--accent-deep);
+}
+.tk-slot.is-full,
+.tk-slot:disabled {
+    background: var(--bg-off);
+    color: var(--muted-light);
+    text-decoration: line-through;
+    cursor: not-allowed;
+}
+.tk-slots-legend {
+    display: flex;
+    gap: 16px;
+    margin-top: 10px;
+    font-size: var(--fs-xs);
+    color: var(--muted);
+}
+.tk-slots-legend > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+.tk-legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    display: inline-block;
+}
+.tk-legend-dot.is-selected { background: var(--accent-deep); }
+.tk-legend-dot.is-full {
+    background: var(--bg-off);
+    border: 0.5px solid var(--muted-light);
+}
+
+/* ───── select ───── */
+.tk-select-wrap {
+    position: relative;
+    padding-block: 6px;
+    border-bottom: 0.5px solid var(--muted-light);
+    transition: border-color .2s;
+}
+.tk-select-wrap:focus-within {
+    border-bottom-color: var(--accent);
+}
+.tk-select-wrap::after {
+    content: "";
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-30%) rotate(45deg);
+    width: 6px;
+    height: 6px;
+    border-right: 1.5px solid var(--muted);
+    border-bottom: 1.5px solid var(--muted);
+    pointer-events: none;
+}
+.tk-select-wrap select {
+    appearance: none;
+    -webkit-appearance: none;
     width: 100%;
     border: none;
     outline: none;
     background: transparent;
-    padding-block: 8px;
-    font-size: var(--fs-body);
     font-family: inherit;
+    font-size: var(--fs-body);
+    color: var(--ink);
+    padding-right: 18px;
+    cursor: pointer;
+}
+.tk-select-wrap select:disabled {
+    color: var(--muted-light);
+    cursor: not-allowed;
 }
 
-.ticket-field:focus-within {
-    border-bottom-color: var(--accent);
+/* ───── shop cards ───── */
+.tk-shops {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 6px;
 }
-.ticket-actions .btn-primary{
+.tk-shops-empty {
+    grid-column: 1 / -1;
+    padding: 28px 16px;
+    background: var(--bg-off);
     border-radius: 3px;
+    text-align: center;
+    color: var(--muted);
+    font-size: var(--fs-sm);
+}
+.tk-shop-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+    padding: 18px 16px;
+    /* fallback：無照片時顯示 navy 漸層；JS 會 inline 覆蓋為「漸層+照片」*/
+    background: linear-gradient(135deg, #1c3470 0%, #0F2D6E 60%, #081d52 100%);
+    background-size: cover;
+    background-position: center;
+    color: var(--white);
+    cursor: pointer;
+    border: 1.5px solid transparent;
+    transition: transform .2s, border-color .2s, box-shadow .2s;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    isolation: isolate;
+}
+.tk-shop-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(15, 45, 110, 0.2);
+}
+.tk-shop-card.is-selected {
+    border-color: var(--yellow);
+    box-shadow: 0 0 0 3px rgba(250, 194, 63, 0.25);
+}
+.tk-shop-card.is-selected::before {
+    content: "✓";
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    width: 22px;
+    height: 22px;
+    background: var(--yellow);
+    color: var(--accent-deep);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
     justify-content: center;
+    font-size: 13px;
+    font-weight: bold;
+}
+.tk-shop-name {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 500;
     font-size: var(--fs-lg);
-    margin-top: 16px;
+    line-height: 1.4;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.75);
+    letter-spacing: .02em;
+}
+.tk-shop-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 12px;
+    font-size: var(--fs-xs);
+    color: rgba(255,255,255,0.88);
+    letter-spacing: .04em;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+.tk-shop-rating {
+    color: var(--yellow);
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+}
+
+/* ───── service cards ───── */
+.tk-services {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 6px;
+}
+.tk-service-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    border: 0.5px solid var(--muted-light);
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all .2s;
+    background: var(--white);
+}
+.tk-service-card input {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 0;
+    height: 0;
+    position: absolute;
+}
+.tk-service-icon {
+    width: 28px;
+    height: 28px;
+    color: var(--muted);
+    flex-shrink: 0;
+    transition: color .2s;
+}
+.tk-service-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.tk-service-name {
+    font-size: var(--fs-body);
+    color: var(--ink);
+}
+.tk-service-price {
+    font-size: var(--fs-xs);
+    color: var(--muted);
+    letter-spacing: .03em;
+}
+.tk-service-card:has(input:checked) {
+    border-color: var(--accent);
+    background: rgba(82, 117, 198, 0.08);
+}
+.tk-service-card:has(input:checked) .tk-service-icon {
+    color: var(--accent);
+}
+.tk-service-card:has(input:checked) .tk-service-price {
+    color: var(--accent);
+}
+
+/* ───── textarea ───── */
+.tk-field textarea {
+    width: 100%;
+    border: 0.5px solid var(--muted-light);
+    border-radius: 3px;
+    padding: 12px 14px;
+    font-family: inherit;
+    font-size: var(--fs-body);
+    color: var(--ink);
+    resize: vertical;
+    outline: none;
+    background: var(--white);
+    transition: border-color .2s;
+    margin-top: 4px;
+}
+.tk-field textarea:focus {
+    border-color: var(--accent);
+}
+
+/* ───── actions ───── */
+.tk-actions {
+    margin-top: 36px;
+}
+.tk-actions-row {
+    display: flex;
+    gap: 14px;
+}
+.tk-actions-row .btn-primary { flex: 2; }
+.tk-actions-row .btn-secondary { flex: 1; }
+
+/* ───── summary ───── */
+.tk-summary {
+    border-top: 0.5px solid var(--muted-light);
+    margin-top: 8px;
+}
+.tk-sum-row {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 18px;
+    padding-block: 16px;
+    border-bottom: 0.5px solid var(--muted-light);
+    align-items: baseline;
+}
+.tk-sum-row dt {
+    color: var(--muted);
+    font-size: var(--fs-sm);
+    letter-spacing: .08em;
+}
+.tk-sum-row dd {
+    color: var(--ink);
+    font-size: var(--fs-body);
+    word-break: break-word;
+}
+.tk-sum-serif {
+    font-family: 'Noto Serif TC', serif;
+    font-size: var(--fs-lg);
+}
+.tk-sum-tags {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.tk-sum-tags .tag {
+    font-size: var(--fs-xs);
+    padding: 4px 10px;
+    background: var(--accent);
+    color: var(--white);
+    border-radius: 3px;
+    letter-spacing: .03em;
+}
+.tk-note {
+    margin-top: 22px;
+    padding: 14px 16px;
+    background: var(--bg-off);
+    border-left: 3px solid var(--yellow);
+    color: var(--muted);
+    font-size: var(--fs-sm);
+    border-radius: 3px;
+    line-height: 1.7;
+}
+
+/* ───── 完成 hero ───── */
+.tk-done-card {
+    background: var(--white);
+    border: 1px solid var(--muted-light);
+    border-radius: 3px;
+    padding: 56px 32px 44px;
+    text-align: center;
+}
+.tk-done-check {
+    width: 56px;
+    height: 56px;
+    color: #1d9e75;
+    margin-bottom: 14px;
+}
+.tk-done-title {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 500;
+    font-size: 26px;
+    color: var(--accent-deep);
+    letter-spacing: .05em;
+    margin-bottom: 8px;
+}
+.tk-done-sub {
+    font-family: 'Noto Sans TC', sans-serif;
+    color: var(--muted);
+    font-size: var(--fs-sm);
+    letter-spacing: .05em;
+}
+.tk-done-status {
+    margin-top: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: var(--fs-sm);
+    letter-spacing: .05em;
+    color: var(--muted);
+    background: var(--bg-off);
+    padding: 6px 14px;
+    border-radius: 3px;
+}
+.tk-done-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--yellow);
+    border-radius: 50%;
+    display: inline-block;
+}
+
+
+/* ============================================
+   flatpickr 主題覆寫
+   ============================================ */
+.flatpickr-calendar {
+    font-family: 'Noto Sans TC', sans-serif !important;
+    border-radius: 3px !important;
+    box-shadow: 0 4px 20px rgba(15, 45, 110, 0.15) !important;
+}
+.flatpickr-day.selected,
+.flatpickr-day.selected:hover {
+    background: var(--accent-deep) !important;
+    border-color: var(--accent-deep) !important;
+}
+.flatpickr-day.today {
+    border-color: var(--yellow) !important;
+}
+.flatpickr-day.today:not(.selected) {
+    color: var(--accent-deep) !important;
+}
+.flatpickr-day:hover {
+    background: rgba(82, 117, 198, 0.12) !important;
+}
+.flatpickr-months .flatpickr-month {
+    color: var(--accent-deep) !important;
+}
+.flatpickr-current-month .flatpickr-monthDropdown-months,
+.flatpickr-current-month input.cur-year {
+    font-family: 'Noto Serif TC', serif !important;
+    font-weight: 500 !important;
+}
+span.flatpickr-weekday {
+    color: var(--muted) !important;
+    font-size: var(--fs-xs) !important;
+}
+
+
+/* ============================================
+   RWD：平板 769–1024
+   ============================================ */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .tk-header {
+        padding: calc(var(--nav-h) + 44px) 28px 28px;
+    }
+    .tk-steps {
+        padding: 22px 24px;
+    }
+    .tk-step {
+        padding-inline: 12px;
+    }
+    .tk-step:not(:last-child)::after {
+        width: 44px;
+        margin-left: 12px;
+    }
+    .tk-layout {
+        padding-inline: 28px;
+        margin: 40px auto;
+        grid-template-columns: minmax(0, 1fr) 260px;
+        gap: 28px;
+    }
+    .tk-section-num {
+        font-size: 42px;
+    }
+    .tk-section-title {
+        font-size: 22px;
+    }
+    .tk-panel-banner {
+        height: 130px;
+        margin-bottom: 22px;
+    }
+}
+
+/* ============================================
+   RWD：手機 ≤768
+   ============================================ */
+@media (max-width: 768px) {
+    .tk-header {
+        padding: calc(var(--nav-h) + 28px) 20px 22px;
+    }
+    .tk-header h2 {
+        font-size: 28px;
+    }
+    .tk-steps {
+        padding: 18px 8px;
+        gap: 0;
+    }
+    .tk-step {
+        padding-inline: 6px;
+        gap: 6px;
+    }
+    .tk-step-label {
+        font-size: var(--fs-xs);
+    }
+    .tk-step-num {
+        width: 26px;
+        height: 26px;
+        font-size: var(--fs-xs);
+    }
+    .tk-step:not(:last-child)::after {
+        width: 18px;
+        margin-left: 6px;
+    }
+    .tk-layout {
+        padding-inline: 20px;
+        margin: 24px auto;
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .tk-aside {
+        position: static;
+        order: -1;
+    }
+    .tk-aside-shop {
+        height: 100px;
+    }
+    .tk-panel-banner {
+        height: 100px;
+        margin-bottom: 20px;
+    }
+    .tk-section-head {
+        gap: 12px;
+        margin-bottom: 18px;
+    }
+    .tk-section-num {
+        font-size: 36px;
+    }
+    .tk-section-title {
+        font-size: 20px;
+    }
+
+    /* 城市/區 仍同列（你要求的）*/
+    /* 不變 */
+
+    /* 時段：手機改 3 欄（之前是 4，輪數整除 8）*/
+    .tk-slots {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;
+    }
+    .tk-slot {
+        font-size: var(--fs-sm);
+        padding: 9px 0;
+    }
+
+    /* 車行卡片：手機改單欄 */
+    .tk-shops {
+        grid-template-columns: 1fr;
+    }
+
+    /* 服務卡片：手機改單欄 */
+    .tk-services {
+        grid-template-columns: 1fr;
+    }
+
+    /* summary 改上下排 */
+    .tk-sum-row {
+        grid-template-columns: 1fr;
+        gap: 4px;
+        padding-block: 14px;
+    }
+
+    /* 按鈕字級縮 */
+    .btn-wide {
+        font-size: var(--fs-body);
+        padding: 12px 16px;
+    }
+
+    /* 完成 hero 縮一點 */
+    .tk-done-card {
+        padding: 44px 20px 36px;
+    }
+    .tk-done-title {
+        font-size: 22px;
+    }
+}
+
+/* 更小手機（≤380）日期框佔滿 */
+@media (max-width: 380px) {
+    .tk-date-wrap { max-width: 100%; width: 100%; }
+    .tk-slots { grid-template-columns: repeat(2, 1fr); }
 }
