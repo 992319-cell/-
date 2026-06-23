@@ -35,7 +35,7 @@
     --pad-y-section: 60px;
 
     /* nav 高度 */
-    --nav-h: 62px;
+    --nav-h: 48px;
 }
 
 /* rest */
@@ -71,11 +71,11 @@ nav{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding:4px 20px;
+    padding: 0 20px;
     height: var(--nav-h);
-    background-color: rgba(10,12,16,0.82);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: rgba(22,22,23,.72);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
     border-bottom: 1px solid rgba(255,255,255,0.06);
     position: fixed;
     top: 0;
@@ -87,10 +87,21 @@ nav{
 .logo svg {
     display: block;
 }
+.logo {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
 .logo h1{
+    display: flex;
+    align-items: center;
     font-size: var(--fs-body);
     line-height: 1;
     color: var(--white);
+}
+.logo h1 a {
+    display: flex;
+    align-items: center;
 }
 .logo-mark {
     display: inline-flex;
@@ -98,49 +109,52 @@ nav{
     gap: 10px;
 }
 .logo-mark img {
-    width: 44px;
-    height: 44px;
+    width: 36px;
+    height: 36px;
     display: block;
     object-fit: contain;
     /* 不用 drop-shadow（會白光暈把黃色稀釋）
        改用 contrast + saturate 強化對比飽和：黃更黃、白更白、線條視覺更實 */
-    filter: contrast(1.2) saturate(1.4) brightness(1.05);
+    filter: contrast(1.35) saturate(1.5) brightness(1.05);
 }
 .logo-text {
     font-family: 'Noto Serif TC', serif;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
     letter-spacing: .15em;
     color: var(--white);
     white-space: nowrap;
 }
 @media (max-width: 480px) {
-    .logo-mark img { width: 38px; height: 38px; }
-    .logo-text { font-size: 16px; }
+    .logo-mark img { width: 32px; height: 32px; }
+    .logo-text { font-size: 14px; }
 }
 .links{
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 32px;
 }
 .links a{
     display: block;
     padding: 4px 8px;
-    letter-spacing: 1.5px;
-    color: var(--white);
+    color: rgba(255,255,255,.85);
+    font-family: 'Inter','Noto Sans TC',sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: .01em;
     transition: color .2s;
-    font-size: var(--fs-sm);
 }
 .links a:active{
-    color: var(--muted-light);
+    color: var(--white);
 }
 @media (hover: hover) {
     .links a:hover{
-        color: var(--muted-light);
+        color: var(--white);
     }
 }
 .links .is-current a {
-    border-bottom: 1px solid var(--muted);
+    color: var(--white);
+    border-bottom: 1px solid rgba(255,255,255,.3);
 }
 
 /* 漢堡按鈕（手機才顯示）*/
@@ -164,37 +178,34 @@ nav{
 nav.is-open .nav-toggle .icon-open { display: none; }
 nav.is-open .nav-toggle .icon-close { display: block; }
 
-/* nav RWD：≤768px 漢堡選單 ─────────────────
-   走法 3 車主端：選單推下去（不蓋住內容）+ 動畫慢 + 雜誌感字體
+/* nav RWD：≤1024px 漢堡選單(.links 改 absolute dropdown)
+   nav 高度永遠固定 48,logo/漢堡絕對置中,無追逐感
    ───────────────────────────────────────── */
 @media (max-width: 1024px) {
     nav {
-        flex-wrap: wrap;
-        padding: 0 16px;
-        height: auto;
-        min-height: var(--nav-h);
-        transition: background 0.3s, border-color 0.3s;
-    }
-    nav > .logo,
-    nav > .nav-toggle {
+        /* 高度固定不變,padding 不變 → 縮放無追逐感 */
         height: var(--nav-h);
-        display: flex;
-        align-items: center;
     }
     .nav-toggle {
         display: flex;
     }
     .links {
-        order: 99;
-        flex-basis: 100%;
+        /* 從 flow 拿出，dropdown 從 nav 下緣垂下 */
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
         flex-direction: column;
         align-items: stretch;
         gap: 0;
+        background: rgba(22,22,23,.92);
+        backdrop-filter: saturate(180%) blur(20px);
+        -webkit-backdrop-filter: saturate(180%) blur(20px);
         max-height: 0;
         overflow: hidden;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
-        transition: max-height .5s ease, opacity .4s ease;
+        transition: max-height .35s ease, opacity .25s ease;
         opacity: 0;
     }
     nav.is-open .links {
@@ -210,10 +221,11 @@ nav.is-open .nav-toggle .icon-close { display: block; }
         border-bottom: none;
     }
     .links a {
-        font-family: 'Noto Serif TC', serif;
-        font-size: 17px;
-        padding: 18px 8px;
-        letter-spacing: .15em;
+        font-family: 'Inter','Noto Sans TC',sans-serif;
+        font-size: 15px;
+        font-weight: 400;
+        padding: 16px 20px;
+        letter-spacing: .02em;
         min-height: 44px;
         display: flex;
         align-items: center;

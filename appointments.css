@@ -1,0 +1,381 @@
+/* ============================================
+   appointments.css — 車主預約追蹤頁
+   ============================================ */
+
+:root {
+  --ink-soft: #2c2c2e;
+  --radius: 3px;
+  --badge-wait-bg: #f3f3f3;
+  --badge-wait-fg: #555;
+  --badge-ok-bg: #eef2fb;
+  --badge-ok-fg: #2a4a8f;
+  --badge-reject-bg: #eaeaea;
+  --badge-reject-fg: #444;
+  --badge-cancel-bg: #f3f3f3;
+  --badge-cancel-fg: #999;
+}
+
+body {
+  font-family: 'Inter', 'Noto Sans TC', sans-serif;
+  letter-spacing: -.01em;
+  color: var(--ink);
+  background: var(--white);
+}
+
+/* ───── 頁面主容器 ───── */
+.ap {
+  padding-top: var(--nav-h);
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* ───── 頁首 ───── */
+.ap-head {
+  padding: 32px 40px 20px;
+  border-bottom: 0.5px solid var(--line);
+}
+.ap-head h1 {
+  font-size: var(--fs-page-title);
+  font-weight: 700;
+  letter-spacing: -.03em;
+  line-height: 1.15;
+  margin: 0;
+}
+
+/* ───── 工具列(tabs + 新增預約 CTA) ───── */
+.ap-toolbar {
+  display: flex;
+  align-items: center;
+  padding: 0 40px;
+  border-bottom: 0.5px solid var(--line);
+  background: var(--white);
+}
+.ap-tabs {
+  display: flex;
+  gap: 28px;
+  flex: 1;
+}
+.ap-tab {
+  padding: 14px 0;
+  font-size: var(--fs-sm);
+  color: var(--muted);
+  letter-spacing: .02em;
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+.ap-tab:hover { color: var(--ink-soft); }
+.ap-tab.is-active {
+  color: var(--ink);
+  font-weight: 500;
+}
+.ap-tab.is-active::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 -0.5px 0;
+  height: 2px;
+  background: var(--accent);
+}
+.ap-tab span {
+  margin-left: 4px;
+  font-size: var(--fs-xs);
+  color: var(--muted-light);
+  font-variant-numeric: tabular-nums;
+}
+.ap-tab.is-active span { color: var(--accent); }
+
+.ap-add {
+  padding: 7px 16px;
+  font-size: var(--fs-xs);
+  background: var(--ink);
+  color: var(--white);
+  border-radius: var(--radius);
+  letter-spacing: .04em;
+  text-decoration: none;
+  transition: background .2s, transform .2s;
+}
+.ap-add:hover {
+  background: var(--ink-soft);
+  transform: translateY(-1px);
+}
+
+/* ───── 列表 ───── */
+.ap-list {
+  padding: 24px 40px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: var(--white);
+  min-height: 360px;
+}
+
+/* ───── 卡片 ───── */
+.ap-card {
+  background: var(--white);
+  border: 0.5px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  min-height: 168px;
+  transition: opacity .35s, transform .25s, box-shadow .25s;
+}
+/* fix:[hidden] 在 display: grid 下會失效,要顯式 reset */
+.ap-card[hidden],
+.ap-empty[hidden] { display: none; }
+
+.ap-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(15, 45, 110, .08);
+}
+.ap-card.is-leaving {
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+}
+.ap-card.is-closed { opacity: .62; }
+.ap-card.is-closed:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* 左:照片區(沿用 ticket.html .tk-shop-card 視覺) */
+.ap-card .photo {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: var(--white);
+  isolation: isolate;
+}
+.ap-card .photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.25) 55%, rgba(0,0,0,0) 100%);
+  z-index: -1;
+}
+.ap-card .city {
+  font-size: var(--fs-xs);
+  letter-spacing: .12em;
+  color: rgba(255,255,255,.92);
+  text-shadow: 0 1px 3px rgba(0,0,0,.6);
+  margin: 0;
+}
+.ap-card .shop {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-weight: 500;
+  font-size: var(--fs-lg);
+  letter-spacing: .02em;
+  margin: 6px 0 0;
+  text-shadow: 0 1px 3px rgba(0,0,0,.55);
+  line-height: 1.35;
+}
+.ap-card .rating {
+  font-size: var(--fs-xs);
+  color: var(--yellow);
+  letter-spacing: .04em;
+  text-shadow: 0 1px 3px rgba(0,0,0,.6);
+  font-variant-numeric: tabular-nums;
+  margin: 0;
+}
+
+/* 右:資訊區 */
+.ap-card .body {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.ap-card .body > header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+.ap-card time {
+  font-variant-numeric: tabular-nums;
+}
+.ap-card time strong {
+  display: block;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -.03em;
+  line-height: 1;
+}
+.ap-card time span {
+  display: block;
+  font-size: var(--fs-xs);
+  color: var(--muted);
+  margin-top: 5px;
+  letter-spacing: .04em;
+}
+
+/* 狀態徽章 */
+.ap-card .badge {
+  font-size: var(--fs-xs);
+  padding: 4px 11px;
+  border-radius: 2px;
+  letter-spacing: .04em;
+  white-space: nowrap;
+  align-self: flex-start;
+  font-weight: 500;
+}
+.ap-card .badge.wait   { background: var(--badge-wait-bg);   color: var(--badge-wait-fg); }
+.ap-card .badge.ok     { background: var(--badge-ok-bg);     color: var(--badge-ok-fg); }
+.ap-card .badge.reject { background: var(--badge-reject-bg); color: var(--badge-reject-fg); }
+.ap-card .badge.cancel { background: var(--badge-cancel-bg); color: var(--badge-cancel-fg); }
+
+/* 服務項目(純文字逗號分隔,沿用 Airbnb / Booking 派) */
+.ap-card .services {
+  font-size: var(--fs-sm);
+  color: var(--ink);
+  letter-spacing: -.005em;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* 車款 暱稱 */
+.ap-card .vehicle {
+  font-size: var(--fs-xs);
+  color: var(--ink-soft);
+  letter-spacing: .03em;
+  font-variant-numeric: tabular-nums;
+  margin: 0;
+}
+
+/* 動作列 */
+.ap-card .actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-top: 2px;
+}
+.ap-card .actions button,
+.ap-card .actions a {
+  font-size: var(--fs-xs);
+  color: var(--muted);
+  letter-spacing: .04em;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  text-decoration: none;
+  transition: color .2s;
+}
+.ap-card .actions button:hover { color: var(--ink); }
+.ap-card .actions .cancel:hover { color: #b04040; }
+.ap-card .actions .delete:hover { color: #b04040; }
+.ap-card .actions .tel {
+  color: var(--accent);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.ap-card .actions .tel:hover { color: var(--accent-deep); }
+.ap-card .actions .note {
+  cursor: default;
+}
+
+/* ───── 未成立 tab 的批次操作列 ───── */
+.ap-bulk {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: #fafafa;
+  border: 0.5px solid var(--line);
+  border-radius: var(--radius);
+  font-size: var(--fs-xs);
+  color: var(--muted);
+  letter-spacing: .02em;
+  margin-bottom: 4px;
+}
+.ap-bulk strong {
+  color: var(--ink);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.ap-bulk-clear {
+  font-size: var(--fs-xs);
+  color: var(--muted);
+  letter-spacing: .04em;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px 10px;
+  font-family: inherit;
+  transition: color .2s;
+}
+.ap-bulk-clear:hover { color: #b04040; }
+.ap-bulk[hidden] { display: none; }
+
+/* ───── 空狀態 ───── */
+.ap-empty {
+  padding: 80px 40px;
+  text-align: center;
+  color: var(--muted);
+  font-size: var(--fs-body);
+  letter-spacing: .02em;
+}
+.ap-empty a {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 22px;
+  font-size: var(--fs-sm);
+  background: var(--ink);
+  color: var(--white);
+  border-radius: var(--radius);
+  letter-spacing: .04em;
+  text-decoration: none;
+  transition: background .2s;
+}
+.ap-empty a:hover { background: var(--ink-soft); }
+
+/* ============================================
+   RWD
+   ============================================ */
+
+@media (max-width: 1024px) {
+  .ap-head { padding: 28px 32px 18px; }
+  .ap-head h1 { font-size: 36px; }
+  .ap-toolbar { padding: 0 32px; }
+  .ap-tabs { gap: 24px; }
+  .ap-list { padding: 20px 32px 48px; }
+  .ap-card { grid-template-columns: 180px 1fr; }
+}
+
+@media (max-width: 768px) {
+  .ap-head { padding: 24px 20px 16px; }
+  .ap-head h1 { font-size: 30px; }
+
+  .ap-toolbar { padding: 0 20px; overflow-x: auto; scrollbar-width: none; }
+  .ap-toolbar::-webkit-scrollbar { display: none; }
+  .ap-tabs { gap: 18px; }
+  .ap-tab { white-space: nowrap; flex-shrink: 0; }
+  .ap-add { flex-shrink: 0; padding: 6px 12px; font-size: 11px; }
+
+  .ap-list { padding: 16px 20px 40px; }
+
+  .ap-card {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .ap-card .photo { min-height: 120px; padding: 16px 18px; }
+  .ap-card .shop { font-size: 17px; }
+  .ap-card .body { padding: 16px 18px 18px; }
+  .ap-card time strong { font-size: 22px; }
+  .ap-card .actions { flex-wrap: wrap; gap: 14px; }
+}
+
+@media (max-width: 480px) {
+  .ap-head h1 { font-size: 26px; }
+  .ap-card .photo { min-height: 100px; padding: 14px 16px; }
+  .ap-card .shop { font-size: 16px; }
+  .ap-card .body > header { flex-direction: column; gap: 8px; }
+}

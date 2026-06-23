@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我的預約　明前知行</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+TC:wght@300;400;500;700;900&family=Noto+Serif+TC:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="common.css">
+<link rel="stylesheet" href="appointments.css">
+</head>
+<body>
+
+<nav>
+  <div class="logo">
+    <h1>
+      <a href="index.html">
+        <span class="logo-mark">
+          <img src="./icon/logo-mark拷貝2.png" alt="" aria-hidden="true">
+          <span class="logo-text">明前知行</span>
+        </span>
+      </a>
+    </h1>
+  </div>
+  <ul class="links">
+    <li><a href="market.html">查行情</a></li>
+    <li class="is-current"><a href="appointments.html">我的預約</a></li>
+    <li><a href="vehicle.html">車歷</a></li>
+    <li><a href="login.html">登入</a></li>
+  </ul>
+  <button type="button" class="nav-toggle" aria-label="開啟選單" aria-expanded="false">
+    <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <line x1="4" y1="6" x2="20" y2="6"/>
+      <line x1="4" y1="12" x2="20" y2="12"/>
+      <line x1="4" y1="18" x2="20" y2="18"/>
+    </svg>
+    <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <line x1="6" y1="6" x2="18" y2="18"/>
+      <line x1="18" y1="6" x2="6" y2="18"/>
+    </svg>
+  </button>
+</nav>
+
+<main class="ap">
+
+  <header class="ap-head">
+    <h1>我的預約</h1>
+  </header>
+
+  <div class="ap-toolbar">
+    <div class="ap-tabs" role="tablist">
+      <button type="button" role="tab" class="ap-tab is-active" aria-selected="true" data-status="pending">
+        待確認<span data-count="pending">2</span>
+      </button>
+      <button type="button" role="tab" class="ap-tab" aria-selected="false" data-status="in_progress">
+        進行中<span data-count="in_progress">1</span>
+      </button>
+      <button type="button" role="tab" class="ap-tab" aria-selected="false" data-status="closed">
+        未成立<span data-count="closed">1</span>
+      </button>
+    </div>
+    <a href="ticket.html" class="ap-add">+ 新增預約</a>
+  </div>
+
+  <section class="ap-list" aria-label="預約列表">
+
+    <div class="ap-bulk" hidden>
+      <span>未成立紀錄　共 <strong data-bulk-count>0</strong> 筆</span>
+      <button type="button" class="ap-bulk-clear">清除全部</button>
+    </div>
+
+    <!-- ===== 待確認 1 ===== -->
+    <article class="ap-card" data-status="pending">
+      <div class="photo" style="background-image:url('./圖片素材/shop/car-repair-2.jpg')">
+        <header>
+          <p class="city">台中　北屯區</p>
+          <h3 class="shop">慶順汽車</h3>
+        </header>
+        <p class="rating">★ 4.7</p>
+      </div>
+      <div class="body">
+        <header>
+          <time datetime="2026-06-24T14:00">
+            <strong>06 / 24</strong>
+            <span>週三　14:00 – 15:30</span>
+          </time>
+          <span class="badge wait">等待回覆</span>
+        </header>
+        <p class="services">機油更換、空濾清洗</p>
+        <p class="vehicle">Toyota Altis　大灰</p>
+        <div class="actions">
+          <button type="button">查看詳情</button>
+          <button type="button" class="cancel">取消預約</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- ===== 待確認 2 ===== -->
+    <article class="ap-card" data-status="pending">
+      <div class="photo" style="background-image:url('./圖片素材/shop/alley-day.jpg')">
+        <header>
+          <p class="city">台北　大同區</p>
+          <h3 class="shop">大同機車行</h3>
+        </header>
+        <p class="rating">★ 4.5</p>
+      </div>
+      <div class="body">
+        <header>
+          <time datetime="2026-06-26T10:00">
+            <strong>06 / 26</strong>
+            <span>週五　10:00 – 11:00</span>
+          </time>
+          <span class="badge wait">等待回覆</span>
+        </header>
+        <p class="services">機油 + 機油芯</p>
+        <p class="vehicle">Yamaha Cygnus　狗熊</p>
+        <div class="actions">
+          <button type="button">查看詳情</button>
+          <button type="button" class="cancel">取消預約</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- ===== 進行中 1 ===== -->
+    <article class="ap-card" data-status="in_progress" hidden>
+      <div class="photo" style="background-image:url('./圖片素材/shop/shop-2.jpg')">
+        <header>
+          <p class="city">新北　三重區</p>
+          <h3 class="shop">三益車業</h3>
+        </header>
+        <p class="rating">★ 4.8</p>
+      </div>
+      <div class="body">
+        <header>
+          <time datetime="2026-06-23T15:00">
+            <strong>06 / 23</strong>
+            <span>週一　15:00 – 16:00</span>
+          </time>
+          <span class="badge ok">預約成功</span>
+        </header>
+        <p class="services">煞車皮更換</p>
+        <p class="vehicle">SYM Jet SL　小銀</p>
+        <div class="actions">
+          <span class="note">如需取消請聯絡車行</span>
+          <a href="tel:+886229876543" class="tel">02-2987-6543</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- ===== 未成立 1 ===== -->
+    <article class="ap-card is-closed" data-status="closed" hidden>
+      <div class="photo" style="background-image:url('./圖片素材/shop/shop-4.jpg')">
+        <header>
+          <p class="city">台南　中西區</p>
+          <h3 class="shop">洪大車行</h3>
+        </header>
+        <p class="rating">★ 4.6</p>
+      </div>
+      <div class="body">
+        <header>
+          <time datetime="2026-06-20T09:00">
+            <strong>06 / 20</strong>
+            <span>週五　09:00 – 10:00</span>
+          </time>
+          <span class="badge reject">車行未接</span>
+        </header>
+        <p class="services">六萬公里大保養</p>
+        <p class="vehicle">Honda Civic　小白</p>
+        <div class="actions">
+          <button type="button" class="delete">刪除紀錄</button>
+        </div>
+      </div>
+    </article>
+
+    <p class="ap-empty" data-empty="default" hidden>
+      這個分頁還沒有預約
+      <a href="ticket.html">+ 新增預約</a>
+    </p>
+    <p class="ap-empty" data-empty="closed" hidden>
+      目前沒有未成立的紀錄
+    </p>
+
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 明前知行　版權所有</p>
+  <a href="mailto:992319@gmail.com">992319@gmail.com</a>
+</footer>
+
+<script src="nav.js"></script>
+<script src="appointments.js"></script>
+
+</body>
+</html>
