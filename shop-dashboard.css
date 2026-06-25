@@ -1,687 +1,263 @@
 /* ====================================================
    shop-dashboard.css
-   車行後台 dashboard 樣式
-   依賴：common.css（顏色/字型/nav/btn/footer）
+   車行端首頁專屬樣式
+   依賴:common.css(token)+ shop-app.css(側欄 / topbar / page-head)
    ==================================================== */
 
-
-/* ===== nav 內車行專屬元素 ===== */
-.shop-dashboard nav {
-    justify-content: flex-start;
-    gap: 16px;
-}
-
-/* .links 是漢堡選單用的，桌機（>1024）隱藏，平板+手機顯示 */
-.shop-dashboard nav > .links {
-    display: none;
-}
-@media (max-width: 1024px) {
-    .shop-dashboard nav > .links {
-        display: flex;
-    }
-}
-
-.shop-tools {
-    margin-left: auto;
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    padding-right: 16px;
-    border-right: 1px solid rgba(255,255,255,.12);
-}
-.shop-tools :is(button, a) {
-    width: 30px;
-    height: 30px;
-    border: 1px solid rgba(255,255,255,.2);
-    border-radius: 50%;
-    background: transparent;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: rgba(255,255,255,.75);
-    cursor: pointer;
-    transition: all .2s;
-    text-decoration: none;
-}
-.shop-tools :is(button, a):active {
-    border-color: var(--accent);
-    color: var(--white);
-}
-@media (hover: hover) {
-    .shop-tools :is(button, a):hover {
-        border-color: var(--accent);
-        color: var(--white);
-    }
-}
-
-/* shop-badge dropdown trigger */
-.shop-account {
-    position: relative;
-}
-.shop-badge {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 14px;
-    border: 1px solid rgba(255,255,255,.2);
-    border-radius: 20px;
-    cursor: pointer;
-    transition: border-color .2s;
-    color: var(--white);
-    background: transparent;
-    font-family: inherit;
-}
-.shop-badge:active { border-color: var(--accent); }
-@media (hover: hover) {
-    .shop-badge:hover { border-color: var(--accent); }
-}
-.shop-badge::after {
-    content: "▾";
-    font-size: 9px;
-    color: rgba(255,255,255,.6);
-    margin-left: 2px;
-    transition: transform .2s;
-}
-.shop-badge[aria-expanded="true"]::after {
-    transform: rotate(180deg);
-}
-.shop-name {
-    font-size: var(--fs-sm);
-    letter-spacing: .05em;
-}
-
-/* dropdown menu */
-.shop-menu {
-    position: absolute;
-    top: calc(100% + 8px);
-    right: 0;
-    min-width: 180px;
-    background: var(--white);
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    box-shadow: 0 8px 24px rgba(15, 45, 110, 0.12);
-    padding: 6px 0;
-    margin: 0;
-    list-style: none;
-    z-index: 100;
-}
-.shop-menu[hidden] { display: none; }
-.shop-menu a {
-    display: block;
-    padding: 10px 16px;
-    font-size: var(--fs-sm);
-    color: var(--ink);
-    text-decoration: none;
-    transition: background .15s;
-    letter-spacing: .03em;
-}
-.shop-menu a:hover { background: var(--bg-off); }
-.shop-menu [role="separator"] {
-    height: 1px;
-    background: var(--line);
-    margin: 6px 0;
-}
-
-
-/* ===== dashboard 主體 ===== */
-.dash {
-    padding: calc(var(--nav-h) + var(--pad-y-section)) var(--pad-x-section) var(--pad-y-section);
-    background: var(--bg-off);
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-    min-height: 100vh;
-}
-
-.sec-eyebrow {
-    font-size: var(--fs-xs);
-    color: var(--muted);
-    letter-spacing: .25em;
+/* ─── section label(.actions / .kpi / .revenue 共用標題)─── */
+.shop-dashboard .app-body h2 {
+    font-size: 11px;
     font-weight: 500;
-    margin-bottom: 12px;
-}
-
-
-/* ===== 頂部雙卡 ===== */
-.dash-top {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 20px;
-}
-
-.kpi-hero,
-.kpi-alerts {
-    padding: 28px 32px;
-    border-radius: 3px;
-    background: var(--white);
-    border: 1px solid var(--line);
-    box-shadow: 0 1px 2px rgba(15, 45, 110, 0.04);
-}
-.kpi-hero {
-    border-top: 2px solid var(--accent);
-}
-.kpi-hero h3,
-.kpi-alerts h3 {
-    font-size: var(--fs-xs);
-    letter-spacing: .25em;
-    color: var(--muted);
-    font-weight: 500;
-    margin-bottom: 16px;
-}
-.kpi-hero strong {
-    display: block;
-    font-size: 40px;
-    font-weight: 500;
-    line-height: 1;
-    margin-bottom: 12px;
-    color: var(--accent-deep);
-    font-variant-numeric: tabular-nums;
-    letter-spacing: -0.01em;
-}
-.kpi-hero p {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: var(--fs-sm);
-    color: #1d9e75;
-    font-weight: 500;
-    letter-spacing: .03em;
-}
-
-.alert-row {
-    display: grid;
-    grid-template-columns: 36px 1fr auto;
-    align-items: center;
-    gap: 16px;
-    padding: 12px 0;
-    border-bottom: 1px dashed var(--line);
-    font-size: var(--fs-sm);
-}
-.alert-row:last-child { border-bottom: none; }
-.alert-row strong {
-    font-size: var(--fs-amount);
-    color: var(--accent-deep);
-    line-height: 1;
-    font-weight: 500;
-    font-variant-numeric: tabular-nums;
-}
-.alert-row a {
-    font-size: var(--fs-xs);
-    color: var(--accent);
-    letter-spacing: .05em;
-    transition: color .2s;
-}
-.alert-row a:hover { color: var(--accent-deep); }
-
-
-/* ===== 四宮格 KPI ===== */
-.kpi-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-}
-.kpi-cell {
-    background: var(--white);
-    padding: 24px;
-    border: 1px solid var(--line);
-    border-top: 2px solid var(--accent);
-    border-radius: 3px;
-    box-shadow: 0 1px 2px rgba(15, 45, 110, 0.04);
-}
-.kpi-cell h3 {
-    font-size: var(--fs-xs);
     color: var(--muted);
     letter-spacing: .2em;
-    font-weight: 500;
+    text-transform: uppercase;
     margin-bottom: 12px;
 }
-.kpi-cell strong {
-    display: block;
-    font-size: var(--fs-date);
-    color: var(--ink);
-    line-height: 1;
-    margin-bottom: 8px;
-    font-weight: 500;
-    font-variant-numeric: tabular-nums;
-    letter-spacing: -0.01em;
-}
-.kpi-cell p {
-    font-size: var(--fs-xs);
-    color: var(--muted);
+
+/* ─── 區塊間距 ─── */
+.shop-dashboard .app-body > section + section {
+    margin-top: 32px;
 }
 
-
-/* ===== box 容器（趨勢圖、工單）===== */
-.box {
-    background: var(--white);
-    padding: 32px;
-    border: 1px solid var(--line);
-    border-radius: 3px;
-    box-shadow: 0 1px 2px rgba(15, 45, 110, 0.04);
-}
-.box > header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 24px;
-    flex-wrap: wrap;
+/* ─────────────────────────────────────────────────
+   需要你關注 — action items 兩張卡
+   ───────────────────────────────────────────────── */
+.actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 16px;
 }
-.box h3 {
-    font-size: var(--fs-label);
-    font-weight: 400;
-    color: var(--ink);
+.actions h2 {
+    grid-column: 1 / -1;
 }
 
-
-/* ===== 趨勢圖 ===== */
-.trend-tabs {
-    display: flex;
-    gap: 4px;
-    background: var(--bg-off);
-    padding: 4px;
-    border-radius: 3px;
-}
-.trend-tabs button {
-    padding: 6px 16px;
-    font-size: var(--fs-sm);
-    color: var(--muted);
-    cursor: pointer;
-    border-radius: 2px;
-    transition: all .2s;
-    font-family: inherit;
-    border: none;
-    background: none;
-}
-.trend-tabs button.is-active {
+.actions a {
+    position: relative;
     background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 22px 24px 18px 28px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto auto auto;
+    column-gap: 12px;
+    row-gap: 4px;
+    align-items: baseline;
+    color: var(--ink);
+    transition: border-color .15s, box-shadow .15s;
+    overflow: hidden;
+}
+.actions a:hover {
+    border-color: var(--accent);
+    box-shadow: 0 1px 3px rgba(15, 45, 110, 0.08);
+}
+
+/* 左邊色條:依 tone 變色 */
+.actions a::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+}
+.actions a[data-tone="hot"]::before { background: var(--yellow); }
+.actions a[data-tone="warn"]::before { background: #185FA5; }
+
+.actions a h3 {
+    grid-row: 1;
+    grid-column: 1 / -1;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: .03em;
+}
+.actions a strong {
+    grid-row: 2;
+    grid-column: 1;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -.02em;
+    font-variant-numeric: tabular-nums;
+}
+.actions a strong span {
+    font-weight: 700;
+}
+.actions a > p {
+    grid-row: 2;
+    grid-column: 2 / -1;
+    font-size: 12px;
+    color: var(--muted);
+    align-self: end;
+    padding-bottom: 6px;
+}
+.actions a small {
+    grid-row: 3;
+    grid-column: 1 / 3;
+    font-size: 11px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: .03em;
+}
+.actions a em {
+    grid-row: 3;
+    grid-column: 3;
+    font-style: normal;
+    font-size: 12px;
+    font-weight: 600;
     color: var(--accent-deep);
-    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+    letter-spacing: .03em;
+}
+
+/* ─────────────────────────────────────────────────
+   本月概覽 — KPI 三張卡
+   ───────────────────────────────────────────────── */
+.kpi {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+.kpi h2 {
+    grid-column: 1 / -1;
+}
+.kpi article {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 18px 20px 16px;
+    cursor: pointer;
+    transition: border-color .15s, box-shadow .15s;
+}
+.kpi article:hover {
+    border-color: var(--accent);
+    box-shadow: 0 1px 3px rgba(15, 45, 110, 0.08);
+}
+.kpi article h3 {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--muted);
+    letter-spacing: .02em;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+/* ⓘ tooltip:button 不裝任何 class,純樣式 */
+.kpi article h3 button {
+    background: none;
+    border: none;
+    color: var(--muted-light);
+    cursor: help;
+    font-size: 11px;
+    padding: 0;
+    line-height: 1;
+    position: relative;
+    font-family: inherit;
+}
+.kpi article h3 button:hover { color: var(--muted); }
+.kpi article h3 button::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1f1f21;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 3px;
+    font-size: 12px;
+    line-height: 1.5;
+    letter-spacing: .03em;
+    white-space: normal;
+    width: 220px;
+    text-align: left;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .15s;
+    z-index: 200;
+    box-shadow: 0 4px 12px rgba(0,0,0,.25);
+}
+.kpi article h3 button:hover::after { opacity: 1; }
+
+.kpi article strong {
+    display: block;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -.02em;
+    font-variant-numeric: tabular-nums;
+    margin-bottom: 8px;
+}
+.kpi article p {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: .03em;
+    display: flex;
+    gap: 8px;
+}
+.kpi article p span:first-child { font-weight: 600; }
+.kpi article p [data-trend="up"] { color: var(--trend-green, #1d9e75); }
+.kpi article p [data-trend="down"] { color: #C73E3E; }
+
+/* ─────────────────────────────────────────────────
+   營收趨勢
+   ───────────────────────────────────────────────── */
+.revenue {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px 24px 24px;
+}
+.revenue header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 14px;
+}
+.revenue header h2 {
+    margin-bottom: 0;
+}
+.revenue header strong {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -.02em;
+    font-variant-numeric: tabular-nums;
 }
 .trend-chart-wrap {
     position: relative;
     width: 100%;
     height: 280px;
 }
-.trend-chart-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
 .trend-chart-wrap canvas {
     display: block;
 }
 
-
-/* ===== 工單管理 tabs ===== */
-.otabs {
-    display: flex;
-    gap: 24px;
-    border-bottom: 1px solid var(--line);
-    margin-bottom: 8px;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    scrollbar-width: none;
-}
-.otabs::-webkit-scrollbar { display: none; }
-.otab {
-    padding: 10px 0;
-    font-size: var(--fs-sm);
-    color: var(--muted);
-    cursor: pointer;
-    background: none;
-    border: none;
-    border-bottom: 2px solid transparent;
-    margin-bottom: -1px;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-family: inherit;
-    transition: all .2s;
-    white-space: nowrap;
-    flex-shrink: 0;
-}
-.otab.is-active {
-    color: var(--accent-deep);
-    border-bottom-color: var(--accent-deep);
-    font-weight: 500;
-}
-.ticket-badge {
-    background: var(--accent);
-    color: var(--white);
-    font-size: 11px;
-    padding: 2px 8px;
-    border-radius: 10px;
-    font-weight: 500;
-}
-.ticket-badge.gray {
-    background: var(--muted-light);
-    color: var(--muted);
+/* ─────────────────────────────────────────────────
+   RWD
+   ───────────────────────────────────────────────── */
+@media (max-width: 1023px) {
+    .kpi { grid-template-columns: 1fr 1fr; }
+    .kpi article:last-child { grid-column: 1 / -1; }
 }
 
+@media (max-width: 767px) {
+    .actions { grid-template-columns: 1fr; }
+    .actions a { padding: 18px 18px 14px 22px; }
+    .actions a strong { font-size: 28px; }
 
-/* ===== 工單卡片 ===== */
-.order {
-    display: grid;
-    grid-template-columns: 80px 70px 1fr auto auto;
-    gap: 18px;
-    align-items: center;
-    padding: 20px 0;
-    border-bottom: 1px solid var(--line);
-    transition: opacity .35s ease, transform .35s ease;
-}
-.order:last-of-type { border-bottom: none; }
-.order.is-hidden { display: none; }
-.order.is-leaving {
-    opacity: 0;
-    transform: translateX(40px);
-    pointer-events: none;
-}
+    .kpi { grid-template-columns: 1fr; }
+    .kpi article:last-child { grid-column: auto; }
+    .kpi article strong { font-size: 28px; }
 
-/* 愛車照頭貼 / 剪影 fallback */
-.bike-photo,
-.bike-silhouette {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    overflow: hidden;
-    flex-shrink: 0;
-    border: 2px solid var(--white);
-    box-shadow: 0 0 0 1px var(--line);
-}
-.bike-photo { background: var(--bg-off); }
-.bike-silhouette {
-    background: linear-gradient(135deg, #e8eef8 0%, #d4def0 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.bike-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-.bike-silhouette img {
-    width: 55%;
-    height: 55%;
-    object-fit: contain;
-    opacity: .7;
-}
-
-.odate {
-    text-align: center;
-    padding-right: 18px;
-    border-right: 1px solid var(--line);
-}
-.odate p:first-child {
-    font-size: var(--fs-lg);
-    color: var(--accent-deep);
-    line-height: 1;
-    font-weight: 500;
-    font-variant-numeric: tabular-nums;
-}
-.odate p:last-child {
-    font-size: 10px;
-    color: var(--muted);
-    letter-spacing: .15em;
-    margin-top: 4px;
-}
-
-.oinfo h4 {
-    font-size: var(--fs-body);
-    font-weight: 500;
-    color: var(--ink);
-    margin-bottom: 8px;
-    word-break: keep-all;
-    overflow-wrap: anywhere;
-}
-.oinfo .tags { margin-bottom: 8px; }
-.oinfo p {
-    font-size: var(--fs-xs);
-    color: var(--muted);
-    letter-spacing: .05em;
-    word-break: keep-all;
-}
-
-.oprice {
-    font-size: var(--fs-amount);
-    color: var(--ink);
-    font-weight: 500;
-    font-variant-numeric: tabular-nums;
-}
-
-.oact {
-    display: flex;
-    gap: 8px;
-}
-
-/* 按鈕：核准 / 駁回 / 填寫完工 / 客人未到 */
-.bapp, .brej, .bfill, .bnoshow {
-    padding: 8px 16px;
-    font-size: var(--fs-sm);
-    border-radius: 3px;
-    cursor: pointer;
-    font-family: inherit;
-    transition: all .2s;
-    border: none;
-}
-.bapp {
-    background: var(--accent-deep);
-    color: var(--white);
-}
-.bapp:active { background: var(--accent); }
-@media (hover: hover) {
-    .bapp:hover { background: var(--accent); }
-}
-.brej,
-.bnoshow {
-    background: var(--white);
-    color: var(--muted);
-    border: 1px solid var(--muted-light);
-}
-.brej:active,
-.bnoshow:active {
-    border-color: #c64545;
-    color: #c64545;
-}
-@media (hover: hover) {
-    .brej:hover,
-    .bnoshow:hover {
-        border-color: #c64545;
-        color: #c64545;
-    }
-}
-.bfill {
-    background: var(--yellow);
-    color: var(--ink);
-    font-weight: 500;
-    letter-spacing: .05em;
-}
-.bfill:active { background: var(--yellow-dark); }
-@media (hover: hover) {
-    .bfill:hover { background: var(--yellow-dark); }
-}
-
-
-/* ===== 工單狀態 pill ===== */
-.ostatus {
-    display: inline-block;
-    padding: 6px 14px;
-    font-size: var(--fs-xs);
-    border-radius: 20px;
-    letter-spacing: .05em;
-    white-space: nowrap;
-}
-.ostatus.is-completed {
-    background: rgba(15, 45, 110, .06);
-    color: var(--accent-deep);
-    border: 1px solid rgba(15, 45, 110, .2);
-}
-.ostatus.is-rejected {
-    background: var(--bg-off);
-    color: var(--muted);
-    border: 1px solid var(--muted-light);
-}
-
-
-/* ===== 空狀態 ===== */
-.orders-empty {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 80px 20px;
-    text-align: center;
-}
-.orders-empty[hidden] { display: none; }
-.orders-empty svg {
-    color: var(--muted-light);
-    margin-bottom: 20px;
-    opacity: .7;
-}
-.orders-empty h3 {
-    font-family: 'Noto Serif TC', serif;
-    font-size: var(--fs-label);
-    color: var(--muted);
-    letter-spacing: .15em;
-    margin-bottom: 8px;
-    font-weight: 400;
-}
-.orders-empty p {
-    font-size: var(--fs-sm);
-    color: var(--muted-light);
-    letter-spacing: .1em;
-}
-
-
-/* ===== RWD：平板 769–1024 ===== */
-@media (min-width: 769px) and (max-width: 1024px) {
-    .dash {
-        padding: calc(var(--nav-h) + 40px) 24px 40px;
-        gap: 28px;
-    }
-    .dash-top { grid-template-columns: 1fr 1fr; }
-    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
-    .box { padding: 24px; }
-
-    /* nav 平板：shop-tools/shop-account 跟手機一樣藏到漢堡選單 */
-    .shop-dashboard nav {
-        justify-content: space-between;
-        flex-wrap: wrap;
-    }
-    .shop-dashboard nav .shop-tools,
-    .shop-dashboard nav .shop-account {
-        display: none;
+    /* tooltip 在手機上展開的氣球避免出邊界 */
+    .kpi article h3 button::after {
+        left: 0;
+        transform: none;
+        width: 200px;
     }
 
-    .order {
-        grid-template-columns: 70px 60px 1fr auto auto;
-        gap: 14px;
-    }
-    .bike-photo,
-    .bike-silhouette { width: 70px; height: 70px; }
-}
-
-
-/* ===== RWD：手機 ≤768 ===== */
-@media (max-width: 768px) {
-    /* 手機版 nav 改回兩端對齊（logo 在左、漢堡在右） */
-    .shop-dashboard nav {
-        justify-content: space-between;
-        flex-wrap: wrap;
-    }
-    .shop-dashboard nav > .logo {
-        flex-shrink: 0;
-    }
-
-    .shop-tools {
-        gap: 8px;
-        padding-right: 12px;
-    }
-    .shop-badge {
-        padding: 4px;
-    }
-    .shop-badge::after,
-    .shop-name {
-        display: none;
-    }
-
-    /* 車行端 nav 漢堡選單：覆寫 common.css 的車主端風格
-       工具感 = 動畫快 + 無襯線 + 字小 + 行距緊 */
-    .shop-dashboard .links {
-        transition: max-height .25s ease, opacity .2s ease;
-    }
-    .shop-dashboard .links a {
-        font-family: 'Noto Sans TC', sans-serif;
-        font-size: var(--fs-sm);
-        padding: 12px 8px;
-        letter-spacing: .05em;
-    }
-
-    /* shop-tools / shop-account 整塊塞進漢堡選單時隱藏 */
-    .shop-dashboard nav .shop-tools,
-    .shop-dashboard nav .shop-account {
-        display: none;
-    }
-
-    .dash {
-        padding: calc(var(--nav-h) + 32px) 16px 32px;
-        gap: 24px;
-    }
-    .dash-top { grid-template-columns: 1fr; }
-    .kpi-grid { grid-template-columns: 1fr 1fr; }
-    .box { padding: 20px; }
-    .kpi-hero strong { font-size: 56px; }
-
-    /* 趨勢圖：橫向滾動 + min-width 放 inner，讓 Chart.js 量到正確寬度 */
-    .trend-chart-wrap {
-        overflow-x: auto;
-        overscroll-behavior-x: contain;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: thin;
-    }
-    .trend-chart-inner {
-        min-width: 480px;
-    }
-
-    .order {
-        grid-template-columns: 70px 1fr;
-        gap: 14px;
-    }
-    .order .odate {
-        grid-row: 1;
-        grid-column: 2;
-        text-align: left;
-        padding-right: 0;
-        border-right: none;
-        display: flex;
-        align-items: baseline;
-        gap: 6px;
-    }
-    .order .odate p:first-child { font-size: var(--fs-body); }
-    .order .odate p:last-child { margin-top: 0; }
-    .oinfo {
-        grid-row: 2;
-        grid-column: 1 / -1;
-    }
-    .oprice {
-        grid-row: 3;
-        grid-column: 1;
-        font-size: var(--fs-lg);
-    }
-    .oact {
-        grid-row: 3;
-        grid-column: 2;
-        justify-content: flex-end;
-    }
-    .bike-photo,
-    .bike-silhouette {
-        width: 70px;
-        height: 70px;
-    }
-    .oact .ostatus {
-        font-size: 11px;
-        padding: 4px 10px;
-    }
+    .revenue { padding: 16px 16px 20px; }
+    .revenue header { flex-direction: column; gap: 4px; align-items: flex-start; }
+    .trend-chart-wrap { height: 220px; }
 }

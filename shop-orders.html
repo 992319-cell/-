@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工單管理｜光陽機車行</title>
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="shop-app.css">
+    <link rel="stylesheet" href="shop-orders.css">
+</head>
+<body class="shop-app shop-orders">
+
+    <!-- ───────── 側欄 ───────── -->
+    <button type="button" class="sidebar-burger" id="sidebar-burger" aria-label="開啟側欄" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="4" y1="6" x2="20" y2="6"/>
+            <line x1="4" y1="12" x2="20" y2="12"/>
+            <line x1="4" y1="18" x2="20" y2="18"/>
+        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="6" y1="6" x2="18" y2="18"/>
+            <line x1="18" y1="6" x2="6" y2="18"/>
+        </svg>
+    </button>
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+    <aside class="sidebar" id="sidebar">
+        <a class="sidebar-brand" href="shop-dashboard.html" aria-label="返回首頁">
+            <img src="./icon/logo-mark拷貝2.png" alt="" aria-hidden="true">
+            <span>明前知行</span>
+        </a>
+
+        <div class="sidebar-account">
+            <button type="button" class="sidebar-shop-btn" id="sidebar-shop-btn" aria-haspopup="menu" aria-expanded="false" aria-controls="sidebar-shop-menu" data-tooltip="光陽機車行">
+                <span>光</span>
+                <span>光陽機車行</span>
+            </button>
+            <div class="sidebar-shop-menu" id="sidebar-shop-menu" role="menu" hidden>
+                <a role="menuitem" href="#switch">切換店家</a>
+                <a role="menuitem" href="#account">帳號設定</a>
+                <a role="menuitem" href="#help">說明中心</a>
+                <a role="menuitem" href="#notif-settings">通知設定</a>
+                <hr>
+                <a role="menuitem" href="#logout">登出</a>
+            </div>
+        </div>
+
+        <button type="button" class="sidebar-walkin" id="sidebar-walkin" data-tooltip="新增現場工單">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+                <line x1="12" y1="5" x2="12" y2="19"/>
+                <line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            <span>新增現場工單</span>
+        </button>
+
+        <small>管理</small>
+
+        <div class="sidebar-nav">
+            <a href="shop-dashboard.html" data-tooltip="首頁">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M3 12l9-9 9 9"/>
+                    <path d="M5 10v11h14V10"/>
+                </svg>
+                <span>首頁</span>
+            </a>
+            <a href="shop-orders.html" class="is-active" data-tooltip="工單管理">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M14 3v4a1 1 0 0 0 1 1h4"/>
+                    <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"/>
+                    <line x1="9" y1="13" x2="15" y2="13"/>
+                    <line x1="9" y1="17" x2="13" y2="17"/>
+                </svg>
+                <span>工單管理</span>
+            </a>
+        </div>
+
+        <div class="sidebar-bottom">
+            <label class="sidebar-open-toggle" data-tooltip="營業狀態">
+                <input type="checkbox" id="shop-open-toggle" checked>
+                <span>營業中</span>
+            </label>
+        </div>
+    </aside>
+
+    <!-- ───────── 主內容區 ───────── -->
+    <main class="app-main">
+        <div class="app-topbar">
+            <button type="button" class="icon-btn" aria-label="搜尋">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="11" cy="11" r="8"/>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+            </button>
+            <button type="button" class="icon-btn has-alert" aria-label="通知　有未讀訊息">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="page-head">
+            <h1>工單管理</h1>
+            <p>本月　<span id="month-total">47</span>　筆</p>
+        </div>
+
+        <div class="app-body">
+            <div class="otabs">
+                <button type="button" class="otab is-active" data-status="pending">待接單<span class="ticket-badge" data-count="pending">0</span></button>
+                <button type="button" class="otab" data-status="in_progress">進行中<span class="ticket-badge" data-count="in_progress">0</span></button>
+                <button type="button" class="otab" data-status="completed">已完成<span class="ticket-badge" data-count="completed">0</span></button>
+                <button type="button" class="otab" data-status="rejected">未接單<span class="ticket-badge" data-count="rejected">0</span></button>
+            </div>
+
+            <div class="ofilters">
+                <button type="button" class="ofilter-pill">本月</button>
+                <button type="button" class="ofilter-pill">服務項目</button>
+                <label class="ofilter-search">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="11" cy="11" r="8"/>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                    <input type="search" placeholder="搜尋車牌、車主">
+                </label>
+            </div>
+
+            <div class="orders-wrap">
+                <ul class="orders-list" aria-live="polite">
+
+                <!-- ─── 待接單 ─── -->
+                <li class="order" data-status="pending"
+                     data-plate="ABC-1234" data-shop="光陽機車行　台北信義"
+                     data-mileage="32140" data-order-id="20260625-01"
+                     data-bike="SUZUKI Swish 125　王*">
+                    <div class="bike-photo">
+                        <img src="./img/bike-avatar-01.jpg" alt="王*的愛車">
+                    </div>
+                    <div class="odate">
+                        <time>06.25</time>
+                        <time>10:00</time>
+                        <span>2026</span>
+                    </div>
+                    <div class="oinfo">
+                        <h4>SUZUKI Swish 125　王*</h4>
+                        <div class="tags"><span>機油更換</span><span>空濾清洗</span></div>
+                        <p>工單 #20260625-01</p>
+                    </div>
+                    <div class="oprice">$0</div>
+                    <div class="oact">
+                        <button type="button" class="bapp">接單</button>
+                        <button type="button" class="brej">不接單</button>
+                    </div>
+                </li>
+
+                <li class="order" data-status="pending"
+                     data-plate="DEF-5678" data-shop="光陽機車行　台北信義"
+                     data-mileage="18420" data-order-id="20260625-02"
+                     data-bike="YAMAHA Cygnus　李*">
+                    <div class="bike-photo">
+                        <img src="./img/bike-avatar-02.jpg" alt="李*的愛車">
+                    </div>
+                    <div class="odate">
+                        <time>06.26</time>
+                        <time>14:00</time>
+                        <span>2026</span>
+                    </div>
+                    <div class="oinfo">
+                        <h4>YAMAHA Cygnus　李*</h4>
+                        <div class="tags"><span>定期保養</span></div>
+                        <p>工單 #20260625-02</p>
+                    </div>
+                    <div class="oprice">$0</div>
+                    <div class="oact">
+                        <button type="button" class="bapp">接單</button>
+                        <button type="button" class="brej">不接單</button>
+                    </div>
+                </li>
+
+                <li class="order" data-status="pending"
+                     data-plate="GHI-9012" data-shop="光陽機車行　台北信義"
+                     data-mileage="8240" data-order-id="20260625-03"
+                     data-bike="Gogoro VIVA　張*">
+                    <div class="bike-silhouette">
+                        <img src="./icon/silhouette-bike.png" alt="">
+                    </div>
+                    <div class="odate">
+                        <time>06.27</time>
+                        <time>09:30</time>
+                        <span>2026</span>
+                    </div>
+                    <div class="oinfo">
+                        <h4>Gogoro VIVA　張*</h4>
+                        <div class="tags"><span>胎壓檢查</span><span>剎車保養</span></div>
+                        <p>工單 #20260625-03</p>
+                    </div>
+                    <div class="oprice">$0</div>
+                    <div class="oact">
+                        <button type="button" class="bapp">接單</button>
+                        <button type="button" class="brej">不接單</button>
+                    </div>
+                </li>
+
+                <!-- ─── 進行中 ─── -->
+                <li class="order" data-status="in_progress"
+                     data-plate="JKL-3456" data-shop="光陽機車行　台北信義"
+                     data-mileage="42100" data-order-id="20260624-05"
+                     data-bike="KYMCO Racing S　陳*">
+                    <div class="bike-photo">
+                        <img src="./img/bike-avatar-01.jpg" alt="陳*的愛車">
+                    </div>
+                    <div class="odate">
+                        <time>06.24</time>
+                        <time>13:00</time>
+                        <span>2026</span>
+                    </div>
+                    <div class="oinfo">
+                        <h4>KYMCO Racing S　陳*</h4>
+                        <div class="tags"><span>機油更換</span><span>火星塞更換</span></div>
+                        <p>工單 #20260624-05</p>
+                    </div>
+                    <div class="oprice">$0</div>
+                    <div class="oact">
+                        <button type="button" class="bfill">填寫完工</button>
+                        <button type="button" class="bnoshow" title="客人未到場">客人未到</button>
+                    </div>
+                </li>
+
+                <li class="order" data-status="in_progress"
+                     data-plate="MNO-7890" data-shop="光陽機車行　台北信義"
+                     data-mileage="25600" data-order-id="20260624-06"
+                     data-bike="SYM Jet S　林*">
+                    <div class="bike-photo">
+                        <img src="./img/bike-avatar-02.jpg" alt="林*的愛車">
+                    </div>
+                    <div class="odate">
+                        <time>06.24</time>
+                        <time>15:30</time>
+                        <span>2026</span>
+                    </div>
+                    <div class="oinfo">
+                        <h4>SYM Jet S　林*</h4>
+                        <div class="tags"><span>輪胎更換</span></div>
+                        <p>工單 #20260624-06</p>
+                    </div>
+                    <div class="oprice">$0</div>
+                    <div class="oact">
+                        <button type="button" class="bfill">填寫完工</button>
+                        <button type="button" class="bnoshow" title="客人未到場">客人未到</button>
+                    </div>
+                </li>
+
+                <!-- ─── 已完成 ─── -->
+                <li class="order" data-status="completed">
+                    <div class="bike-photo">
+                        <img src="./img/bike-avatar-01.jpg" alt="許*的愛車">
+                    </div>
+                    <div class="odate">
+                        <time>06.20</time>
+                        <time>10:00</time>
+                        <span>2026</span>
+                    </div>
+                    <div class="oinfo">
+                        <h4>YAMAHA Force　許*</h4>
+                        <div class="tags"><span>機油更換</span><span>火星塞更換</span></div>
+                        <p>36,200 km　工單 #20260620-06　已交車</p>
+                    </div>
+                    <div class="oprice">$520</div>
+                    <div class="oact">
+                        <span class="ostatus is-completed">已完成 ✓</span>
+                    </div>
+                </li>
+
+                <li class="order" data-status="completed">
+                    <div class="bike-photo">
+                        <img src="./img/bike-avatar-02.jpg" alt="鄭*的愛車">
+                    </div>
+                    <div class="odate">
+                        <time>06.18</time>
+                        <time>11:00</time>
+                        <span>2026</span>
+                    </div>
+                    <div class="oinfo">
+                        <h4>KYMCO Racing S　鄭*</h4>
+                        <div class="tags"><span>輪胎更換</span></div>
+                        <p>14,800 km　工單 #20260618-02　已交車</p>
+                    </div>
+                    <div class="oprice">$2,400</div>
+                    <div class="oact">
+                        <span class="ostatus is-completed">已完成 ✓</span>
+                    </div>
+                </li>
+
+                <!-- ─── 未接單 ─── -->
+                <li class="order" data-status="rejected">
+                    <div class="bike-silhouette">
+                        <img src="./icon/silhouette-bike.png" alt="">
+                    </div>
+                    <div class="odate">
+                        <time>06.22</time>
+                        <time>16:00</time>
+                        <span>2026</span>
+                    </div>
+                    <div class="oinfo">
+                        <h4>YAMAHA Cygnus　蔡*</h4>
+                        <div class="tags"><span>機油更換</span></div>
+                        <p>工單 #20260622-11</p>
+                    </div>
+                    <div class="oprice">$0</div>
+                    <div class="oact">
+                        <span class="ostatus is-rejected">未接單 ✕</span>
+                    </div>
+                </li>
+                </ul>
+
+                <div class="orders-empty" hidden>
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M14 3v4a1 1 0 0 0 1 1h4"/>
+                        <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"/>
+                        <line x1="9" y1="17" x2="15" y2="17"/>
+                    </svg>
+                    <h3>目前沒有資料</h3>
+                    <p>這個分頁還沒有任何工單</p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- ─── 完工填寫 modal ─────────────────────────── -->
+    <div class="fmodal" id="fmodal" hidden>
+        <div class="fmodal-backdrop" data-close></div>
+        <div class="fmodal-panel" role="dialog" aria-modal="true" aria-labelledby="fmodal-title">
+            <div class="fmodal-head">
+                <div>
+                    <p class="fmodal-orderid" id="fmodal-orderid">工單 #—</p>
+                    <h3 class="fmodal-title" id="fmodal-title">填寫完工內容</h3>
+                    <p class="fmodal-meta">
+                        <span id="fmodal-bike">—</span>
+                        <span class="fmodal-plate" id="fmodal-plate">—</span>
+                    </p>
+                </div>
+                <button type="button" class="fmodal-close" data-close aria-label="關閉">✕</button>
+            </div>
+
+            <div class="fmodal-body">
+                <p class="fmodal-section-label">服務項目　金額</p>
+                <ul class="fitems" id="fitems"></ul>
+                <button type="button" class="fitem-add" id="fitem-add">＋ 加項</button>
+
+                <div class="fmodal-grid">
+                    <div>
+                        <label class="fmodal-label" for="fmile">完工里程 (KM)</label>
+                        <input type="text" id="fmile" class="fmodal-input" inputmode="numeric">
+                    </div>
+                    <div>
+                        <label class="fmodal-label">總金額</label>
+                        <div class="fmodal-total" id="fmodal-total">$ 0</div>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="fmodal-label" for="fnote">備註(可選)</label>
+                    <textarea id="fnote" class="fmodal-input fmodal-textarea" placeholder="例:下次建議檢查煞車皮"></textarea>
+                </div>
+            </div>
+
+            <div class="fmodal-foot">
+                <button type="button" class="fmodal-cancel" data-close>取消</button>
+                <button type="button" class="fmodal-next" id="fmodal-next">請車主簽名 →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ─── 簽名頁 overlay(全屏) ─────────────────── -->
+    <div class="sign-overlay" id="sign-overlay" hidden>
+        <div class="sign-panel">
+            <div class="sign-head">
+                <p class="sign-orderid" id="sign-orderid">工單 #—</p>
+                <h3 class="sign-title">請確認完工內容並簽名</h3>
+            </div>
+
+            <div class="sign-summary" id="sign-summary"></div>
+
+            <p class="sign-disclaimer">
+                請確認上方完工內容無誤<br>
+                簽名後將同步至數位車歷　無法修改
+            </p>
+
+            <div class="sign-canvas-wrap">
+                <canvas id="sign-canvas" class="sign-canvas"></canvas>
+                <p class="sign-canvas-hint" id="sign-canvas-hint">請於虛線區域簽名</p>
+                <button type="button" class="sign-clear" id="sign-clear">重簽</button>
+            </div>
+
+            <div class="sign-actions">
+                <button type="button" class="sign-reject" id="sign-reject">內容有誤</button>
+                <button type="button" class="sign-confirm" id="sign-confirm" disabled>確認簽名</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="shop-sidebar.js"></script>
+    <script src="shop-orders.js"></script>
+</body>
+</html>

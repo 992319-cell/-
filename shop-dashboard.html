@@ -3,405 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>車行後台｜光陽機車行</title>
+    <title>首頁｜光陽機車行</title>
     <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="shop-app.css">
     <link rel="stylesheet" href="shop-dashboard.css">
 </head>
-<body class="shop-dashboard">
+<body class="shop-app shop-dashboard">
 
-    <nav>
-        <div class="logo">
-            <h1>
-                <a href="index.html" aria-label="明前知行首頁">
-                    <span class="logo-mark">
-                        <img src="./icon/logo-mark拷貝2.png" alt="" aria-hidden="true">
-                        <span class="logo-text">明前知行</span>
-                    </span>
-                </a>
-            </h1>
+    <!-- ───────── 側欄 ───────── -->
+    <button type="button" class="sidebar-burger" id="sidebar-burger" aria-label="開啟側欄" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="4" y1="6" x2="20" y2="6"/>
+            <line x1="4" y1="12" x2="20" y2="12"/>
+            <line x1="4" y1="18" x2="20" y2="18"/>
+        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="6" y1="6" x2="18" y2="18"/>
+            <line x1="18" y1="6" x2="6" y2="18"/>
+        </svg>
+    </button>
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+    <aside class="sidebar" id="sidebar">
+        <a class="sidebar-brand" href="shop-dashboard.html" aria-label="返回首頁">
+            <img src="./icon/logo-mark拷貝2.png" alt="" aria-hidden="true">
+            <span>明前知行</span>
+        </a>
+
+        <div class="sidebar-account">
+            <button type="button" class="sidebar-shop-btn" id="sidebar-shop-btn" aria-haspopup="menu" aria-expanded="false" aria-controls="sidebar-shop-menu" data-tooltip="光陽機車行">
+                <span>光</span>
+                <span>光陽機車行</span>
+            </button>
+            <div class="sidebar-shop-menu" id="sidebar-shop-menu" role="menu" hidden>
+                <a role="menuitem" href="#switch">切換店家</a>
+                <a role="menuitem" href="#account">帳號設定</a>
+                <a role="menuitem" href="#help">說明中心</a>
+                <a role="menuitem" href="#notif-settings">通知設定</a>
+                <hr>
+                <a role="menuitem" href="#logout">登出</a>
+            </div>
         </div>
 
-        <div class="shop-tools">
-            <button type="button" aria-label="搜尋">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        <button type="button" class="sidebar-walkin" id="sidebar-walkin" data-tooltip="新增現場工單">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+                <line x1="12" y1="5" x2="12" y2="19"/>
+                <line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            <span>新增現場工單</span>
+        </button>
+
+        <small>管理</small>
+
+        <div class="sidebar-nav">
+            <a href="shop-dashboard.html" class="is-active" data-tooltip="首頁">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M3 12l9-9 9 9"/>
+                    <path d="M5 10v11h14V10"/>
                 </svg>
-            </button>
-            <a href="#notifications" aria-label="通知">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                <span>首頁</span>
+            </a>
+            <a href="shop-orders.html" data-tooltip="工單管理">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M14 3v4a1 1 0 0 0 1 1h4"/>
+                    <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"/>
+                    <line x1="9" y1="13" x2="15" y2="13"/>
+                    <line x1="9" y1="17" x2="13" y2="17"/>
                 </svg>
+                <span>工單管理</span>
             </a>
         </div>
 
-        <div class="shop-account">
-            <button type="button" class="shop-badge" aria-haspopup="menu" aria-expanded="false" aria-controls="shop-dropdown-menu">
-                <span class="shop-name">光陽機車行</span>
-            </button>
-            <ul class="shop-menu" id="shop-dropdown-menu" role="menu" hidden>
-                <li role="none"><a role="menuitem" href="#account">帳號設定</a></li>
-                <li role="none"><a role="menuitem" href="#help">說明中心</a></li>
-                <li role="none"><a role="menuitem" href="#notif-settings">通知設定</a></li>
-                <li role="separator"></li>
-                <li role="none"><a role="menuitem" href="#logout">登出</a></li>
-            </ul>
+        <div class="sidebar-bottom">
+            <label class="sidebar-open-toggle" data-tooltip="營業狀態">
+                <input type="checkbox" id="shop-open-toggle" checked>
+                <span>營業中</span>
+            </label>
         </div>
-    
-        <ul class="links">
-            <li><a href="#account">帳號設定</a></li>
-            <li><a href="#help">說明中心</a></li>
-            <li><a href="#notif-settings">通知設定</a></li>
-            <li><a href="#logout">登出</a></li>
-        </ul>
-            <button type="button" class="nav-toggle" aria-expanded="false" aria-label="開啟選單">
-                <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <line x1="4" y1="6" x2="20" y2="6"/>
-                    <line x1="4" y1="12" x2="20" y2="12"/>
-                    <line x1="4" y1="18" x2="20" y2="18"/>
-                </svg>
-                <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <line x1="6" y1="6" x2="18" y2="18"/>
-                    <line x1="18" y1="6" x2="6" y2="18"/>
+    </aside>
+
+    <!-- ───────── 主內容區 ───────── -->
+    <main class="app-main">
+        <div class="app-topbar">
+            <button type="button" class="icon-btn" aria-label="搜尋">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="11" cy="11" r="8"/>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
                 </svg>
             </button>
-    </nav>
+            <button type="button" class="icon-btn has-alert" aria-label="通知　有未讀訊息">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                </svg>
+            </button>
+        </div>
 
-    <main class="dash">
+        <div class="page-head">
+            <h1 id="greeting">午安　光陽機車行</h1>
+            <p id="today-date">2026 / 06 / 25　週三</p>
+        </div>
 
-        <section>
-            <h2 class="sec-eyebrow">本月概況</h2>
-            <div class="dash-top">
-                <div class="kpi-hero">
-                    <h3>本月營收</h3>
-                    <strong>$48,200</strong>
-                    <p>
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="M3 17l6-6 4 4 8-8"/>
-                            <path d="M14 7h7v7"/>
-                        </svg>
-                        12.4% vs 上月
-                    </p>
-                </div>
-                <div class="kpi-alerts">
-                    <h3>待處理</h3>
-                    <div class="alert-row">
-                        <strong>5</strong>
-                        <span>張工單待審核</span>
-                        <a href="#pending">前往 →</a>
-                    </div>
-                    <div class="alert-row">
-                        <strong>2</strong>
-                        <span>則新評價待回覆</span>
-                        <a href="#reviews">前往 →</a>
-                    </div>
-                    <div class="alert-row">
-                        <strong>1</strong>
-                        <span>爭議工單</span>
-                        <a href="#disputes">前往 →</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <div class="app-body">
 
-        <section>
-            <h2 class="sec-eyebrow">關鍵指標</h2>
-            <div class="kpi-grid">
-                <div class="kpi-cell">
-                    <h3>本月工單</h3>
-                    <strong>127</strong>
-                    <p>較上月 +8</p>
-                </div>
-                <div class="kpi-cell">
-                    <h3>平均客單</h3>
-                    <strong>$378</strong>
-                    <p>中位數 $320</p>
-                </div>
-                <div class="kpi-cell">
-                    <h3>好評率</h3>
-                    <strong>94%</strong>
-                    <p>47 則評價</p>
-                </div>
-                <div class="kpi-cell">
-                    <h3>回頭率</h3>
+            <!-- 需要你關注 -->
+            <section class="actions" aria-labelledby="actions-label">
+                <h2 id="actions-label">需要你關注</h2>
+                <a href="shop-orders.html?tab=pending" data-tone="hot">
+                    <h3>待你接單</h3>
+                    <strong><span id="pending-count">3</span> 筆</strong>
+                    <p>線上預約</p>
+                    <small id="pending-earliest">最早一筆　06 / 25　10:00</small>
+                    <em>處理 →</em>
+                </a>
+                <a href="shop-orders.html?tab=in_progress" data-tone="warn">
+                    <h3>即將到時</h3>
+                    <strong><span id="upcoming-count">1</span> 筆</strong>
+                    <p>預約　1 小時內</p>
+                    <small id="upcoming-detail">ABC-1234　13:00 報到</small>
+                    <em>查看 →</em>
+                </a>
+            </section>
+
+            <!-- 本月概覽 -->
+            <section class="kpi" aria-labelledby="kpi-label">
+                <h2 id="kpi-label">本月概覽</h2>
+                <article>
+                    <h3>本月工單數 <button type="button" aria-label="說明" data-tip="本月已建立的工單總數　包含進行中與已完成">ⓘ</button></h3>
+                    <strong>47</strong>
+                    <p><span data-trend="up">↑ 12%</span><span>vs 上月</span></p>
+                </article>
+                <article>
+                    <h3>平均客單金額 <button type="button" aria-label="說明" data-tip="本月已完成工單　總金額 ÷ 筆數">ⓘ</button></h3>
+                    <strong>$845</strong>
+                    <p><span data-trend="up">↑ 5%</span><span>vs 上月</span></p>
+                </article>
+                <article>
+                    <h3>回頭率　90 天 <button type="button" aria-label="說明" data-tip="最近 90 天內二次以上回廠的車主數 ÷ 總車主數">ⓘ</button></h3>
                     <strong>68%</strong>
-                    <p>86 / 127</p>
-                </div>
-            </div>
-        </section>
+                    <p><span data-trend="down">↓ 2%</span><span>vs 上月</span></p>
+                </article>
+            </section>
 
-        <section class="box">
-            <header>
-                <h3 id="trend-title">近 30 天營收趨勢</h3>
-                <div class="trend-tabs">
-                    <button type="button" class="is-active" data-metric="revenue">營收</button>
-                    <button type="button" data-metric="orders">工單數</button>
-                    <button type="button" data-metric="ratings">評價</button>
-                </div>
-            </header>
-            <div class="trend-chart-wrap">
-                <div class="trend-chart-inner">
+            <!-- 營收趨勢 -->
+            <section class="revenue" aria-labelledby="revenue-label">
+                <header>
+                    <h2 id="revenue-label">營收趨勢　最近 30 天</h2>
+                    <strong>$39,712</strong>
+                </header>
+                <div class="trend-chart-wrap">
                     <canvas id="trend-chart"></canvas>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section class="box">
-            <header>
-                <h3>工單管理</h3>
-            </header>
-
-            <div class="otabs">
-                <button type="button" class="otab is-active" data-status="pending">待接單 <span class="ticket-badge" data-count="pending">5</span></button>
-                <button type="button" class="otab" data-status="in_progress">進行中 <span class="ticket-badge gray" data-count="in_progress">3</span></button>
-                <button type="button" class="otab" data-status="completed">已完成 <span class="ticket-badge gray" data-count="completed">2</span></button>
-                <button type="button" class="otab" data-status="rejected">已駁回 <span class="ticket-badge gray" data-count="rejected">1</span></button>
-            </div>
-
-            <div class="orders-wrap" aria-live="polite">
-
-                <div class="order" data-status="pending">
-                    <div class="bike-photo">
-                        <img src="./img/bike-avatar-01.jpg" alt="王*的愛車">
-                    </div>
-                    <div class="odate">
-                        <p>11.04</p>
-                        <p>2025</p>
-                    </div>
-                    <div class="oinfo">
-                        <h4>SUZUKI Swish 125　狗熊</h4>
-                        <div class="tags"><span>機油更換</span><span>空濾清洗</span></div>
-                        <p>32,140 km　工單 #20251104-03</p>
-                    </div>
-                    <div class="oprice">$380</div>
-                    <div class="oact">
-                        <button type="button" class="bapp">核准</button>
-                        <button type="button" class="brej">駁回</button>
-                    </div>
-                </div>
-
-                <div class="order" data-status="pending">
-                    <div class="bike-silhouette">
-                        <img src="./icon/silhouette-bike.png" alt="機車">
-                    </div>
-                    <div class="odate">
-                        <p>11.03</p>
-                        <p>2025</p>
-                    </div>
-                    <div class="oinfo">
-                        <h4>YAMAHA CUXI　陳*</h4>
-                        <div class="tags"><span>機油更換</span><span>更換皮帶</span></div>
-                        <p>28,600 km　工單 #20251103-07</p>
-                    </div>
-                    <div class="oprice">$1,250</div>
-                    <div class="oact">
-                        <button type="button" class="bapp">核准</button>
-                        <button type="button" class="brej">駁回</button>
-                    </div>
-                </div>
-
-                <div class="order" data-status="pending">
-                    <div class="bike-photo">
-                        <img src="./img/car-avatar-01.jpg" alt="林*的愛車">
-                    </div>
-                    <div class="odate">
-                        <p>11.02</p>
-                        <p>2025</p>
-                    </div>
-                    <div class="oinfo">
-                        <h4>TOYOTA Altis　大灰</h4>
-                        <div class="tags"><span>定期保養</span><span>輪胎調位</span></div>
-                        <p>68,200 km　工單 #20251102-12</p>
-                    </div>
-                    <div class="oprice">$3,800</div>
-                    <div class="oact">
-                        <button type="button" class="bapp">核准</button>
-                        <button type="button" class="brej">駁回</button>
-                    </div>
-                </div>
-
-                <div class="order" data-status="pending">
-                    <div class="bike-photo">
-                        <img src="./img/bike-avatar-02.jpg" alt="李*的愛車">
-                    </div>
-                    <div class="odate">
-                        <p>11.01</p>
-                        <p>2025</p>
-                    </div>
-                    <div class="oinfo">
-                        <h4>YAMAHA BWS'R　小黑</h4>
-                        <div class="tags"><span>火星塞更換</span><span>輪胎更換</span></div>
-                        <p>42,500 km　工單 #20251101-15</p>
-                    </div>
-                    <div class="oprice">$2,180</div>
-                    <div class="oact">
-                        <button type="button" class="bapp">核准</button>
-                        <button type="button" class="brej">駁回</button>
-                    </div>
-                </div>
-
-                <div class="order" data-status="pending">
-                    <div class="bike-silhouette">
-                        <img src="./icon/silhouette-car.png" alt="汽車">
-                    </div>
-                    <div class="odate">
-                        <p>10.30</p>
-                        <p>2025</p>
-                    </div>
-                    <div class="oinfo">
-                        <h4>HONDA Fit　張*</h4>
-                        <div class="tags"><span>機油更換</span><span>煞車油</span></div>
-                        <p>52,100 km　工單 #20251030-22</p>
-                    </div>
-                    <div class="oprice">$1,650</div>
-                    <div class="oact">
-                        <button type="button" class="bapp">核准</button>
-                        <button type="button" class="brej">駁回</button>
-                    </div>
-                </div>
-
-                <div class="order" data-status="in_progress">
-                    <div class="bike-silhouette">
-                        <img src="./icon/silhouette-bike.png" alt="機車">
-                    </div>
-                    <div class="odate">
-                        <p>10.28</p>
-                        <p>2025</p>
-                    </div>
-                    <div class="oinfo">
-                        <h4>KYMCO Many 125　黃*</h4>
-                        <div class="tags"><span>機油更換</span><span>空濾清洗</span></div>
-                        <p>18,400 km　工單 #20251028-09</p>
-                    </div>
-                    <div class="oprice">$420</div>
-                    <div class="oact">
-                        <button type="button" class="bfill">填寫完工</button>
-                        <button type="button" class="bnoshow" title="客人未到場">客人未到</button>
-                    </div>
-                </div>
-
-                <div class="order" data-status="in_progress">
-                    <div class="bike-photo">
-                        <img src="./img/bike-avatar-01.jpg" alt="周*的愛車">
-                    </div>
-                    <div class="odate">
-                        <p>10.26</p>
-                        <p>2025</p>
-                    </div>
-                    <div class="oinfo">
-                        <h4>SYM Jet SL　小銀</h4>
-                        <div class="tags"><span>煞車皮更換</span></div>
-                        <p>25,800 km　工單 #20251026-04</p>
-                    </div>
-                    <div class="oprice">$680</div>
-                    <div class="oact">
-                        <button type="button" class="bfill">填寫完工</button>
-                        <button type="button" class="bnoshow" title="客人未到場">客人未到</button>
-                    </div>
-                </div>
-
-                <div class="order" data-status="in_progress">
-                    <div class="bike-photo">
-                        <img src="./img/bike-avatar-02.jpg" alt="愛車">
-                    </div>
-                    <div class="odate">
-                        <p>10.24</p>
-                        <p>2025</p>
-                    </div>
-                    <div class="oinfo">
-                        <h4>MAZDA 3　吳*</h4>
-                        <div class="tags"><span>定期保養</span><span>四輪定位</span></div>
-                        <p>71,500 km　工單 #20251024-18</p>
-                    </div>
-                    <div class="oprice">$4,200</div>
-                    <div class="oact">
-                        <button type="button" class="bfill">填寫完工</button>
-                        <button type="button" class="bnoshow" title="客人未到場">客人未到</button>
-                    </div>
-                </div>
-
-                <div class="order" data-status="completed">
-                    <div class="bike-photo">
-                        <img src="./img/bike-avatar-02.jpg" alt="許*的愛車">
-                    </div>
-                    <div class="odate">
-                        <p>10.20</p>
-                        <p>2025</p>
-                    </div>
-                    <div class="oinfo">
-                        <h4>YAMAHA Force　閃電</h4>
-                        <div class="tags"><span>機油更換</span><span>火星塞更換</span></div>
-                        <p>36,200 km　工單 #20251020-06　已簽收</p>
-                    </div>
-                    <div class="oprice">$520</div>
-                    <div class="oact">
-                        <span class="ostatus is-completed">已完成 ✓</span>
-                    </div>
-                </div>
-
-                <div class="order" data-status="completed">
-                    <div class="bike-photo">
-                        <img src="./img/bike-avatar-01.jpg" alt="愛車">
-                    </div>
-                    <div class="odate">
-                        <p>10.18</p>
-                        <p>2025</p>
-                    </div>
-                    <div class="oinfo">
-                        <h4>KYMCO Racing S　鄭*</h4>
-                        <div class="tags"><span>輪胎更換</span></div>
-                        <p>14,800 km　工單 #20251018-02　已簽收</p>
-                    </div>
-                    <div class="oprice">$2,400</div>
-                    <div class="oact">
-                        <span class="ostatus is-completed">已完成 ✓</span>
-                    </div>
-                </div>
-
-                <div class="order" data-status="rejected">
-                    <div class="bike-photo">
-                        <img src="./img/bike-avatar-02.jpg" alt="愛車">
-                    </div>
-                    <div class="odate">
-                        <p>10.22</p>
-                        <p>2025</p>
-                    </div>
-                    <div class="oinfo">
-                        <h4>YAMAHA Cygnus　蔡*</h4>
-                        <div class="tags"><span>機油更換</span></div>
-                        <p>里程資料不符　工單 #20251022-11</p>
-                    </div>
-                    <div class="oprice">$280</div>
-                    <div class="oact">
-                        <span class="ostatus is-rejected">已駁回 ✕</span>
-                    </div>
-                </div>
-
-                <div class="orders-empty" hidden>
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M14 3v4a1 1 0 0 0 1 1h4"/>
-                        <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"/>
-                        <line x1="9" y1="17" x2="15" y2="17"/>
-                    </svg>
-                    <h3>目前沒有資料</h3>
-                    <p>這個分頁還沒有任何工單</p>
-                </div>
-
-            </div>
-        </section>
-
+        </div>
     </main>
-
-    <footer>
-        <p>© 2026 明前知行　版權所有</p>
-        <a href="mailto:992319@gmail.com">992319@gmail.com</a>
-    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="trend-chart.js"></script>
-    <script src="nav.js"></script>
+    <script src="shop-sidebar.js"></script>
     <script src="shop-dashboard.js"></script>
 </body>
 </html>

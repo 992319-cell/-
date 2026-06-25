@@ -1,0 +1,506 @@
+/* ====================================================
+   shop-app.css
+   車行端共用基底:左側欄 + 主區 topbar / page-head / icon-btn
+   被 shop-dashboard / shop-orders 引用
+   依賴:common.css(顏色/字型 token)
+   ==================================================== */
+
+/* ===== body ===== */
+.shop-app {
+    font-family: 'Inter', 'Noto Sans TC', sans-serif;
+    letter-spacing: -.01em;
+    background: var(--bg-off);
+    min-height: 100vh;
+}
+.shop-app main,
+.shop-app aside { box-sizing: border-box; }
+
+/* ─────────────────────────────────────────────────
+   側欄
+   ───────────────────────────────────────────────── */
+.sidebar {
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    width: 200px;
+    background: #161617;
+    color: rgba(255,255,255,.85);
+    display: flex;
+    flex-direction: column;
+    padding: 18px 14px 16px;
+    z-index: 50;
+    transition: transform .25s ease;
+}
+
+/* 品牌 */
+.sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 6px 14px;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    margin-bottom: 14px;
+}
+.sidebar-brand img {
+    width: 28px; height: 28px;
+    filter: contrast(1.35) saturate(1.5) brightness(1.05);
+    flex-shrink: 0;
+}
+.sidebar-brand span {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 15px;
+    letter-spacing: .15em;
+    color: #fff;
+    white-space: nowrap;
+}
+
+/* 帳號區 */
+.sidebar-account {
+    position: relative;
+    margin-bottom: 14px;
+}
+.sidebar-shop-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 3px;
+    padding: 8px 10px;
+    color: #fff;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 13px;
+    letter-spacing: .03em;
+    transition: background .15s, border-color .15s;
+}
+.sidebar-shop-btn:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.16); }
+.sidebar-shop-btn > span:first-child {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0;
+    flex-shrink: 0;
+}
+.sidebar-shop-btn > span:last-child {
+    flex: 1;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.sidebar-shop-btn::after {
+    content: "▾";
+    font-size: 9px;
+    color: rgba(255,255,255,.55);
+    transition: transform .2s;
+}
+.sidebar-shop-btn[aria-expanded="true"]::after { transform: rotate(180deg); }
+
+.sidebar-shop-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0; right: 0;
+    background: #1f1f21;
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 4px;
+    padding: 4px;
+    z-index: 60;
+    box-shadow: 0 8px 24px rgba(0,0,0,.4);
+}
+.sidebar-shop-menu[hidden] { display: none; }
+.sidebar-shop-menu a {
+    display: block;
+    padding: 8px 10px;
+    font-size: 12px;
+    color: rgba(255,255,255,.8);
+    letter-spacing: .03em;
+    border-radius: 3px;
+    transition: background .15s;
+}
+.sidebar-shop-menu a:hover { background: rgba(255,255,255,.08); color: #fff; }
+.sidebar-shop-menu hr {
+    border: none;
+    border-top: 1px solid rgba(255,255,255,.08);
+    margin: 4px 2px;
+}
+
+/* 裝飾性 <i> 拿掉 italic */
+.sidebar i,
+.icon-btn i {
+    font-style: normal;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 新增現場工單 CTA */
+.sidebar-walkin {
+    background: var(--yellow);
+    color: var(--ink);
+    border: none;
+    border-radius: 3px;
+    padding: 10px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .03em;
+    cursor: pointer;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+    transition: background .15s;
+}
+.sidebar-walkin:hover { background: var(--yellow-dark); }
+.sidebar-walkin > svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+/* section label */
+.sidebar > small {
+    font-size: 10px;
+    letter-spacing: .25em;
+    color: rgba(255,255,255,.4);
+    padding: 0 8px 6px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+/* 主導航 */
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.sidebar-nav a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 10px;
+    font-size: 13px;
+    color: rgba(255,255,255,.7);
+    border-left: 2px solid transparent;
+    border-radius: 0 3px 3px 0;
+    transition: background .15s, color .15s, border-color .15s;
+    letter-spacing: .02em;
+}
+.sidebar-nav a:hover {
+    background: rgba(255,255,255,.05);
+    color: #fff;
+}
+.sidebar-nav a.is-active {
+    background: rgba(250, 194, 63, .14);
+    color: #fff;
+    border-left-color: var(--yellow);
+    font-weight: 500;
+}
+.sidebar-nav svg {
+    width: 16px; height: 16px;
+    stroke-width: 1.6;
+    flex-shrink: 0;
+}
+
+/* 底部:營業 toggle */
+.sidebar-bottom {
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,.08);
+}
+.sidebar-open-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    cursor: pointer;
+    font-size: 12px;
+    color: rgba(255,255,255,.7);
+}
+.sidebar-open-toggle > input {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 0 2px rgba(74, 222, 128, .2);
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background .2s, box-shadow .2s;
+}
+.sidebar-open-toggle > input:not(:checked) {
+    background: #6b6b6b;
+    box-shadow: none;
+}
+.sidebar-open-toggle > span {
+    line-height: 1;
+}
+
+/* mobile drawer 控制 */
+.sidebar-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.45);
+    z-index: 40;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .2s, visibility .2s;
+}
+.shop-app.is-drawer-open .sidebar-backdrop {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 手機漢堡 */
+.sidebar-burger {
+    display: none;
+    position: fixed;
+    top: 12px; left: 12px;
+    width: 36px; height: 36px;
+    background: #161617;
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+    z-index: 60;
+    align-items: center;
+    justify-content: center;
+}
+.sidebar-burger svg { width: 20px; height: 20px; }
+.sidebar-burger svg + svg { display: none; }
+.sidebar-burger[aria-expanded="true"] svg:first-of-type { display: none; }
+.sidebar-burger[aria-expanded="true"] svg + svg { display: inline-block; }
+
+/* ─────────────────────────────────────────────────
+   主內容區
+   ───────────────────────────────────────────────── */
+.app-main {
+    margin-left: 200px;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 右上 utility bar */
+.app-topbar {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 14px 32px 0;
+    align-items: center;
+}
+.icon-btn {
+    width: 32px; height: 32px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--white);
+    color: var(--muted);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    transition: border-color .15s, color .15s;
+}
+.icon-btn:hover { border-color: var(--accent); color: var(--accent); }
+.icon-btn svg { width: 15px; height: 15px; }
+.icon-btn.has-alert::after {
+    content: "";
+    position: absolute;
+    top: 5px; right: 5px;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #C73E3E;
+    border: 1.5px solid var(--white);
+    box-sizing: content-box;
+    pointer-events: none;
+}
+
+/* 頁首 */
+.page-head {
+    padding: 18px 32px 22px;
+}
+.page-head h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -.03em;
+    margin-bottom: 4px;
+}
+.page-head > p {
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: .03em;
+    font-variant-numeric: tabular-nums;
+}
+
+/* 內容容器 */
+.app-body {
+    padding: 0 32px 60px;
+    flex: 1;
+}
+
+/* ─────────────────────────────────────────────────
+   RWD:平板 768-1023(側欄 56px icon-only + tooltip)
+   ───────────────────────────────────────────────── */
+@media (max-width: 1023px) and (min-width: 768px) {
+    .sidebar {
+        width: 56px;
+        padding: 14px 8px;
+    }
+    .sidebar-nav a:hover {
+        background: transparent;
+        color: var(--yellow);
+    }
+    .sidebar-shop-btn:hover {
+        background: rgba(255,255,255,.04);
+        border-color: rgba(255,255,255,.08);
+    }
+
+    .sidebar [data-tooltip] { position: relative; }
+    .sidebar [data-tooltip]::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        left: calc(100% + 16px);
+        top: 50%;
+        transform: translateY(-50%);
+        background: #1f1f21;
+        color: #fff;
+        padding: 6px 10px;
+        border-radius: 3px;
+        font-size: 12px;
+        letter-spacing: .03em;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .15s ease;
+        z-index: 200;
+        box-shadow: 0 4px 12px rgba(0,0,0,.25);
+    }
+    .sidebar [data-tooltip]::before {
+        content: "";
+        position: absolute;
+        left: calc(100% + 8px);
+        top: 50%;
+        transform: translateY(-50%);
+        border: 5px solid transparent;
+        border-right-color: #1f1f21;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .15s ease;
+        z-index: 200;
+    }
+    .sidebar [data-tooltip]:hover::after,
+    .sidebar [data-tooltip]:hover::before {
+        opacity: 1;
+    }
+
+    .sidebar-brand {
+        padding: 0 0 12px;
+        justify-content: center;
+    }
+    .sidebar-brand span { display: none; }
+    .sidebar-brand img { width: 26px; height: 26px; }
+
+    .sidebar-shop-btn {
+        padding: 6px;
+        justify-content: center;
+    }
+    .sidebar-shop-btn > span:last-child,
+    .sidebar-shop-btn::after { display: none; }
+
+    .sidebar-walkin {
+        justify-content: center;
+        padding: 10px 8px;
+    }
+    .sidebar-walkin > span { display: none; }
+
+    .sidebar > small { display: none; }
+    .sidebar-nav a {
+        justify-content: center;
+        padding: 10px 6px;
+        gap: 0;
+    }
+    .sidebar-nav a > span { display: none; }
+
+    .sidebar-open-toggle {
+        justify-content: center;
+        padding: 6px 4px;
+    }
+    .sidebar-open-toggle > span { display: none; }
+
+    /* 帳號區改底部圓頭像 */
+    .sidebar-account {
+        order: 99;
+        margin-top: auto;
+        margin-bottom: 0;
+    }
+    .sidebar-bottom {
+        order: 98;
+        border-top: none;
+        padding-top: 8px;
+    }
+
+    .app-main { margin-left: 56px; }
+    .app-topbar,
+    .page-head,
+    .app-body { padding-left: 24px; padding-right: 24px; }
+
+    .sidebar-shop-menu {
+        left: calc(100% + 8px);
+        right: auto;
+        top: 0;
+        min-width: 180px;
+    }
+}
+
+/* ─────────────────────────────────────────────────
+   RWD:手機 <768(抽屜)
+   ───────────────────────────────────────────────── */
+@media (max-width: 767px) {
+    .sidebar {
+        transform: translateX(-100%);
+        width: 240px;
+    }
+    .shop-app.is-drawer-open .sidebar {
+        transform: translateX(0);
+        box-shadow: 0 0 40px rgba(0,0,0,.4);
+    }
+    .sidebar-burger { display: inline-flex; }
+
+    .app-main {
+        margin-left: 0;
+        padding-top: 0;
+    }
+    .app-topbar {
+        position: sticky;
+        top: 0;
+        z-index: 30;
+        background: var(--bg-off);
+        padding: 10px 16px 10px 60px;
+        min-height: 56px;
+        align-items: center;
+    }
+    .sidebar-burger {
+        top: 10px; left: 10px;
+        background: var(--white);
+        border: 1px solid var(--line);
+        color: var(--ink);
+    }
+    .page-head { padding: 8px 16px 18px; }
+    .app-body { padding: 0 16px 40px; }
+
+    .page-head h1 { font-size: 22px; }
+}
