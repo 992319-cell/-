@@ -93,23 +93,28 @@ body {
     transform: translateY(-2px);
     box-shadow: 0 4px 16px rgba(15, 45, 110, .06);
 }
+.veh-card:focus-visible {
+    outline: 2px solid var(--accent-deep);
+    outline-offset: 2px;
+}
 
 /* 卡片照片區 */
-.veh-photo {
+.veh-card > figure {
     width: 100%;
     aspect-ratio: 16 / 10;
+    margin: 0;
     background: linear-gradient(135deg, #e8eef8 0%, #d4def0 100%);
     position: relative;
     overflow: hidden;
 }
-.veh-photo img {
+.veh-card > figure img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
 }
-/* silhouette fallback:用車種對應的線稿 icon,縮小置中 */
-.veh-photo img.is-silhouette {
+/* fallback silhouette:車種對應的線稿 icon,縮小置中 */
+.veh-card > figure img[data-fallback="true"] {
     width: 55%;
     height: 55%;
     margin: 22.5% auto;
@@ -117,8 +122,8 @@ body {
     opacity: .55;
 }
 
-/* 卡片右上角 ★ + dots menu */
-.veh-card-actions {
+/* ── 角落 actions ── */
+.veh-card > .actions {
     position: absolute;
     top: 12px;
     right: 12px;
@@ -127,7 +132,8 @@ body {
     gap: 6px;
     z-index: 2;
 }
-.veh-star {
+.veh-card .star,
+.veh-card .menu-btn {
     width: 32px;
     height: 32px;
     border-radius: 3px;
@@ -136,35 +142,32 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
-    color: var(--muted-light);
-    transition: color .15s, background .15s, transform .15s;
+    transition: background .15s, color .15s, transform .15s;
 }
-.veh-star:hover {
+.veh-card .star {
+    font-size: var(--fs-body);
+    color: var(--muted-light);
+}
+.veh-card .star:hover {
     background: var(--white);
     transform: scale(1.08);
 }
-.veh-star.is-primary {
+.veh-card .star.is-primary {
     color: var(--yellow);
     background: var(--white);
 }
-.veh-menu-btn {
-    width: 32px;
-    height: 32px;
-    border-radius: 3px;
-    background: rgba(255, 255, 255, .9);
-    border: 0.5px solid var(--line);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.veh-card .menu-btn {
     color: var(--ink);
-    transition: background .15s;
 }
-.veh-menu-btn:hover { background: var(--white); }
-.veh-menu-btn svg { stroke: currentColor; }
+.veh-card .menu-btn:hover { background: var(--white); }
+.veh-card .menu-btn svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+}
 
 /* dots menu dropdown */
-.veh-menu {
+.veh-card .menu {
     position: absolute;
     top: 52px;
     right: 12px;
@@ -178,8 +181,8 @@ body {
     list-style: none;
     margin: 0;
 }
-.veh-menu[hidden] { display: none; }
-.veh-menu li {
+.veh-card .menu[hidden] { display: none; }
+.veh-card .menu li {
     padding: 10px 16px;
     font-size: var(--fs-sm);
     color: var(--ink);
@@ -189,19 +192,24 @@ body {
     align-items: center;
     gap: 8px;
 }
-.veh-menu li:hover { background: var(--bg-off); }
-.veh-menu li.is-danger { color: #C73E3E; }
-.veh-menu li svg { stroke: currentColor; flex-shrink: 0; }
+.veh-card .menu li:hover { background: var(--bg-off); }
+.veh-card .menu li.danger { color: #C73E3E; }
+.veh-card .menu li svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+    flex-shrink: 0;
+}
 
-/* 卡片資訊區 */
-.veh-info {
+/* ── 卡片資訊區 ── */
+.veh-card > .body {
     padding: 20px;
     display: flex;
     flex-direction: column;
     gap: 12px;
     flex: 1;
 }
-.veh-plate {
+.veh-card .body h2 {
     font-size: var(--fs-label);
     font-weight: 500;
     letter-spacing: -.02em;
@@ -209,7 +217,7 @@ body {
     margin: 0;
     color: var(--ink);
 }
-.veh-sub {
+.veh-card .body > p {
     font-size: var(--fs-sm);
     color: var(--muted);
     margin: 0;
@@ -217,7 +225,7 @@ body {
 }
 
 /* meta dl 兩格資料 */
-.veh-meta {
+.veh-card .body dl {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 12px;
@@ -225,17 +233,17 @@ body {
     padding: 12px 0 0;
     border-top: 0.5px solid var(--line);
 }
-.veh-meta > div {
+.veh-card .body dl > div {
     display: flex;
     flex-direction: column;
     gap: 2px;
 }
-.veh-meta dt {
+.veh-card .body dt {
     font-size: var(--fs-xs);
     color: var(--muted);
     letter-spacing: .05em;
 }
-.veh-meta dd {
+.veh-card .body dd {
     font-size: var(--fs-body);
     font-weight: 500;
     color: var(--ink);
@@ -244,7 +252,7 @@ body {
 }
 
 /* 完整車歷 CTA */
-.veh-cta {
+.veh-card .cta {
     margin-top: auto;
     padding-top: 12px;
     display: inline-flex;
@@ -255,9 +263,15 @@ body {
     border-top: 0.5px solid var(--line);
     transition: color .15s;
 }
-.veh-cta:hover { color: var(--accent-glow); }
-.veh-cta svg { stroke: currentColor; transition: transform .15s; }
-.veh-card:hover .veh-cta svg { transform: translateX(3px); }
+.veh-card .cta:hover { color: var(--accent-glow); }
+.veh-card .cta svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+    transition: transform .15s;
+    flex-shrink: 0;
+}
+.veh-card:hover .cta svg { transform: translateX(3px); }
 
 /* ── 空狀態 ────────────────────────────────── */
 .veh-empty {
@@ -292,13 +306,368 @@ body {
         gap: 14px;
         padding: 24px 24px 40px;
     }
-    .veh-info { padding: 18px; }
+    .veh-card > .body { padding: 18px; }
 }
 
 @media (max-width: 480px) {
     .veh-head { padding: 20px 20px 14px; }
     .veh-head h1 { font-size: 28px; }
     .veh-grid { padding: 20px 20px 32px; gap: 12px; }
-    .veh-plate { font-size: var(--fs-lg); }
-    .veh-photo { aspect-ratio: 16 / 9; }
+    .veh-card .body h2 { font-size: var(--fs-lg); }
+    .veh-card > figure { aspect-ratio: 16 / 9; }
+}
+
+/* ====================================================
+   ↓↓↓ 以下為新增 / 編輯車輛 modal 的樣式
+   原本獨立 vehicle-modal.css　已合併至此檔
+   ==================================================== */
+
+/* ====================================================
+   vehicle-modal.css
+   車庫頁「新增 / 編輯車輛」燈箱
+   依賴 common.css token
+   風格參考 walkin-modal.css 但獨立命名空間 .vm-*
+   ==================================================== */
+
+.vm-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.vm-modal[hidden] { display: none; }
+
+.vm-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .45);
+}
+
+.vm-card {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    background: var(--white);
+    border-radius: 6px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, .18);
+    padding: 22px 22px 18px;
+    box-sizing: border-box;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+}
+
+/* ── head ── */
+.vm-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+.vm-head p {
+    margin: 0;
+    font-size: var(--fs-lg);
+    font-weight: 600;
+    letter-spacing: -.01em;
+    color: var(--ink);
+}
+.vm-close {
+    background: none;
+    border: none;
+    padding: 4px 6px;
+    cursor: pointer;
+    color: var(--muted);
+    font-size: var(--fs-body);
+    line-height: 1;
+    font-family: inherit;
+}
+.vm-close:hover { color: var(--ink); }
+
+/* ── field ── */
+.vm-body .vm-field {
+    margin-bottom: 14px;
+}
+.vm-body .vm-label {
+    display: block;
+    font-size: var(--fs-sm);
+    color: var(--muted);
+    margin: 0 0 6px;
+    letter-spacing: .01em;
+}
+.vm-body .vm-label .vm-opt {
+    color: var(--muted-light);
+    font-size: var(--fs-xs);
+    margin-left: 4px;
+}
+
+.vm-body input[type="text"],
+.vm-body select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    font-size: var(--fs-body);
+    font-family: inherit;
+    background: var(--white);
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -.01em;
+}
+/* flatpickr 改造後日期 input 是 type="text",由上方 text 規則統一處理 */
+.vm-body input#vm-date {
+    cursor: pointer;
+    caret-color: transparent;
+}
+.vm-body select {
+    appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%),
+                      linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+    background-position: calc(100% - 18px) center, calc(100% - 12px) center;
+    background-size: 6px 6px;
+    background-repeat: no-repeat;
+    padding-right: 32px;
+    cursor: pointer;
+}
+.vm-body input:focus,
+.vm-body select:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.vm-body input.is-error {
+    border-color: #C73E3E;
+    background: #fff7f7;
+}
+.vm-body input.is-error:focus {
+    border-color: #C73E3E;
+}
+.vm-error {
+    margin: 6px 0 0;
+    font-size: var(--fs-xs);
+    color: #C73E3E;
+    letter-spacing: .02em;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.vm-error::before {
+    content: "⚠";
+    font-size: var(--fs-xs);
+}
+
+/* ── 車種 radio group ── */
+.vm-typegrp {
+    display: flex;
+    gap: 8px;
+}
+.vm-typeopt {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: var(--fs-sm);
+    color: var(--ink);
+    background: var(--white);
+    transition: border-color .12s, background .12s;
+}
+.vm-typeopt:hover { border-color: var(--accent); }
+.vm-typeopt:has(input:checked) {
+    border-color: var(--accent-deep);
+    background: #F4F7FE;
+    color: var(--accent-deep);
+    font-weight: 600;
+}
+.vm-typeopt input[type="radio"] {
+    margin: 0;
+    accent-color: var(--accent-deep);
+}
+
+/* ── 車輛照片上傳 ── */
+.vm-avatar-box {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+}
+.vm-avatar-preview {
+    width: 88px;
+    height: 64px;
+    border-radius: 3px;
+    border: 0.5px solid var(--line);
+    background: linear-gradient(135deg, #e8eef8 0%, #d4def0 100%);
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.vm-avatar-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.vm-avatar-silhouette {
+    width: 60%;
+    height: 60%;
+    object-fit: contain;
+    opacity: .55;
+}
+.vm-avatar-ctrls {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-start;
+}
+.vm-avatar-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+.vm-avatar-btn {
+    display: inline-block;
+    padding: 7px 14px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--white);
+    color: var(--ink);
+    font-size: var(--fs-sm);
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: .02em;
+    transition: border-color .12s;
+}
+.vm-avatar-btn:hover {
+    border-color: var(--accent);
+}
+.vm-avatar-clear {
+    background: none;
+    border: none;
+    padding: 2px 4px;
+    color: var(--muted);
+    font-size: var(--fs-xs);
+    cursor: pointer;
+    font-family: inherit;
+    text-decoration: underline;
+    letter-spacing: .02em;
+}
+.vm-avatar-clear:hover { color: #C73E3E; }
+
+/* ── hint ── */
+.vm-hint {
+    margin: 14px 0 0;
+    font-size: var(--fs-xs);
+    color: var(--muted);
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    line-height: 1.5;
+}
+.vm-hint::before {
+    content: "ⓘ";
+    flex-shrink: 0;
+}
+
+/* ── foot ── */
+.vm-foot {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 0.5px solid var(--line);
+}
+.vm-btn {
+    font-size: var(--fs-sm);
+    padding: 10px 18px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--white);
+    color: var(--ink);
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: .02em;
+}
+.vm-btn:hover {
+    border-color: var(--muted-light);
+}
+.vm-cta {
+    background: var(--accent-deep);
+    color: var(--white);
+    border-color: var(--accent-deep);
+    font-weight: 600;
+}
+.vm-cta:hover {
+    background: #07205a;
+    border-color: #07205a;
+}
+.vm-btn[aria-disabled="true"] {
+    opacity: .5;
+    cursor: not-allowed;
+}
+.vm-cta[aria-disabled="true"]:hover {
+    background: var(--accent-deep);
+    border-color: var(--accent-deep);
+}
+
+/* ── RWD ── */
+@media (max-width: 480px) {
+    .vm-modal { padding: 12px; }
+    .vm-card { padding: 18px 18px 14px; }
+    .vm-foot { flex-direction: column-reverse; }
+    .vm-btn { width: 100%; }
+}
+
+/* ====================================================
+   flatpickr 主題覆寫
+   ── 跟 ticket.css 對齊的視覺風格
+   ── 未來日期被 disable(maxDate: today)
+   ==================================================== */
+.flatpickr-calendar {
+    font-family: 'Noto Sans TC', sans-serif !important;
+    border-radius: 3px !important;
+    box-shadow: 0 4px 20px rgba(15, 45, 110, 0.15) !important;
+}
+.flatpickr-day.selected,
+.flatpickr-day.selected:hover {
+    background: var(--accent-deep) !important;
+    border-color: var(--accent-deep) !important;
+}
+/* 未來日期不可選(maxDate: today)　明顯灰掉避免誤以為壞掉 */
+.flatpickr-day.flatpickr-disabled,
+.flatpickr-day.flatpickr-disabled:hover {
+    color: var(--muted-light) !important;
+    background: var(--bg-off) !important;
+    border-color: transparent !important;
+    cursor: not-allowed !important;
+    text-decoration: line-through !important;
+    opacity: .55 !important;
+}
+/* 上次保養可以是今天　today 視覺保留淡色強調　但不要 yellow 邊框搶戲 */
+.flatpickr-day.today:not(.selected) {
+    border-color: var(--line) !important;
+    color: var(--accent-deep) !important;
+}
+.flatpickr-day:hover {
+    background: rgba(82, 117, 198, 0.12) !important;
+}
+.flatpickr-months .flatpickr-month {
+    color: var(--accent-deep) !important;
+}
+.flatpickr-current-month .flatpickr-monthDropdown-months,
+.flatpickr-current-month input.cur-year {
+    font-family: 'Noto Serif TC', serif !important;
+    font-weight: 500 !important;
+}
+span.flatpickr-weekday {
+    color: var(--muted) !important;
+    font-size: var(--fs-xs) !important;
 }

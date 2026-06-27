@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>車庫　明前知行</title>
     <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="vehicle.css">
-    <link rel="stylesheet" href="vehicle-modal.css">
 </head>
 <body>
 
@@ -42,7 +42,7 @@
 
 <main class="veh">
 
-    <header class="veh-head">
+    <div class="veh-head">
         <div class="veh-head-titles">
             <h1>我的車庫</h1>
             <p id="veh-summary" class="veh-summary">共 0 台</p>
@@ -54,7 +54,7 @@
             </svg>
             新增車輛
         </button>
-    </header>
+    </div>
 
     <section id="veh-grid" class="veh-grid" aria-label="車輛清單"></section>
 
@@ -70,7 +70,8 @@
 </footer>
 
 <script src="nav.js"></script>
-<script src="vehicle-modal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://npmcdn.com/flatpickr/dist/l10n/zh-tw.js"></script>
 <script src="vehicle.js"></script>
 </body>
 </html>

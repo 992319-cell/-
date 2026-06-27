@@ -14,26 +14,46 @@
 
 (function () {
   const LS_HIST_RECORDS = "mqzx:histRecords";
+  const LS_VEHICLES = "mqzx:vehicles";
 
   // ═══════════════════════════════════════════════════
-  //   demo 車輛清單
+  //   demo 車輛清單　seed
+  //   ── 跟 vehicle.js 的 SEED 對齊(同步車款 / 暱稱 / avatar)
+  //   ── 實際使用時優先讀 mqzx:vehicles LS,讓車庫新增的車也能在這裡出現
   // ═══════════════════════════════════════════════════
-  const VEHICLES = [
+  const VEHICLES_SEED = [
     {
       plate: "ABC-1234",
-      model: "山羊 VIVA",
+      model: "SUZUKI Swish",
+      nickname: "狗熊",
       kind: "機車",
       mileage: "32,520",
-      avatar: "./img/bike-avatar-01.jpg",
+      avatar: "./img/bike-avatar-04.jpg",
     },
     {
       plate: "RAH-5688",
       model: "TOYOTA Altis",
+      nickname: "",
       kind: "汽車",
       mileage: "58,650",
       avatar: "./img/car-avatar-01.jpg",
     },
   ];
+
+  // 讀 LS 車輛清單　空 / 壞掉就 fallback seed
+  function loadVehicles() {
+    try {
+      const raw = localStorage.getItem(LS_VEHICLES);
+      if (!raw) return VEHICLES_SEED.slice();
+      const arr = JSON.parse(raw);
+      if (!Array.isArray(arr) || arr.length === 0) return VEHICLES_SEED.slice();
+      return arr;
+    } catch {
+      return VEHICLES_SEED.slice();
+    }
+  }
+
+  const VEHICLES = loadVehicles();
 
   // ═══════════════════════════════════════════════════
   //   demo mock 紀錄
@@ -103,9 +123,10 @@
       return null;
     }
   })();
-  let currentPlate = urlPlate && VEHICLES.find(v => v.plate === urlPlate)
-                     ? urlPlate
-                     : VEHICLES[0].plate;
+  let currentPlate =
+    urlPlate && VEHICLES.find((v) => v.plate === urlPlate)
+      ? urlPlate
+      : VEHICLES[0].plate;
   let currentSort = "newest";
 
   function pickVehicle(plate) {
@@ -158,16 +179,35 @@
   function renderHeader() {
     const v = pickVehicle(currentPlate);
     document.getElementById("hist-veh-plate").textContent = v.plate;
-    document.getElementById("hist-veh-sub").textContent =
-      `${v.model}　${v.kind}`;
+
+    // 副標:有暱稱就顯示　例「狗熊　Gogoro VIVA　機車」
+    const subParts = [];
+    if (v.nickname && v.nickname.trim()) subParts.push(v.nickname);
+    subParts.push(v.model, v.kind);
+    document.getElementById("hist-veh-sub").textContent = subParts.join("　");
+
     document.getElementById("hist-veh-meter-num").innerHTML =
-      `${v.mileage} <span>km</span>`;
+      `${v.mileage || "—"} <span>km</span>`;
 
     const img = document.getElementById("hist-veh-img");
     if (img) {
-      img.style.display = ""; // 先 reset(上一輪載失敗會 display:none)
-      img.src = v.avatar;
-      img.alt = `${v.plate}　${v.model}`;
+      if (v.avatar) {
+        img.style.display = "";
+        img.style.cssText = ""; // 清掉之前 silhouette 套的 inline style
+        img.src = v.avatar;
+        img.alt = `${v.plate}　${v.model}`;
+      } else {
+        // 沒上傳照片　顯車種對應 silhouette icon(跟車庫卡片對齊)
+        const silhouette =
+          v.kind === "汽車"
+            ? "./icon/silhouette-car.png"
+            : "./icon/silhouette-bike.png";
+        img.style.display = "";
+        img.src = silhouette;
+        img.alt = `${v.plate}　${v.model}`;
+        img.style.cssText =
+          "width:60%;height:60%;margin:20% auto;object-fit:contain;opacity:.55;display:block";
+      }
     }
 
     // 切換選單 li
@@ -183,7 +223,10 @@
         sp1.textContent = vh.plate;
         const sp2 = document.createElement("span");
         sp2.className = "vm-sub";
-        sp2.textContent = `${vh.model}　${vh.kind}`;
+        const subBits = [];
+        if (vh.nickname && vh.nickname.trim()) subBits.push(vh.nickname);
+        subBits.push(vh.model, vh.kind);
+        sp2.textContent = subBits.join("　");
         li.append(sp1, sp2);
         menu.appendChild(li);
       });

@@ -718,10 +718,25 @@
     background: var(--accent-deep) !important;
     border-color: var(--accent-deep) !important;
 }
-.flatpickr-day.today {
-    border-color: var(--yellow) !important;
+/* 不可選日期(含今天　minDate 之前　maxDate 之後)明顯灰掉
+   避免手機平板使用者誤以為網站壞掉 */
+.flatpickr-day.flatpickr-disabled,
+.flatpickr-day.flatpickr-disabled:hover {
+    color: var(--muted-light) !important;
+    background: var(--bg-off) !important;
+    border-color: transparent !important;
+    cursor: not-allowed !important;
+    text-decoration: line-through !important;
+    opacity: .55 !important;
 }
-.flatpickr-day.today:not(.selected) {
+/* 今天若同時被 disable　就吃 disabled 樣式　不再亮黃邊 */
+.flatpickr-day.today.flatpickr-disabled {
+    border-color: transparent !important;
+    color: var(--muted-light) !important;
+}
+/* 今天若可選(其他頁面用 flatpickr 沒設 minDate 時)　保留淡色強調 */
+.flatpickr-day.today:not(.selected):not(.flatpickr-disabled) {
+    border-color: var(--line) !important;
     color: var(--accent-deep) !important;
 }
 .flatpickr-day:hover {
