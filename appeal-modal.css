@@ -1,0 +1,375 @@
+/* ====================================================
+   appeal-modal.css
+   申訴 modal:服務 snapshot + 簽收憑證(audit trail)+ form / done 兩態
+   ==================================================== */
+
+/* ── appeal trigger link(車歷展開區內)─────────── */
+.appeal-trigger-row {
+    margin: 12px 0 0;
+    text-align: right;
+}
+.appeal-trigger {
+    font-size: 11px;
+    letter-spacing: .02em;
+    color: var(--muted, #888);
+    border-bottom: 0.5px solid currentColor;
+    text-decoration: none;
+    padding-bottom: 1px;
+    cursor: pointer;
+}
+.appeal-trigger:hover {
+    color: var(--ink, #1a1a1a);
+}
+
+/* ── modal frame ──────────────────────────── */
+.appeal-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+}
+.appeal-modal[hidden] { display: none; }
+
+.appeal-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .45);
+    cursor: pointer;
+}
+
+.appeal-modal-card {
+    position: relative;
+    background: #fff;
+    width: 100%;
+    max-width: 560px;
+    max-height: calc(100vh - 48px);
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, .15);
+    animation: appeal-pop .18s ease-out;
+}
+@keyframes appeal-pop {
+    from { opacity: 0; transform: scale(.97) translateY(8px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.appeal-state {
+    overflow-y: auto;
+}
+.appeal-state[hidden] { display: none; }
+
+/* ── 表單態 head ──────────────────────────── */
+.appeal-modal-head {
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 0.5px solid rgba(0, 0, 0, .1);
+}
+.appeal-modal-eye {
+    margin: 0;
+    font-size: 11px;
+    letter-spacing: .18em;
+    color: #9a9a9a;
+    text-transform: uppercase;
+}
+.appeal-modal-title {
+    margin: 2px 0 0;
+    font-size: 15px;
+    font-weight: 500;
+    color: #1a1a1a;
+}
+.appeal-modal-title span {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -.01em;
+}
+.appeal-modal-close {
+    background: none;
+    border: none;
+    padding: 6px;
+    cursor: pointer;
+    color: #6b6b6b;
+    font-family: inherit;
+    border-radius: 3px;
+}
+.appeal-modal-close:hover { color: #1a1a1a; }
+
+/* ── 服務 snapshot ────────────────────────── */
+.appeal-snap {
+    padding: 18px 20px;
+    background: #fafafa;
+    border-bottom: 0.5px solid rgba(0, 0, 0, .1);
+}
+.appeal-section-eye {
+    margin: 0 0 10px;
+    font-size: 11px;
+    letter-spacing: .18em;
+    color: #9a9a9a;
+    text-transform: uppercase;
+}
+.appeal-snap-grid {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    gap: 6px 14px;
+    font-size: 12px;
+}
+.appeal-snap-grid > span:nth-child(odd) { color: #6b6b6b; }
+.appeal-snap-grid > span:nth-child(even) {
+    font-variant-numeric: tabular-nums;
+    color: #1a1a1a;
+}
+
+/* ── 簽收憑證 ─────────────────────────────── */
+.appeal-evid {
+    padding: 18px 20px;
+    border-bottom: 0.5px solid rgba(0, 0, 0, .1);
+}
+.appeal-evid-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    color: #0F6E56;
+}
+.appeal-evid-head .appeal-section-eye {
+    margin: 0;
+    color: #9a9a9a;
+}
+.appeal-evid-badge {
+    font-size: 10px;
+    padding: 2px 6px;
+    background: #E1F5EE;
+    color: #0F6E56;
+    border-radius: 3px;
+    letter-spacing: .05em;
+}
+.appeal-evid-body {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 16px;
+}
+.appeal-sig-box {
+    border: 0.5px solid rgba(0, 0, 0, .1);
+    border-radius: 3px;
+    background: #fff;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 96px;
+}
+.appeal-sig-box svg {
+    width: 100%;
+    height: 60px;
+}
+.appeal-sig-caption {
+    margin: 4px 0 0;
+    font-size: 10px;
+    color: #9a9a9a;
+    letter-spacing: .05em;
+}
+.appeal-evid-table {
+    width: 100%;
+    font-size: 11px;
+    border-collapse: collapse;
+}
+.appeal-evid-table td {
+    padding: 3px 0;
+    vertical-align: top;
+}
+.appeal-evid-table td:first-child {
+    color: #6b6b6b;
+    width: 70px;
+}
+.appeal-evid-table td:not(:first-child) {
+    color: #1a1a1a;
+    font-variant-numeric: tabular-nums;
+}
+.appeal-hash {
+    font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+    font-size: 10px;
+    word-break: break-all;
+    line-height: 1.5;
+}
+.appeal-evid-note {
+    margin: 12px 0 0;
+    padding: 10px 12px;
+    background: #E1F5EE;
+    color: #085041;
+    font-size: 11px;
+    border-radius: 3px;
+    line-height: 1.6;
+    display: flex;
+    gap: 8px;
+}
+.appeal-evid-note svg {
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+/* ── 表單 ───────────────────────────────── */
+.appeal-form {
+    padding: 18px 20px;
+}
+.appeal-form-label {
+    display: block;
+    margin: 0 0 8px;
+    font-size: 12px;
+    color: #6b6b6b;
+}
+.appeal-textarea {
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 80px;
+    border: 0.5px solid rgba(0, 0, 0, .1);
+    border-radius: 3px;
+    padding: 10px 12px;
+    background: #fff;
+    font-size: 13px;
+    color: #1a1a1a;
+    font-family: inherit;
+    letter-spacing: -.01em;
+    resize: vertical;
+}
+.appeal-textarea:focus {
+    outline: none;
+    border-color: #5275c6;
+}
+.appeal-textarea::placeholder {
+    color: #9a9a9a;
+}
+
+.appeal-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    margin-top: 14px;
+}
+.appeal-btn-cancel {
+    background: none;
+    border: 0.5px solid rgba(0, 0, 0, .15);
+    padding: 8px 16px;
+    font-size: 13px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-family: inherit;
+    color: #1a1a1a;
+}
+.appeal-btn-cancel:hover {
+    background: #fafafa;
+}
+.appeal-btn-send {
+    background: #C73E3E;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    font-size: 13px;
+    border-radius: 3px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: inherit;
+    letter-spacing: .02em;
+    transition: background .12s, transform .08s;
+}
+.appeal-btn-send:hover { background: #a73030; }
+.appeal-btn-send:active { transform: scale(.98); }
+.appeal-btn-send[aria-disabled="true"] {
+    opacity: .5;
+    pointer-events: none;
+}
+
+/* ── 成功態 ─────────────────────────────── */
+.appeal-state-done {
+    padding: 56px 20px 32px;
+    text-align: center;
+    position: relative;
+}
+.appeal-modal-close-floating {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+}
+.appeal-done-mark {
+    margin: 0 auto 22px;
+    color: #1d9e75;
+    width: 48px;
+    height: 48px;
+}
+.appeal-done-mark svg { display: block; }
+.appeal-done-title {
+    margin: 0 0 12px;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -.02em;
+    color: #1a1a1a;
+}
+.appeal-done-sub {
+    margin: 0 0 28px;
+    font-size: 13px;
+    color: #6b6b6b;
+    line-height: 1.7;
+}
+.appeal-done-meta {
+    max-width: 280px;
+    margin: 0 auto 28px;
+    padding: 14px 18px;
+    background: #fafafa;
+    border-radius: 3px;
+    text-align: left;
+}
+.appeal-done-meta dt {
+    font-size: 11px;
+    color: #9a9a9a;
+    letter-spacing: .05em;
+    margin-top: 10px;
+}
+.appeal-done-meta dt:first-child { margin-top: 0; }
+.appeal-done-meta dd {
+    margin: 2px 0 0;
+    font-size: 13px;
+    color: #1a1a1a;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -.01em;
+}
+.appeal-btn-close-final {
+    background: #0F2D6E;
+    color: #fff;
+    border: none;
+    padding: 10px 28px;
+    font-size: 13px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: .02em;
+    min-width: 120px;
+}
+.appeal-btn-close-final:hover { background: #07205a; }
+
+/* ── RWD 手機 ──────────────────────────── */
+@media (max-width: 540px) {
+    .appeal-modal { padding: 0; align-items: flex-end; }
+    .appeal-modal-card {
+        max-height: 92vh;
+        border-radius: 12px 12px 0 0;
+        animation: appeal-slide-up .22s ease-out;
+    }
+    @keyframes appeal-slide-up {
+        from { transform: translateY(100%); }
+        to   { transform: translateY(0); }
+    }
+    .appeal-evid-body {
+        grid-template-columns: 1fr;
+    }
+    .appeal-sig-box {
+        max-width: 240px;
+        margin: 0 auto;
+    }
+}

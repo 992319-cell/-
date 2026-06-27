@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="theme-color" content="#161617">
+    <title>到店報到　明前知行</title>
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="self-checkin.css">
+</head>
+<body class="cin-body">
+
+<header class="cin-top">
+    <a class="cin-brand" href="index.html">
+        <img src="./icon/logo-mark拷貝2.png" alt="">
+        <span>明前知行</span>
+    </a>
+    <span class="cin-top-act">到店報到</span>
+</header>
+
+<main class="cin-shell">
+
+    <!-- ── 已登入:選車送出 ── -->
+    <section class="cin-state" id="cin-member" hidden>
+        <p class="cin-eyebrow">到店報到</p>
+        <h1 class="cin-shop" id="cin-shop-name">光陽機車行　台北信義</h1>
+        <p class="cin-time" id="cin-now"></p>
+
+        <p class="cin-greet">
+            <span id="cin-greet-name">林小華</span>
+            <span class="cin-tag">會員</span>
+        </p>
+        <p class="cin-sublabel">選擇要報到的車輛</p>
+
+        <ul class="cin-vehicles" id="cin-vehicles"></ul>
+
+        <button type="button" class="cin-cta" id="cin-submit">送出報到</button>
+        <p class="cin-foothint">送出後車行櫃台會立即收到通知</p>
+    </section>
+
+    <!-- ── 未登入:引導註冊 / 登入 ── -->
+    <section class="cin-state" id="cin-guest" hidden>
+        <p class="cin-eyebrow">到店報到</p>
+        <h1 class="cin-shop" id="cin-shop-name-2">光陽機車行　台北信義</h1>
+        <p class="cin-time" id="cin-now-2"></p>
+
+        <div class="cin-guest-box">
+            <p class="cin-guest-title">第一次來嗎</p>
+            <p class="cin-guest-sub">5 秒登記手機與車牌　以後到任何門市都不用再填</p>
+            <a class="cin-cta" id="cin-go-reg">立即登記</a>
+            <p class="cin-guest-login">
+                已有帳號　<a id="cin-go-login">登入</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- ── 成功確認 ── -->
+    <section class="cin-state cin-done" id="cin-done" hidden>
+        <div class="cin-done-mark" aria-hidden="true">
+            <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="26" cy="26" r="24" fill="none" stroke="currentColor" stroke-width="2"/>
+                <path fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M14 27 L23 35 L38 18"/>
+            </svg>
+        </div>
+        <h1 class="cin-done-title">已通知車行</h1>
+        <p class="cin-done-sub">請到櫃台讓師傅確認車輛</p>
+
+        <dl class="cin-done-meta" id="cin-done-meta"></dl>
+
+        <p class="cin-done-hint">完工後系統會自動推播　可在我的預約查看</p>
+        <a class="cin-cta cin-cta-ghost" href="appointments.html">我的預約</a>
+    </section>
+
+</main>
+
+<script src="self-checkin.js"></script>
+</body>
+</html>

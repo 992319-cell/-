@@ -1,5 +1,7 @@
-/* 字型 */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+TC:wght@300;400;500&family=Noto+Sans+TC:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap');
+/* 字型
+   只載全站共用字體:Inter(數字 內文)+ Noto Sans TC(中文)+ Noto Serif TC(nav logo)
+   裝飾字體 Cormorant Garamond / DM Serif Display 已搬到 ticket.html / market.html 各自 link */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@300;400;500&display=swap');
 
 
 /* 變數 */
@@ -58,6 +60,30 @@ body {
     font-weight: 400;
     line-height: 1.7;
     overflow-x: hidden;
+}
+
+/* 表單元素 reset
+   只拿掉瀏覽器預設的字體 字色 letter-spacing
+   邊框 邊距 寬度交給各頁自己決定　不全域強加 */
+input, textarea, select, button {
+    font: inherit;
+    color: inherit;
+    letter-spacing: inherit;
+}
+textarea {
+    font-family: inherit;
+    resize: vertical;
+}
+input::placeholder, textarea::placeholder {
+    color: var(--muted-light);
+    opacity: 1;
+}
+button {
+    cursor: pointer;
+}
+button:disabled {
+    cursor: not-allowed;
+    opacity: .5;
 }
 
 /* wrap */
@@ -346,5 +372,13 @@ footer a {
 @media (hover: hover) {
     footer a:hover {
         color: var(--white);
+    }
+}
+@media (max-width: 768px) {
+    footer {
+        padding: 24px 20px;
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
     }
 }

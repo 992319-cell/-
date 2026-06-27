@@ -45,9 +45,15 @@
     }
   });
 
-  // walk-in CTA(Phase 3 才實作 modal,先 placeholder)
+  // walk-in CTA → 開啟新增現場工單 modal(walkin-modal.js 提供)
   document.getElementById("sidebar-walkin")?.addEventListener("click", () => {
-    alert("新增現場工單 modal 開發中(Phase 3)");
+    if (typeof window.openWalkinModal === "function") {
+      // 手機抽屜開著的話先關掉,modal 才不會被遮
+      if (body.classList.contains("is-drawer-open")) closeDrawer();
+      window.openWalkinModal();
+    } else {
+      console.warn("openWalkinModal 未載入:請確認 walkin-modal.js 已 link");
+    }
   });
 
   // 營業 toggle:同步 label 文字

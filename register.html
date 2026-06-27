@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="theme-color" content="#161617">
+    <title>立即登記　明前知行</title>
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="self-checkin.css">
+    <link rel="stylesheet" href="register.css">
+</head>
+<body class="cin-body reg-body">
+
+<header class="cin-top">
+    <a class="cin-brand" href="index.html">
+        <img src="./icon/logo-mark拷貝2.png" alt="">
+        <span>明前知行</span>
+    </a>
+    <span class="cin-top-act">立即登記</span>
+</header>
+
+<main class="cin-shell reg-shell">
+    <p class="cin-eyebrow">第一次到店</p>
+    <h1 class="reg-title">5 秒登記　以後免填</h1>
+    <p class="reg-sub">手機號碼是你的帳號　下次任何門市都不用再登記</p>
+
+    <form class="reg-form" id="reg-form" novalidate>
+
+        <label class="reg-field" for="reg-phone">手機號碼</label>
+        <input
+            class="reg-input"
+            type="tel"
+            id="reg-phone"
+            inputmode="tel"
+            autocomplete="tel"
+            maxlength="13"
+            placeholder="09XX-XXX-XXX">
+
+        <label class="reg-field">車種</label>
+        <div class="reg-typegrp" id="reg-typegrp">
+            <label class="reg-typeopt">
+                <input type="radio" name="reg-kind" value="機車" checked>
+                <span>機車</span>
+            </label>
+            <label class="reg-typeopt">
+                <input type="radio" name="reg-kind" value="汽車">
+                <span>汽車</span>
+            </label>
+        </div>
+
+        <label class="reg-field" for="reg-plate">車牌</label>
+        <input
+            class="reg-input"
+            type="text"
+            id="reg-plate"
+            autocomplete="off"
+            maxlength="8"
+            placeholder="ABC-1234">
+
+        <label class="reg-field" for="reg-model">車款</label>
+        <input
+            class="reg-input"
+            type="text"
+            id="reg-model"
+            autocomplete="off"
+            placeholder="光陽 G6　Gogoro VIVA　SUZUKI Swish 125">
+
+        <label class="reg-field">
+            姓名<span class="reg-opt">選填</span>
+        </label>
+        <input
+            class="reg-input"
+            type="text"
+            id="reg-name"
+            autocomplete="name"
+            placeholder="">
+
+        <button type="submit" class="cin-cta reg-cta" id="reg-submit" aria-disabled="true">
+            完成登記
+        </button>
+
+        <p class="reg-hint">登記後會自動帶你回到報到頁</p>
+    </form>
+</main>
+
+<script src="register.js"></script>
+</body>
+</html>

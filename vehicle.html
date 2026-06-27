@@ -1,155 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>車輛管理</title>
+    <title>車庫　明前知行</title>
     <link rel="stylesheet" href="common.css">
     <link rel="stylesheet" href="vehicle.css">
+    <link rel="stylesheet" href="vehicle-modal.css">
 </head>
 <body>
-    <div class="wrap">
-        <nav>
-            <div class="logo">
-                <h1>
-                    <a href="index.html">
-                        <span class="logo-mark">
-                            <img src="./icon/logo-mark拷貝2.png" alt="" aria-hidden="true">
-                            <span class="logo-text">明前知行</span>
-                        </span>
-                    </a>
-                </h1>
-            </div>
-            <ul class="links">
-                <li><a href="market.html">查行情</a></li>
-                <li><a href="appointments.html">我的預約</a></li>
-                <li class="is-current"><a href="vehicle.html">車歷</a>
-                </li>
-                <li><a href="login.html">登入</a></li>
-            </ul>
-                    <button type="button" class="nav-toggle" aria-expanded="false" aria-label="開啟選單">
-                <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <line x1="4" y1="6" x2="20" y2="6"/>
-                    <line x1="4" y1="12" x2="20" y2="12"/>
-                    <line x1="4" y1="18" x2="20" y2="18"/>
-                </svg>
-                <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <line x1="6" y1="6" x2="18" y2="18"/>
-                    <line x1="18" y1="6" x2="6" y2="18"/>
-                </svg>
-            </button>
-        </nav>
-        <div class="vehicle-layout">
-            <aside class="vehicle-sidebar">
-                <div class="vehicle-sidebar-header">
-                    <div class="vehicle-sidebar-header-title">
-                        <h3>我的車輛</h3>
-                        <p>共 3 台 機車2 汽車1</p>
-                    </div>
-                    <button type="button">
-                        <img src="./icon/square-plus (1).png" alt="square-icon">
-                    </button>
-                </div>
-                <div class="vehicle-group">
-                    <h3>機車</h3>
-                    <ul class="vehicle-sidebar-list">
-                        <!-- 串js -->
-                        <li class="vehicle-sidebar-item is-active is-primary">
-                            <button type="button" class="vehicle-star">★</button>
-                            <p>狗熊</p>
-                            <p>ABC-1234</p>
-                        </li>
-                        <li class="vehicle-sidebar-item">
-                            <button type="button" class="vehicle-star">★</button>
-                            <p>小白</p>
-                            <p>XYZ-5678</p>
-                        </li>
-                    </ul>
-                </div>
-                <div class="vehicle-group">
-                    <h3>汽車</h3>
-                    <ul class="vehicle-sidebar-list">
-                        <li class="vehicle-sidebar-item">
-                            <button type="button" class="vehicle-star">★</button>
-                            <p>大灰</p>
-                            <p>GHI-3456</p>
-                        </li>
-                    </ul>
-                </div>
-            </aside>
-            <main class="vehicle-main">
-                <div class="vehicle-main-header">
-                    <div class="vehicle-main-header-txt">
-                        <div class="vehicle-main-title-row">
-                            <h2>SUZUKI Swish 125</h2>
-                            <span class="vehicle-star">★</span>
-                        </div>
-                        <p>ABC-1234</p>
-                        <p>2022 年 暱稱：狗熊</p>
-                    </div>
-                    <div class="vehicle-menu">
-                        <button type="button">
-                            <img src="./icon/dots-vertical.png" alt="dots-vertical">
-                        </button>
-                        <ul class="vehicle-menu-list">
-                            <li>★ 設為主要</li>
-                            <li>
-                                <img src="./icon/pencil-plus.png" alt="pencil-plus">
-                                編輯資料
-                            </li>
-                            <li class="is-danger">
-                                <img src="./icon/trash.png" alt="trash">
-                                刪除車輛
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="vehicle-main-content">
-                    <h3>近期保養紀錄</h3>
-                    <ul class="vehicle-history-list card">
-                        <li>
-                            <div class="card-title">
-                                <h3>光陽機車行　台北信義</h3>
-                                <p><span>380</span>元</p>
-                            </div>
-                            <div class="card-content">
-                                <div class="tags">
-                                    <span>機油更換</span>
-                                    <span>空濾清洗</span>
-                                </div>
-                                <p>2025.11.04 · 32,140 km</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="card-title">
-                                <h3>三重保養廠　新北三重</h3>
-                                <p><span>1250</span>元</p>
-                            </div>
-                            <div class="card-content">
-                                <div class="tags">
-                                    <span>更換皮帶</span>
-                                    <span>機油更換</span>
-                                </div>
-                                <p>2025.07.18 · 28,600 km</p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="vehicle-main-footer">
-                    <a href="history.html" class="btn-secondary">
-                        完整車歷
-                        <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
-                        <path d="M2 7H12M8 3L12 7L8 11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </a>
-                </div>
-            </main>
-        </div>
-        <footer>
-            <p>© 2026 明前知行　版權所有</p>
-            <a href="mailto:992319@gmail.com">992319@gmail.com</a>
-        </footer>
+
+<nav>
+    <div class="logo">
+        <h1>
+            <a href="index.html">
+                <span class="logo-mark">
+                    <img src="./icon/logo-mark拷貝2.png" alt="" aria-hidden="true">
+                    <span class="logo-text">明前知行</span>
+                </span>
+            </a>
+        </h1>
     </div>
-    <script src="nav.js"></script>
+    <ul class="links">
+        <li><a href="market.html">查行情</a></li>
+        <li><a href="appointments.html">我的預約</a></li>
+        <li class="is-current"><a href="vehicle.html">車庫</a></li>
+        <li><a href="login.html">登入</a></li>
+    </ul>
+    <button type="button" class="nav-toggle" aria-expanded="false" aria-label="開啟選單">
+        <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="4" y1="6" x2="20" y2="6"/>
+            <line x1="4" y1="12" x2="20" y2="12"/>
+            <line x1="4" y1="18" x2="20" y2="18"/>
+        </svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="6" y1="6" x2="18" y2="18"/>
+            <line x1="18" y1="6" x2="6" y2="18"/>
+        </svg>
+    </button>
+</nav>
+
+<main class="veh">
+
+    <header class="veh-head">
+        <div class="veh-head-titles">
+            <h1>我的車庫</h1>
+            <p id="veh-summary" class="veh-summary">共 0 台</p>
+        </div>
+        <button type="button" id="veh-add-btn" class="veh-add">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <line x1="12" y1="5" x2="12" y2="19"/>
+                <line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            新增車輛
+        </button>
+    </header>
+
+    <section id="veh-grid" class="veh-grid" aria-label="車輛清單"></section>
+
+    <p id="veh-empty" class="veh-empty" hidden>
+        車庫還沒有車輛　點右上「新增車輛」加入第一台
+    </p>
+
+</main>
+
+<footer>
+    <p>© 2026 明前知行　版權所有</p>
+    <a href="mailto:992319@gmail.com">992319@gmail.com</a>
+</footer>
+
+<script src="nav.js"></script>
+<script src="vehicle-modal.js"></script>
+<script src="vehicle.js"></script>
 </body>
 </html>

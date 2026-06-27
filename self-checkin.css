@@ -1,0 +1,314 @@
+/* ====================================================
+   self-checkin.css
+   車主端到店報到頁(mobile-first)
+   依賴 common.css 的 color token
+   ==================================================== */
+
+.cin-body {
+    margin: 0;
+    background: var(--bg-off);
+    color: var(--ink);
+    font-family: 'Inter', 'Noto Sans TC', sans-serif;
+    letter-spacing: -.01em;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ── 頂部 glass bar ────────────────────────── */
+.cin-top {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    height: 48px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(22, 22, 23, .72);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    color: #fff;
+}
+.cin-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+    text-decoration: none;
+}
+.cin-brand img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+}
+.cin-brand span {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 14px;
+    letter-spacing: .15em;
+}
+.cin-top-act {
+    font-size: 12px;
+    color: rgba(255, 255, 255, .7);
+    letter-spacing: .05em;
+}
+
+/* ── 主容器 ────────────────────────────────── */
+.cin-shell {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 28px 20px 60px;
+    box-sizing: border-box;
+}
+.cin-state[hidden] { display: none; }
+
+.cin-eyebrow {
+    margin: 0 0 4px;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: .15em;
+    text-transform: uppercase;
+}
+.cin-shop {
+    margin: 0 0 4px;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -.03em;
+    color: var(--ink);
+}
+.cin-time {
+    margin: 0 0 22px;
+    font-size: 13px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: .02em;
+}
+
+/* ── 已登入態 ───────────────────────────── */
+.cin-greet {
+    margin: 0 0 2px;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -.02em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.cin-tag {
+    font-size: 10px;
+    background: var(--accent-deep);
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 2px;
+    letter-spacing: .1em;
+    font-weight: 500;
+}
+.cin-sublabel {
+    margin: 0 0 14px;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+/* ── 車輛卡列表 ───────────────────────── */
+.cin-vehicles {
+    list-style: none;
+    margin: 0 0 24px;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+}
+.cin-vehicle {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    padding: 14px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    cursor: pointer;
+    transition: border-color .12s, background .12s, transform .08s;
+}
+.cin-vehicle:active { transform: scale(.99); }
+.cin-vehicle:has(input:checked) {
+    border-color: var(--accent-deep);
+    background: #F4F7FE;
+}
+.cin-vehicle input[type="radio"] {
+    margin: 0;
+    accent-color: var(--accent-deep);
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+.cin-vehicle img,
+.cin-vehicle .v-thumb {
+    width: 48px;
+    height: 48px;
+    border-radius: 3px;
+    object-fit: cover;
+    background: var(--bg-off);
+    flex-shrink: 0;
+}
+.cin-vehicle .v-thumb {
+    background: linear-gradient(135deg, #e8eef8 0%, #d4def0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cin-vehicle .v-thumb img {
+    width: 60%;
+    height: 60%;
+    opacity: .65;
+    background: none;
+    border-radius: 0;
+}
+.cin-vehicle .v-info {
+    flex: 1;
+    min-width: 0;
+}
+.cin-vehicle .v-plate {
+    margin: 0 0 2px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: .02em;
+}
+.cin-vehicle .v-model {
+    margin: 0;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+/* ── CTA ────────────────────────────────────── */
+.cin-cta {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    padding: 14px 16px;
+    background: var(--accent-deep);
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: inherit;
+    letter-spacing: .02em;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background .12s, opacity .12s, transform .08s;
+}
+.cin-cta:active { transform: scale(.99); }
+.cin-cta:hover { background: #07205a; }
+.cin-cta[aria-disabled="true"] {
+    opacity: .5;
+    pointer-events: none;
+}
+.cin-cta-ghost {
+    background: transparent;
+    color: var(--accent-deep);
+    border: 1px solid var(--line);
+    margin-top: 10px;
+}
+.cin-cta-ghost:hover { background: var(--bg-off); }
+
+.cin-foothint {
+    margin: 10px 0 0;
+    font-size: 11px;
+    color: var(--muted);
+    text-align: center;
+    letter-spacing: .02em;
+}
+
+/* ── 訪客態 ───────────────────────────── */
+.cin-guest-box {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 24px 20px;
+    margin-top: 10px;
+}
+.cin-guest-title {
+    margin: 0 0 6px;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -.02em;
+}
+.cin-guest-sub {
+    margin: 0 0 18px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+}
+.cin-guest-login {
+    margin: 14px 0 0;
+    font-size: 12px;
+    text-align: center;
+    color: var(--muted);
+}
+.cin-guest-login a {
+    color: var(--accent-deep);
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* ── 成功確認 ─────────────────────────── */
+.cin-done {
+    text-align: center;
+    padding-top: 32px;
+}
+.cin-done-mark {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 22px;
+    color: var(--trend-green, #1d9e75);
+}
+.cin-done-mark svg { width: 100%; height: 100%; display: block; }
+.cin-done-title {
+    margin: 0 0 6px;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -.03em;
+}
+.cin-done-sub {
+    margin: 0 0 24px;
+    font-size: 14px;
+    color: var(--muted);
+}
+.cin-done-meta {
+    margin: 0 auto 24px;
+    max-width: 320px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 14px 18px;
+    text-align: left;
+}
+.cin-done-meta dt {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: .05em;
+    margin-top: 8px;
+}
+.cin-done-meta dt:first-child { margin-top: 0; }
+.cin-done-meta dd {
+    margin: 2px 0 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -.01em;
+}
+.cin-done-hint {
+    margin: 0 0 14px;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: .02em;
+}
+
+/* ── RWD ─────────────────────────────────── */
+@media (min-width: 481px) {
+    .cin-shell { padding: 40px 24px 80px; }
+    .cin-shop { font-size: 26px; }
+}

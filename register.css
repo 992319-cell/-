@@ -1,0 +1,133 @@
+/* ====================================================
+   register.css
+   車主端 5 秒註冊頁
+   依賴 common.css + self-checkin.css(共用 .cin-* 基底)
+   ==================================================== */
+
+.reg-shell {
+    max-width: 480px;
+}
+
+.reg-title {
+    margin: 0 0 6px;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -.03em;
+    color: var(--ink);
+}
+.reg-sub {
+    margin: 0 0 26px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+/* ── form ─────────────────────────────────── */
+.reg-form {
+    display: block;
+}
+
+.reg-field {
+    display: block;
+    margin: 0 0 6px;
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: .01em;
+}
+.reg-opt {
+    color: var(--muted-light);
+    font-size: 11px;
+    margin-left: 4px;
+}
+
+.reg-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    font-size: 15px;
+    font-family: inherit;
+    background: var(--white);
+    color: var(--ink);
+    margin: 0 0 14px;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: .01em;
+    -webkit-appearance: none;
+    appearance: none;
+}
+.reg-input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.reg-input.is-error {
+    border-color: #C73E3E;
+    background: #fff7f7;
+}
+.reg-input.is-error:focus {
+    border-color: #C73E3E;
+}
+
+/* error 訊息(緊跟 input 後)*/
+.reg-error {
+    margin: -10px 0 12px;
+    font-size: 11px;
+    color: #C73E3E;
+    letter-spacing: .02em;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.reg-error::before {
+    content: "⚠";
+    font-size: 12px;
+}
+
+/* ── 車種 radio ─────────────────────── */
+.reg-typegrp {
+    display: flex;
+    gap: 8px;
+    margin: 0 0 14px;
+}
+.reg-typeopt {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--ink);
+    background: var(--white);
+    transition: border-color .12s, background .12s;
+}
+.reg-typeopt:hover { border-color: var(--accent); }
+.reg-typeopt:has(input:checked) {
+    border-color: var(--accent-deep);
+    background: #F4F7FE;
+    color: var(--accent-deep);
+    font-weight: 600;
+}
+.reg-typeopt input[type="radio"] {
+    margin: 0;
+    accent-color: var(--accent-deep);
+}
+
+/* ── CTA + 提示 ─────────────────────── */
+.reg-cta {
+    margin-top: 8px;
+}
+.reg-hint {
+    margin: 12px 0 0;
+    font-size: 11px;
+    color: var(--muted);
+    text-align: center;
+    letter-spacing: .02em;
+}
+
+@media (min-width: 481px) {
+    .reg-title { font-size: 26px; }
+}

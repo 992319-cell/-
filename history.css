@@ -1,166 +1,614 @@
-/* header */
-.history-header{
-    padding: var(--pad-y-section) var(--pad-x-section);
-    background-color: var(--white);
+/* ====================================================
+   history.css ── v3
+   對齊站點視覺語言:1280 max / --pad-x-section / 大 h1 page-head
+   字級全用 var(--fs-*) token　不寫死 px
+   ==================================================== */
+
+body {
+    font-family: 'Inter', 'Noto Sans TC', sans-serif;
+    letter-spacing: -.01em;
+    color: var(--ink);
+    background: var(--white);
 }
 
-.history-stats{
-    margin-top: 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.hist {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding-top: var(--nav-h);
 }
 
-.vehicle-list{
-    position: relative;
-    width: 180px;
-    font-size: var(--fs-amount);
-    color: var(--accent-deep);
-}
-.vehicle-list li{
-    cursor: pointer;
-    transition: transform .2s,color .2s;
-}
-.vehicle-list li:hover,
-.vehicle-current:hover{
-    transform: translateX(4px);
-    color: var(--accent);
-}
-/* 控制vehicle-list的狀態 */
-.vehicle-current::after{
-    content: "▷";
-    display: inline-block;
-    font-size: .6em;
-    vertical-align: middle;
-    margin-left: 8px;
-    transition: rotate .3s;
-}
-.vehicle-list.open .vehicle-current::after{
-    rotate: 90deg;
-}
-.vehicle-options {
-    display: none;
-    position: absolute;
-    text-align: center;
-    top: 100%;
-    left: 0;
-    min-width: 100%;
-    background-color: var(--white);
-}
-.vehicle-list.open .vehicle-options {
-    display: block;
-}
-
-.history-totals{
-    display: flex;
-    justify-content: space-between;
+/* ── 返回車庫 breadcrumb ───────────────────── */
+.hist-back {
+    display: inline-flex;
     align-items: center;
-    gap: 36px;
-}
-.history-totals p{
-    font-size: var(--fs-date);
-    text-align: center;
-    color: var(--accent-deep);
-    font-weight: 500;
-}
-.history-totals span{
-    display: block;
-    font-size: var(--fs-sm);
-}
-/* content */
-.history-sort-controls{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #a3b5dc4f;
-    padding: 20px var(--pad-x-section);
-}
-.history-sort{
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-.history-sort label{
-    font-size: var(--fs-label);
-}
-.history-sort select{
-    padding: 8px;
-    border: none;
-    border-radius: 3px;
-}
-.history-sort-actions{
-    display: flex;
-    gap: 32px;
-}
-.history-sort-actions a{
-    display: block;
-}
-.history-sort-actions button:hover{
-    cursor: pointer;
-}
-.history-sort-actions img{
-    width: 28px;
-    height: 28px;
-}
-/* history-list */
-.history-list{
-    padding: 20px 40px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    background-color: var(--white);
-}
-.history-item{
-    border: .5px solid var(--accent-glow);
-    border-radius: 3px;
-    padding: 24px;
-    transition: background .2s, border-color .2s;
-    cursor: pointer;
-}
-.history-item:hover{
-    background-color: var(--bg-off);
-    border-color: var(--accent);
-}
-.history-summary{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.history-date{
-    font-size: var(--fs-body);
+    gap: 6px;
+    padding: 20px var(--pad-x-section) 0;
+    margin-bottom: 4px;
+    font-size: var(--fs-xs);
     color: var(--muted);
-    font-weight: 400;
+    letter-spacing: .02em;
+    transition: color .2s;
+}
+.hist-back:hover { color: var(--ink); }
+.hist-back svg { stroke: currentColor; }
+
+/* ── page-head:車輛主視覺 + 標題 ─────────── */
+.hist-head {
+    padding: 24px var(--pad-x-section);
+    border-bottom: 0.5px solid var(--line);
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    gap: 28px;
+    align-items: center;
+}
+
+.hist-veh-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 3px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #e8eef8 0%, #d4def0 100%);
+}
+.hist-veh-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.hist-veh-titles { min-width: 0; }
+.hist-veh-title-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    position: relative;
+    flex-wrap: wrap;
+}
+#hist-veh-plate {
+    font-size: var(--fs-page-title);
+    font-weight: 700;
+    letter-spacing: -.03em;
+    line-height: 1.15;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink);
+    margin: 0;
+}
+#hist-veh-sub {
+    margin: 6px 0 0;
+    font-size: var(--fs-sm);
+    color: var(--muted);
+    letter-spacing: .02em;
+}
+
+.hist-veh-switch {
+    background: none;
+    border: 0.5px solid var(--line);
+    border-radius: 3px;
+    padding: 6px 12px;
+    font-size: var(--fs-xs);
+    color: var(--muted);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    letter-spacing: .02em;
+    transition: border-color .2s, color .2s;
+}
+.hist-veh-switch:hover {
+    border-color: var(--accent-deep);
+    color: var(--accent-deep);
+}
+.hist-veh-switch svg { transition: transform .2s; }
+.hist-veh-switch[aria-expanded="true"] svg { transform: rotate(180deg); }
+
+#hist-veh-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    background: var(--white);
+    border: 0.5px solid var(--line);
+    border-radius: 3px;
+    padding: 4px;
+    min-width: 260px;
+    z-index: 10;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, .08);
+}
+#hist-veh-menu[hidden] { display: none; }
+#hist-veh-menu li {
+    padding: 10px 12px;
+    font-size: var(--fs-sm);
+    cursor: pointer;
+    border-radius: 3px;
     display: flex;
     align-items: center;
     gap: 12px;
 }
-.history-date::after{
-    content: "▷";
-    display: inline-block;
-    font-size: .6em;
-    transition: rotate .3s;
+#hist-veh-menu li:hover { background: var(--bg-off); }
+#hist-veh-menu li.is-active {
+    color: var(--accent-deep);
+    font-weight: 500;
+    background: var(--bg-off);
 }
-.history-item.open .history-date::after{
-    transform: rotate(90deg);
+#hist-veh-menu .vm-plate {
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+}
+#hist-veh-menu .vm-sub {
+    font-size: var(--fs-xs);
+    color: var(--muted);
+    margin-left: auto;
 }
 
-.history-info h3{
-    font-size: var(--fs-label);
-    font-weight: 400;
+.hist-veh-meter {
+    text-align: right;
 }
-.history-price{
-    font-size: var(--fs-amount);
+#hist-veh-meter-num {
+    margin: 0;
+    font-size: var(--fs-label);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -.01em;
+    color: var(--ink);
+}
+#hist-veh-meter-num span {
+    font-size: var(--fs-body);
+    font-weight: 400;
+    color: var(--muted);
+    margin-left: 4px;
+}
+.hist-veh-meter p:last-child {
+    margin: 4px 0 0;
+    font-size: var(--fs-xs);
+    color: var(--muted);
+    letter-spacing: .04em;
+}
+
+/* ── stats(三格)──────────────────────── */
+.hist-stats {
+    padding: 24px var(--pad-x-section);
+    border-bottom: 0.5px solid var(--line);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+    margin: 0;
+}
+.hist-stats > div {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.hist-stats dt {
+    font-size: var(--fs-xs);
+    color: var(--muted);
+    letter-spacing: .04em;
+    margin: 0;
+}
+.hist-stats dd {
+    margin: 0;
+    font-size: var(--fs-label);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -.01em;
+    color: var(--ink);
+}
+#hist-stat-recent { font-size: var(--fs-body); }
+
+/* ── toolbar(排序 + overflow)─────────────── */
+.hist-toolbar {
+    padding: 14px var(--pad-x-section);
+    border-bottom: 0.5px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+.hist-sort {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+}
+.hist-sort > span {
+    font-size: var(--fs-xs);
+    color: var(--muted);
+    letter-spacing: .04em;
+}
+
+.hist-sort-pill {
+    font-size: var(--fs-xs);
+    padding: 6px 12px;
+    border: 0.5px solid var(--line);
+    border-radius: 3px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    background: var(--white);
+    color: var(--ink);
+    letter-spacing: .02em;
+}
+.hist-sort-pill:hover { border-color: var(--accent-deep); }
+.hist-sort-pill svg { transition: transform .2s; }
+.hist-sort-pill[aria-expanded="true"] svg { transform: rotate(180deg); }
+
+#hist-sort-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 56px;
+    background: var(--white);
+    border: 0.5px solid var(--line);
+    border-radius: 3px;
+    padding: 4px;
+    min-width: 160px;
+    z-index: 10;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, .08);
+}
+#hist-sort-menu[hidden] { display: none; }
+#hist-sort-menu li {
+    padding: 9px 12px;
+    font-size: var(--fs-xs);
+    cursor: pointer;
+    border-radius: 3px;
+    letter-spacing: .02em;
+}
+#hist-sort-menu li:hover { background: var(--bg-off); }
+#hist-sort-menu li.is-active {
     color: var(--accent-deep);
     font-weight: 500;
 }
-.history-detail{
-    display: none;
-    padding: 20px 20px 20px 136px;
-    border-top: 1px solid var(--line);
-    background-color: var(--bg-off);
+
+.hist-overflow {
+    background: none;
+    padding: 6px 8px;
+    cursor: pointer;
+    color: var(--muted);
+    border-radius: 3px;
+}
+.hist-overflow:hover { color: var(--ink); background: var(--bg-off); }
+.hist-overflow svg { fill: currentColor; }
+
+#hist-overflow-menu {
+    position: absolute;
+    right: var(--pad-x-section);
+    top: calc(100% + 4px);
+    background: var(--white);
+    border: 0.5px solid var(--line);
+    border-radius: 3px;
+    padding: 4px;
+    min-width: 180px;
+    z-index: 10;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, .08);
+}
+#hist-overflow-menu[hidden] { display: none; }
+.hist-overflow-item {
+    background: none;
+    padding: 9px 12px;
     font-size: var(--fs-sm);
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 3px;
+    color: var(--ink);
+}
+.hist-overflow-item:hover { background: var(--bg-off); }
+.hist-overflow-item svg { color: var(--muted); stroke: currentColor; }
+
+/* ── record list ─────────────────────────── */
+#hist-list {
+    padding: 24px var(--pad-x-section) 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0;
+}
+.hist-card {
+    background: var(--white);
+    border: 0.5px solid var(--line);
+    border-radius: 3px;
+    overflow: hidden;
+    transition: border-color .2s, box-shadow .2s;
+}
+.hist-card:hover {
+    border-color: rgba(15, 45, 110, .25);
+    box-shadow: 0 2px 12px rgba(15, 45, 110, .04);
+}
+.hist-card.is-open { border-color: rgba(15, 45, 110, .35); }
+
+.hist-card-row {
+    display: grid;
+    grid-template-columns: 110px 1fr auto auto;
+    gap: 24px;
+    align-items: center;
+    padding: 18px 24px;
+    cursor: pointer;
+}
+.hist-card.is-open .hist-card-row {
+    border-bottom: 0.5px solid var(--line);
+}
+.hist-card-date {
+    margin: 0;
+    font-size: var(--fs-xs);
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: .02em;
+}
+.hist-card-mid { min-width: 0; }
+.hist-card-shop {
+    margin: 0;
+    font-size: var(--fs-sm);
+    color: var(--ink);
+}
+.hist-card-services {
+    margin: 3px 0 0;
+    font-size: var(--fs-xs);
+    color: var(--muted);
+    letter-spacing: .02em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.hist-card-price {
+    margin: 0;
+    font-size: var(--fs-body);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink);
+}
+.hist-card-chev {
+    color: var(--muted);
+    transition: transform .2s;
+    stroke: currentColor;
+}
+.hist-card.is-open .hist-card-chev {
+    transform: rotate(180deg);
+    color: var(--ink);
+}
+
+.hist-card-detail {
+    display: none;
+    padding: 20px 24px;
+    background: var(--bg-off);
+}
+.hist-card.is-open .hist-card-detail { display: block; }
+
+.hist-card-meta {
+    width: 100%;
+    font-size: var(--fs-xs);
+    margin-bottom: 16px;
+    border-collapse: collapse;
+}
+.hist-card-meta td {
+    padding: 4px 0;
+    vertical-align: top;
+    letter-spacing: .02em;
+}
+.hist-card-meta td:first-child { color: var(--muted); width: 84px; }
+.hist-card-meta td:not(:first-child) {
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+}
+
+/* ── rating row ─────────────────────────── */
+.rating-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 0;
+    border-top: 0.5px solid var(--line);
+    flex-wrap: wrap;
+    overflow: hidden;
+    transition: opacity .25s ease, max-height .25s ease, margin .25s ease, padding .25s ease;
+    max-height: 200px;
+    opacity: 1;
+}
+.rating-row.is-leaving {
+    opacity: 0;
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-top-width: 0;
+}
+.rating-label {
+    margin: 0;
+    font-size: var(--fs-xs);
+    letter-spacing: .04em;
     color: var(--muted);
 }
-.history-item.open .history-detail{
-    display: block;
+.stars { display: inline-flex; gap: 2px; }
+.star {
+    padding: 2px 3px;
+    font-size: var(--fs-lg);
+    line-height: 1;
+    cursor: pointer;
+    color: var(--muted-light);
+    transition: color .2s ease, transform .08s ease;
+}
+.star:hover { color: var(--yellow); }
+.star.is-on { color: var(--yellow); }
+.star:active { transform: scale(.92); }
+
+.rating-submit {
+    background: var(--accent-deep);
+    color: var(--white);
+    border-radius: 3px;
+    padding: 6px 14px;
+    font-size: var(--fs-xs);
+    cursor: pointer;
+    letter-spacing: .04em;
+    transition: background .2s;
+}
+.rating-submit:hover { background: var(--accent-glow); }
+.rating-submit[hidden] { display: none; }
+
+/* ── 卡底 actions ───────────────────────── */
+.hist-card-actions {
+    padding: 12px 0 0;
+    border-top: 0.5px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+.hist-rebook {
+    background: none;
+    border: 0.5px solid var(--accent-deep);
+    color: var(--accent-deep);
+    border-radius: 3px;
+    padding: 7px 14px;
+    font-size: var(--fs-xs);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    letter-spacing: .02em;
+    transition: background .2s;
+}
+.hist-rebook:hover { background: var(--bg-off); }
+.hist-rebook svg { stroke: currentColor; }
+.hist-rebook[aria-disabled="true"] {
+    opacity: .45;
+    cursor: not-allowed;
+}
+.hist-rebook[aria-disabled="true"]:hover { background: none; }
+
+.appeal-trigger {
+    font-size: var(--fs-xs);
+    letter-spacing: .02em;
+    color: var(--muted);
+    border-bottom: 0.5px solid currentColor;
+    padding-bottom: 1px;
+    cursor: pointer;
+}
+.appeal-trigger:hover { color: var(--ink); }
+
+/* ── empty state ────────────────────────── */
+#hist-empty {
+    margin: 24px var(--pad-x-section) 60px;
+    padding: 80px 20px;
+    text-align: center;
+    border: 0.5px dashed var(--line);
+    border-radius: 3px;
+}
+#hist-empty[hidden] { display: none; }
+#hist-empty p {
+    margin: 0 0 20px;
+    font-size: var(--fs-body);
+    color: var(--muted);
+}
+.hist-empty-cta {
+    display: inline-block;
+    background: var(--ink);
+    color: var(--white);
+    padding: 10px 22px;
+    border-radius: 3px;
+    font-size: var(--fs-sm);
+    letter-spacing: .04em;
+    transition: background .2s;
+}
+.hist-empty-cta:hover { background: var(--accent-deep); }
+
+/* ════════════════════════════════════════════════════
+   RWD　1024 / 768 / 480 三段　對齊全站
+   ════════════════════════════════════════════════════ */
+
+@media (max-width: 1024px) {
+    .hist-back     { padding: 18px 32px 0; }
+    .hist-head     { padding: 22px 32px; }
+    .hist-stats    { padding: 22px 32px; gap: 32px; }
+    .hist-toolbar  { padding: 12px 32px; }
+    #hist-list     { padding: 22px 32px 48px; }
+    #hist-empty    { margin: 22px 32px 48px; }
+    #hist-overflow-menu { right: 32px; }
+    #hist-veh-plate { font-size: 34px; }
+}
+
+@media (max-width: 768px) {
+    .hist-back     { padding: 14px 20px 0; }
+    .hist-head     { padding: 20px 20px; }
+    .hist-stats    { padding: 18px 20px; gap: 24px; }
+    .hist-toolbar  { padding: 10px 20px; }
+    #hist-list     { padding: 18px 20px 40px; }
+    #hist-empty    { margin: 18px 20px 40px; padding: 60px 20px; }
+    #hist-overflow-menu { right: 20px; }
+
+    /* page-head 改縱排：照片+標題 一列　mileage 滿版下方 */
+    .hist-head {
+        grid-template-columns: 80px 1fr;
+        gap: 16px;
+    }
+    .hist-veh-photo { width: 80px; height: 80px; }
+    #hist-veh-plate { font-size: 28px; }
+    .hist-veh-switch { padding: 5px 10px; font-size: 11px; }
+
+    .hist-veh-meter {
+        grid-column: 1 / -1;
+        text-align: left;
+        padding-top: 14px;
+        border-top: 0.5px solid var(--line);
+        display: flex;
+        align-items: baseline;
+        gap: 12px;
+    }
+    .hist-veh-meter p:last-child { margin: 0; }
+
+    /* stats dd 縮一階　不要跟 head h1 搶 */
+    .hist-stats dd { font-size: var(--fs-lg); }
+    #hist-stat-recent { font-size: var(--fs-sm); }
+
+    /* card 改兩列　日期一列(nowrap)　shop / price / chev 一列 */
+    .hist-card-row {
+        grid-template-columns: 1fr auto auto;
+        grid-template-areas:
+            "date  date  date"
+            "mid   price chev";
+        gap: 6px 14px;
+        padding: 14px 16px;
+    }
+    .hist-card-date  { grid-area: date;  white-space: nowrap; }
+    .hist-card-mid   { grid-area: mid; }
+    .hist-card-price { grid-area: price; }
+    .hist-card-chev  { grid-area: chev; align-self: center; }
+    .hist-card-services { white-space: normal; }
+    .hist-card-detail { padding: 16px; }
+
+    #hist-veh-menu, #hist-overflow-menu, #hist-sort-menu { min-width: 200px; }
+}
+
+@media (max-width: 480px) {
+    #hist-veh-plate { font-size: 24px; }
+    .hist-veh-photo { width: 64px; height: 64px; }
+    .hist-head { grid-template-columns: 64px 1fr; gap: 14px; }
+    .hist-stats { grid-template-columns: 1fr 1fr; gap: 18px; }
+    .hist-stats > div:last-child { grid-column: 1 / -1; }
+}
+
+/* ── 列印 ──────────────────────────── */
+@media print {
+    body { background: var(--white); font-size: 11pt; }
+    /* 隱藏 UI chrome:cascade 自然贏(history.css 載入順序在 common.css 之後,同 specificity 後者勝) */
+    nav, footer,
+    .hist-back, .hist-toolbar,
+    .hist-veh-switch,
+    #hist-veh-menu, #hist-overflow-menu,
+    .rating-row, .hist-card-actions,
+    .appeal-modal, .hist-card-chev {
+        display: none;
+    }
+    .hist { max-width: 100%; padding: 0; }
+    .hist-head, .hist-stats, #hist-list { padding: 16px 24px; }
+    .hist-card {
+        page-break-inside: avoid;
+        border: 0.5px solid #ccc;
+        margin-bottom: 6px;
+    }
+    /* 強制展開所有卡片:.hist-card.is-open .hist-card-detail 已是 block,未展開的這條規則勝過預設 display: none */
+    .hist-card-detail {
+        display: block;
+        background: transparent;
+        padding: 12px 24px;
+    }
+    .hist-card-row { cursor: default; border-bottom: 0.5px solid #eee; }
 }

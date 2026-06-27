@@ -48,6 +48,17 @@ function updateBadges() {
 // ═══════════════════════════════════════════════════
 const LS_HIST_PRICE = "mqzx:histPrice";
 const LS_VEHICLE_HIST = "mqzx:vehicleHist";
+const LS_WALKIN = "mqzx:walkinOrders";
+const LS_CHECKIN = "mqzx:newCheckin";
+const LS_HIST_RECORDS = "mqzx:histRecords";
+
+function loadHistRecords() {
+  try { return JSON.parse(localStorage.getItem(LS_HIST_RECORDS) || "[]"); }
+  catch { return []; }
+}
+function saveHistRecords(arr) {
+  localStorage.setItem(LS_HIST_RECORDS, JSON.stringify(arr));
+}
 
 function loadHistPrice() {
   try { return JSON.parse(localStorage.getItem(LS_HIST_PRICE) || "{}"); }
@@ -419,8 +430,8 @@ signConfirm.addEventListener("click", () => {
   });
   saveHistPrice(priceMap);
 
-  // 寫車歷
-  const histList = loadVehicleHist();
+  // 寫車歷紀錄(專用 LS key,不跟車輛清單混)
+  const histList = loadHistRecords();
   histList.unshift({
     date: todayStr(),
     plate: currentPayload.plate,
@@ -432,7 +443,7 @@ signConfirm.addEventListener("click", () => {
     signature: signatureDataUrl,
     orderId: currentPayload.orderId,
   });
-  saveVehicleHist(histList);
+  saveHistRecords(histList);
 
   // 用 const 捕捉 ref(避免 close 把它 null 掉)
   const payload = currentPayload;
@@ -488,6 +499,161 @@ window.addEventListener("resize", () => {
   }
 });
 
+// ═══════════════════════════════════════════════════
+//   walk-in 工單還原 + 即時 prepend
+//   - 頁面載入時讀 mqzx:walkinOrders,prepend 進「進行中」
+//   - 監聽 walkin:created 事件(同分頁),新增即時插入
+// ═══════════════════════════════════════════════════
+function loadWalkinOrders() {
+  try { return JSON.parse(localStorage.getItem(LS_WALKIN) || "[]"); }
+  catch { return []; }
+}
+
+function buildOrderCard(o) {
+  const li = document.createElement("li");
+  li.className = "order";
+  li.dataset.status = o.status || "in_progress";
+  li.dataset.plate = o.plate;
+  li.dataset.shop = o.shop || "光陽機車行　台北信義";
+  li.dataset.mileage = o.mileage || "";
+  li.dataset.orderId = o.id;
+  li.dataset.bike = `${o.model}　${(o.name || "車主")[0]}*`;
+
+  // bike photo / silhouette(對齊既有卡片邏輯)
+  const photoDiv = document.createElement("div");
+  if (o.avatar) {
+    photoDiv.className = "bike-photo";
+    const img = document.createElement("img");
+    img.src = o.avatar; img.alt = "";
+    photoDiv.appendChild(img);
+  } else {
+    photoDiv.className = "bike-silhouette";
+    const img = document.createElement("img");
+    img.src = o.kind === "汽車"
+      ? "./icon/silhouette-car.png"
+      : "./icon/silhouette-bike.png";
+    img.alt = "";
+    photoDiv.appendChild(img);
+  }
+  li.appendChild(photoDiv);
+
+  // odate
+  const odate = document.createElement("div");
+  odate.className = "odate";
+  const t1 = document.createElement("time"); t1.textContent = o.dateLabel;
+  const t2 = document.createElement("time"); t2.textContent = o.timeLabel;
+  const sp = document.createElement("span"); sp.textContent = o.yearLabel;
+  odate.append(t1, t2, sp);
+  li.appendChild(odate);
+
+  // oinfo
+  const oinfo = document.createElement("div");
+  oinfo.className = "oinfo";
+  const h4 = document.createElement("h4");
+  h4.textContent = `${o.model}　${(o.name || "車主")[0]}*`;
+  oinfo.appendChild(h4);
+  const tags = document.createElement("div");
+  tags.className = "tags";
+  (o.services || []).forEach((s) => {
+    const sp2 = document.createElement("span");
+    sp2.textContent = s;
+    tags.appendChild(sp2);
+  });
+  oinfo.appendChild(tags);
+  const pId = document.createElement("p");
+  pId.textContent = `工單 #${o.id}`;
+  oinfo.appendChild(pId);
+  li.appendChild(oinfo);
+
+  // oprice
+  const oprice = document.createElement("div");
+  oprice.className = "oprice";
+  oprice.textContent = `$${o.price || 0}`;
+  li.appendChild(oprice);
+
+  // oact(進行中:填寫完工 + 客人未到)
+  const oact = document.createElement("div");
+  oact.className = "oact";
+  const bfill = document.createElement("button");
+  bfill.type = "button"; bfill.className = "bfill"; bfill.textContent = "填寫完工";
+  const bnoshow = document.createElement("button");
+  bnoshow.type = "button"; bnoshow.className = "bnoshow";
+  bnoshow.title = "客人未到場"; bnoshow.textContent = "客人未到";
+  oact.append(bfill, bnoshow);
+  li.appendChild(oact);
+
+  return li;
+}
+
+function restoreWalkinOrders() {
+  const arr = loadWalkinOrders();
+  if (!arr.length) return;
+  // 反向插,讓最新的在最上面(arr 已經是 unshift 過的)
+  arr.forEach((o) => {
+    // 避免重複(已 prepend 過的不再加)
+    if (ordersWrap.querySelector(`[data-order-id="${o.id}"]`)) return;
+    const card = buildOrderCard(o);
+    ordersWrap.prepend(card);
+  });
+}
+
+window.addEventListener("walkin:created", (e) => {
+  const o = e.detail;
+  if (!o) return;
+  const card = buildOrderCard(o);
+  ordersWrap.prepend(card);
+  // 切到「進行中」tab 讓老闆看到新卡
+  tabs.forEach((t) => t.classList.toggle("is-active", t.dataset.status === "in_progress"));
+  currentTab = "in_progress";
+  renderOrders();
+  updateBadges();
+});
+
+// ═══════════════════════════════════════════════════
+//   self check-in 工單(mqzx:newCheckin)
+//   - 跟 walkin 同 schema → 直接重用 buildOrderCard
+//   - 同分頁:CustomEvent 'checkin:created'
+//   - 跨分頁(車主手機 → 車行桌機 demo):storage event
+// ═══════════════════════════════════════════════════
+function loadCheckinOrders() {
+  try { return JSON.parse(localStorage.getItem(LS_CHECKIN) || "[]"); }
+  catch { return []; }
+}
+
+function restoreCheckinOrders() {
+  const arr = loadCheckinOrders();
+  if (!arr.length) return;
+  arr.forEach((o) => {
+    if (ordersWrap.querySelector(`[data-order-id="${o.id}"]`)) return;
+    const card = buildOrderCard(o);
+    ordersWrap.prepend(card);
+  });
+}
+
+function handleNewCheckin(order) {
+  if (!order) return;
+  if (ordersWrap.querySelector(`[data-order-id="${order.id}"]`)) return;
+  const card = buildOrderCard(order);
+  ordersWrap.prepend(card);
+  tabs.forEach((t) => t.classList.toggle("is-active", t.dataset.status === "in_progress"));
+  currentTab = "in_progress";
+  renderOrders();
+  updateBadges();
+}
+
+window.addEventListener("checkin:created", (e) => handleNewCheckin(e.detail));
+
+window.addEventListener("storage", (e) => {
+  if (e.key !== LS_CHECKIN || !e.newValue) return;
+  try {
+    const arr = JSON.parse(e.newValue);
+    if (!arr.length) return;
+    handleNewCheckin(arr[0]);
+  } catch { /* noop */ }
+});
+
 // ─── 初始化 ─────────────────────────────────────
+restoreWalkinOrders();
+restoreCheckinOrders();
 updateBadges();
 renderOrders();

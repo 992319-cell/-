@@ -1,0 +1,428 @@
+/* ====================================================
+   walkin-modal.css
+   車行端「新增現場工單」燈箱
+   被 shop-dashboard / shop-orders 引用
+   依賴:common.css(顏色 token)/ shop-app.css(色系一致)
+   ==================================================== */
+
+.walkin-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.walkin-modal[hidden] { display: none; }
+
+.walkin-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .45);
+}
+
+.walkin-card {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    background: var(--white);
+    border-radius: 3px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, .18);
+    padding: 22px 22px 18px;
+    box-sizing: border-box;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+}
+
+/* ─── head ─── */
+.walkin-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+.walkin-head p {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -.01em;
+    color: var(--ink);
+}
+.walkin-close {
+    background: none;
+    border: none;
+    padding: 4px 6px;
+    cursor: pointer;
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1;
+}
+.walkin-close:hover { color: var(--ink); }
+
+/* ─── progress bar ─── */
+.walkin-prog {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 18px;
+}
+.walkin-prog > div {
+    flex: 1;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--line);
+    transition: background .15s ease;
+}
+.walkin-prog > div[data-fill="1"] {
+    background: var(--accent-deep);
+}
+
+/* ─── body ─── */
+.walkin-body label.field {
+    display: block;
+    font-size: 13px;
+    color: var(--muted);
+    margin: 0 0 6px;
+    letter-spacing: .01em;
+}
+.walkin-body label.field .opt {
+    color: var(--muted-light);
+    font-size: 11px;
+    margin-left: 4px;
+}
+.walkin-body input[type="text"],
+.walkin-body input[type="tel"] {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    font-size: 14px;
+    font-family: inherit;
+    background: var(--white);
+    color: var(--ink);
+    margin-bottom: 12px;
+    font-variant-numeric: tabular-nums;
+}
+.walkin-body input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.walkin-body input.is-error {
+    border-color: #C73E3E;
+    background: #fff7f7;
+}
+.walkin-body input.is-error:focus {
+    border-color: #C73E3E;
+}
+.walkin-error {
+    margin: -8px 0 12px;
+    font-size: 11px;
+    color: #C73E3E;
+    letter-spacing: .02em;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.walkin-error::before {
+    content: "⚠";
+    font-size: 12px;
+}
+
+/* 會員藍卡 */
+.walkin-found {
+    background: #E6F1FB;
+    border-radius: 3px;
+    padding: 10px 12px;
+    margin-bottom: 4px;
+}
+.walkin-found .name {
+    margin: 0 0 2px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #0C447C;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.walkin-found .tag {
+    font-size: 11px;
+    background: var(--accent-deep);
+    color: #fff;
+    padding: 1px 6px;
+    border-radius: 2px;
+    letter-spacing: .05em;
+    font-weight: 500;
+}
+.walkin-found .meta {
+    margin: 0;
+    font-size: 12px;
+    color: #185FA5;
+}
+
+/* 查無此手機提示卡(放在會員卡同位置,黃色引導往下方新客登記)*/
+.walkin-notfound {
+    background: #FFF7E1;
+    border: 1px solid #F0DDA0;
+    border-radius: 3px;
+    padding: 10px 12px;
+    margin-bottom: 4px;
+}
+.walkin-notfound .title {
+    margin: 0 0 2px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #7A5400;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.walkin-notfound .title::before {
+    content: "ⓘ";
+    font-size: 13px;
+}
+.walkin-notfound .meta {
+    margin: 0;
+    font-size: 12px;
+    color: #8a6b1f;
+    letter-spacing: .02em;
+}
+
+/* 分隔「或」+ 新客連結 */
+.walkin-sep {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 18px 0 12px;
+    color: var(--muted-light);
+    font-size: 11px;
+    letter-spacing: .1em;
+}
+.walkin-sep::before,
+.walkin-sep::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+}
+.walkin-new-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--accent);
+    background: none;
+    border: none;
+    padding: 8px 0;
+    cursor: pointer;
+    font-family: inherit;
+}
+.walkin-new-link:hover { color: var(--accent-deep); }
+
+/* 新客 hint */
+.walkin-hint {
+    margin: 10px 0 0;
+    font-size: 11px;
+    color: var(--muted);
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    line-height: 1.5;
+}
+.walkin-hint::before {
+    content: "ⓘ";
+    flex-shrink: 0;
+}
+
+/* 車種 radio group */
+.walkin-typegrp {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+.walkin-typeopt {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 9px 12px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--ink);
+    background: var(--white);
+    transition: border-color .12s, background .12s;
+}
+.walkin-typeopt:hover { border-color: var(--accent); }
+.walkin-typeopt:has(input:checked) {
+    border-color: var(--accent-deep);
+    background: #F4F7FE;
+    color: var(--accent-deep);
+    font-weight: 600;
+}
+.walkin-typeopt input[type="radio"] {
+    margin: 0;
+    accent-color: var(--accent-deep);
+}
+
+/* 欄位下方小提示(目前未使用,保留供其他欄位用)*/
+.walkin-sublabel {
+    margin: -8px 0 12px;
+    font-size: 11px;
+    color: var(--muted-light);
+    letter-spacing: .02em;
+}
+
+/* ─── Step 2 車輛清單 ─── */
+.walkin-owner {
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0 0 10px;
+}
+.walkin-vehicle {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: background .12s ease, border-color .12s ease;
+}
+.walkin-vehicle:hover {
+    border-color: var(--accent);
+}
+.walkin-vehicle input[type="radio"] {
+    margin: 0;
+    accent-color: var(--accent-deep);
+}
+.walkin-vehicle:has(input:checked) {
+    border-color: var(--accent-deep);
+    background: #F4F7FE;
+}
+.walkin-vehicle img,
+.walkin-vehicle .v-thumb {
+    width: 40px;
+    height: 40px;
+    border-radius: 3px;
+    object-fit: cover;
+    background: var(--bg-off);
+    flex-shrink: 0;
+}
+.walkin-vehicle .v-thumb {
+    background: linear-gradient(135deg, #e8eef8 0%, #d4def0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.walkin-vehicle .v-thumb img {
+    width: 60%;
+    height: 60%;
+    object-fit: contain;
+    opacity: .65;
+    background: none;
+    border-radius: 0;
+}
+.walkin-vehicle .v-info {
+    flex: 1;
+    min-width: 0;
+}
+.walkin-vehicle .v-plate {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+}
+.walkin-vehicle .v-model {
+    margin: 0;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+/* ─── foot ─── */
+.walkin-foot {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    margin-top: 16px;
+}
+.walkin-foot.split { justify-content: space-between; }
+.walkin-foot button {
+    font-size: 13px;
+    padding: 9px 16px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--white);
+    color: var(--ink);
+    cursor: pointer;
+    font-family: inherit;
+}
+.walkin-foot button:hover {
+    border-color: var(--muted-light);
+}
+.walkin-foot button.primary {
+    background: var(--accent-deep);
+    color: var(--white);
+    border-color: var(--accent-deep);
+}
+.walkin-foot button.primary:hover {
+    background: #07205a;
+    border-color: #07205a;
+}
+.walkin-foot button.cta {
+    background: var(--yellow);
+    color: #3a2a00;
+    border-color: var(--yellow-dark);
+    font-weight: 600;
+}
+.walkin-foot button.cta:hover {
+    background: var(--yellow-dark);
+    color: var(--white);
+}
+.walkin-foot button:disabled,
+.walkin-foot button[aria-disabled="true"] {
+    opacity: .5;
+    cursor: not-allowed;
+}
+.walkin-foot button.cta[aria-disabled="true"] {
+    background: var(--yellow);
+    color: #3a2a00;
+    border-color: var(--yellow-dark);
+}
+.walkin-foot button.cta[aria-disabled="true"]:hover {
+    background: var(--yellow);
+    color: #3a2a00;
+}
+
+/* ─── 成功提示(toast)─── */
+.walkin-toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: #0F6E56;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 3px;
+    font-size: 14px;
+    z-index: 95;
+    opacity: 0;
+    transition: opacity .2s ease, transform .2s ease;
+    pointer-events: none;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .15);
+    letter-spacing: -.01em;
+}
+.walkin-toast.is-show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ─── RWD ─── */
+@media (max-width: 480px) {
+    .walkin-modal { padding: 12px; }
+    .walkin-card { padding: 18px 18px 14px; }
+}
