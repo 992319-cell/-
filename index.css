@@ -371,18 +371,20 @@ section > header .lede strong{color:var(--ink); font-weight:600}
 /* =========== 5. Payoff =========== */
 .payoff{
   background:var(--ink); color:var(--white);
-  position:relative;
-  display:grid; grid-template-columns:1fr 1fr;
-  min-height:100vh;
+  display:grid; 
+  grid-template-columns: 1.4fr 1fr;
+  align-items: stretch;
 }
-.payoff-image{position:relative; overflow:hidden; min-height:600px}
+.payoff-image{position:relative; overflow:hidden;}
 .payoff-image img{
-  width:100%; height:100%; object-fit:cover;
+  width:100%; height:100%; 
+  object-fit:cover;
+  object-position: center 35%;
   position:absolute; inset:0;
 }
 .payoff-image::after{
   content:""; position:absolute; inset:0;
-  background:linear-gradient(90deg, transparent 60%, var(--ink) 100%);
+  background:linear-gradient(90deg, transparent 95%, var(--ink) 100%);
 }
 .payoff-image .caption{
   position:absolute; left:32px; bottom:32px; z-index:1;
@@ -390,8 +392,9 @@ section > header .lede strong{color:var(--ink); font-weight:600}
   font-weight:500;
 }
 .payoff-content{
-  padding:120px 80px;
+  padding:80px 60px;
   display:flex; flex-direction:column; justify-content:center;
+  min-width: 0;
 }
 .payoff-content h2{
   font-family:'Noto Sans TC','Inter',sans-serif;
