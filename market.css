@@ -1,140 +1,393 @@
-.market-header{
-    padding: 140px var(--pad-x-section) var(--pad-y-section);
-    background-color: var(--accent-glow);
+/* ─────────────────────────────────────────────
+   查行情 market.html
+   結構：main.market > section.mk-* > div.mk-inner
+   各 section 滿版背景　內容靠 .mk-inner 收 1280
+   ───────────────────────────────────────────── */
+
+.market {
+    padding-top: var(--nav-h);
 }
-.market-header h2{
-    color: var(--bg-off);
+
+.mk-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding-inline: var(--pad-x-section);
 }
-/* search */
-.search{
+
+/* ── hero ───────────────────────────────────── */
+.mk-hero {
+    position: relative;
+    min-height: 240px;
+    background-image:
+        linear-gradient(rgba(15, 26, 46, 0.55), rgba(15, 26, 46, 0.55)),
+        url('./img/login-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+}
+.mk-hero h2 {
+    font-size: var(--fs-page-title);
+    font-weight: 500;
+    line-height: 1.3;
+}
+.mk-hero p {
+    font-size: var(--fs-body);
+    opacity: 0.8;
+    margin-top: 12px;
+}
+
+/* ── search ─────────────────────────────────── */
+.mk-search {
+    background-color: var(--white);
+}
+.mk-search .mk-inner {
+    padding-block: var(--pad-y-section);
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: var(--pad-y-section) var(--pad-x-section);
-    gap: 20px;
+    gap: 24px;
 }
-.search h3{
+.mk-search h3 {
     font-size: var(--fs-label);
-}
-.search-filter{
-    border-bottom: .5px solid var(--muted-light);
-    padding-block: 4px;
-}
-.filter-btn{
-    padding: 12px;
-    margin-right: 20px;
-    border: none;
-    color: var(--muted);
-    background: none;
-    font-size: var(--fs-body);
-    transition: color .2s;
-}
-.filter-btn:hover{
-    color: var(--accent-deep);
     font-weight: 500;
 }
-/* 串js切換 */
-.filter-btn.is-active{
-    color: var(--accent);
-    font-weight: 600;
-}
-.search form{
+
+/* 機車/汽車 tabs */
+.mk-tabs {
     display: flex;
-    gap: 20px;
-    align-items: flex-end;
+    gap: 24px;
+    border-bottom: 0.5px solid var(--muted-light);
 }
-.search-field{
-    flex: 1;
-}
-.search-field label{
-    display: block;
-    font-size: var(--fs-xs);
+.mk-tabs button {
+    border: none;
+    background: none;
+    padding: 12px 0;
+    margin-bottom: -1px;
+    font-size: var(--fs-body);
     color: var(--muted);
-    margin-bottom: 8px;
-    letter-spacing: .05em;
+    border-bottom: 2px solid transparent;
+    transition: color .2s, border-color .2s;
 }
-.search-field select{
-    width: 100%;
+.mk-tabs button:hover {
+    color: var(--accent-deep);
+}
+.mk-tabs button.is-active {
+    color: var(--accent);
+    font-weight: 500;
+    border-bottom-color: var(--accent);
+}
+
+/* form：4 欄 grid（3 select + 1 button） */
+.mk-search form {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr auto;
+    gap: 24px;
+    align-items: end;
+}
+.mk-search form > div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.mk-search form label {
+    font-size: var(--fs-sm);
+    font-weight: 400;
+    color: var(--ink);
+}
+
+/* select 底線型 對齊 ticket
+   wrap：底線 + 偽元素箭頭
+   select：透明背景　無邊框 */
+.mk-search form > div {
+    position: relative;
+}
+.mk-search form > div::after {
+    content: "";
+    position: absolute;
+    right: 6px;
+    bottom: 14px;
+    width: 6px;
+    height: 6px;
+    border-right: 1.5px solid var(--muted);
+    border-bottom: 1.5px solid var(--muted);
+    transform: rotate(45deg);
+    pointer-events: none;
+}
+.mk-search form select {
     appearance: none;
     -webkit-appearance: none;
-    -moz-appearance: none;
-    border: 1px solid var(--line);
-    border-radius: 3px;
-    padding: 12px 36px 12px 14px;
-    background-color: var(--white);
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='none' stroke='%236b6f76' stroke-width='1.5' d='M1 1.5l5 5 5-5'/></svg>");
-    background-repeat: no-repeat;
-    background-position: right 14px center;
+    border: none;
+    border-bottom: 0.5px solid var(--muted-light);
+    background: transparent;
+    padding: 6px 18px 6px 0;
+    font-family: inherit;
     font-size: var(--fs-body);
+    font-weight: 400;
     color: var(--ink);
     cursor: pointer;
-    transition: border-color .15s ease;
+    transition: border-color .2s ease;
 }
-.search-field select:hover{
-    border-color: var(--muted);
-}
-.search-field select:focus{
+.mk-search form select:focus {
     outline: none;
-    border-color: var(--accent-deep);
+    border-bottom-color: var(--accent);
 }
-.search form .btn-primary{
+
+.mk-search form .btn-primary {
     font-size: var(--fs-body);
     justify-content: center;
     border: none;
+    padding: 12px 32px;
 }
-/* market-content (spec 包裝) */
-.market-content{
-    padding: var(--pad-y-section) var(--pad-x-section);
+
+/* ── result（光譜） ──────────────────────────── */
+.mk-result {
     background-color: var(--bg-off);
 }
-.market-content-title{
+.mk-result .mk-inner {
+    padding-block: var(--pad-y-section);
+}
+.mk-result h3 {
     font-size: var(--fs-label);
-    margin-bottom: 40px;
+    font-weight: 500;
+    margin-bottom: 32px;
 }
 
-/* market-footer */
-.market-footer{
-    padding: var(--pad-y-section) var(--pad-x-section);
+/* ── recommend ──────────────────────────────── */
+.mk-recommend {
     background-color: var(--white);
 }
-.market-footer > h3{
+.mk-recommend .mk-inner {
+    padding-block: var(--pad-y-section);
+}
+.mk-recommend h3 {
     font-size: var(--fs-label);
-    font-weight: 400;
-    margin-bottom: 24px;
+    font-weight: 500;
 }
-.market-footer .card{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-.market-footer .card li{
-    border: .5px solid var(--line);
-    border-radius: 3px;
-    padding: 20px;
-    background-color: var(--white);
-}
-.market-actions{
+.mk-recommend-sub {
+    font-size: var(--fs-body);
+    color: var(--muted);
+    margin-top: 6px;
+    margin-bottom: 32px;
     display: flex;
-    justify-content: flex-end;
-    margin-top: 40px;
+    flex-wrap: wrap;
+    gap: 4px 14px;
 }
-.market-actions .btn-secondary{
-    width: 148px;
-    padding-block: 16px;
+.mk-recommend-sub span {
+    white-space: nowrap;
 }
-.market-actions .btn-secondary img{
-    width: 20px;
-    height: 20px;
-    filter: brightness(0) invert(1);
+
+/* swiper wrap：相對定位給左右箭頭定錨 */
+.mk-swiper-wrap {
+    position: relative;
 }
-.market-footer .card li {
-    background-image: 
-        linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.92) 45%, rgba(255,255,255,0.4) 100%),
-        url('./img/scooter-workshop.jpg');
+.mk-swiper {
+    overflow: hidden;
+    padding-bottom: 36px; /* 給 pagination 留空間 */
+}
+
+/* 圓形箭頭：浮在卡片左右邊緣 -18px */
+.mk-swiper-prev,
+.mk-swiper-next {
+    position: absolute;
+    top: calc(50% - 18px); /* 扣除 pagination 高度的視覺中心 */
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 0.5px solid var(--muted-light);
+    color: var(--ink);
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 5;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    transition: background-color .2s, color .2s;
+}
+.mk-swiper-prev svg,
+.mk-swiper-next svg {
+    width: 16px;
+    height: 16px;
+}
+.mk-swiper-prev { left: -18px; }
+.mk-swiper-next { right: -18px; }
+.mk-swiper-prev:hover,
+.mk-swiper-next:hover {
+    background: var(--accent);
+    color: var(--white);
+}
+.mk-swiper-prev.swiper-button-disabled,
+.mk-swiper-next.swiper-button-disabled {
+    color: var(--muted-light);
+    cursor: default;
+    box-shadow: none;
+}
+.mk-swiper-prev.swiper-button-disabled:hover,
+.mk-swiper-next.swiper-button-disabled:hover {
+    background: var(--white);
+    color: var(--muted-light);
+}
+
+/* pagination dots：對齊 mockup 條狀風格 */
+.mk-swiper .swiper-pagination {
+    bottom: 0;
+}
+.mk-swiper .swiper-pagination-bullet {
+    width: 8px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--muted-light);
+    opacity: 1;
+    transition: width .2s, background-color .2s;
+}
+.mk-swiper .swiper-pagination-bullet-active {
+    width: 24px;
+    background: var(--accent);
+}
+
+/* ── 推薦車行卡片 ───────────────────────────── */
+.market-shop-card {
+    border: 0.5px solid var(--muted-light);
+    border-radius: 3px;
+    overflow: hidden;
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.market-shop-card__photo {
+    aspect-ratio: 4 / 3;
     background-size: cover;
-    background-position: center right;
+    background-position: center;
     background-repeat: no-repeat;
 }
+.market-shop-card__body {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.market-shop-card__area {
+    font-size: var(--fs-xs);
+    color: var(--muted);
+}
+.market-shop-card__name {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 4px 0 12px;
+}
+.market-shop-card__meta {
+    display: flex;
+    gap: 12px;
+    font-size: var(--fs-xs);
+    color: var(--muted);
+    margin-bottom: 14px;
+}
+.market-shop-card__foot {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-top: 14px;
+    border-top: 0.5px solid var(--muted-light);
+}
+.market-shop-card__price {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.market-shop-card__cta {
+    color: var(--accent-deep);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    text-decoration: none;
+}
+.market-shop-card__cta:hover {
+    color: var(--accent);
+}
 
-/* 初始隱藏結果 + 結果區(查詢前) */
+/* ── 工具 class ─────────────────────────────── */
 .is-hidden { display: none; }
+
+/* ── 複製到 LINE ────────────────────────────── */
+.mk-share {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 14px;
+    margin-top: 32px;
+}
+.mk-share-hint {
+    font-size: var(--fs-sm);
+    color: var(--muted);
+    transition: opacity .2s;
+}
+.mk-share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 22px;
+    background: var(--white);
+    color: var(--accent-deep);
+    border: 1px solid var(--accent-deep);
+    border-radius: 3px;
+    font-family: inherit;
+    font-size: var(--fs-body);
+    font-weight: 400;
+    cursor: pointer;
+    transition: background-color .2s, color .2s;
+}
+.mk-share-btn:hover {
+    background: var(--accent-deep);
+    color: var(--white);
+}
+.mk-share-btn svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* ─── RWD ─────────────────────────────────── */
+@media (max-width: 1024px) {
+    .mk-search form {
+        grid-template-columns: 1fr 1fr;
+    }
+    .mk-search form .btn-primary {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 768px) {
+    .mk-hero {
+        min-height: 200px;
+    }
+    .mk-hero h2 {
+        font-size: 28px;
+    }
+    .mk-hero p {
+        font-size: var(--fs-sm);
+    }
+    .mk-search .mk-inner {
+        gap: 20px;
+    }
+    /* 手機：藏箭頭，只留 dots（業界慣例） */
+    .mk-swiper-prev,
+    .mk-swiper-next {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .mk-hero {
+        min-height: 180px;
+    }
+    .mk-hero h2 {
+        font-size: 24px;
+    }
+    .mk-search form {
+        grid-template-columns: 1fr;
+    }
+}

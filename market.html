@@ -1,171 +1,152 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>查行情</title>
+    <title>查行情　明前知行</title>
     <link rel="stylesheet" href="common.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap">
     <link rel="stylesheet" href="spectrum.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="market.css">
 </head>
 <body>
-    <div class="wrap">
-        <nav>
-            <div class="logo">
-                <h1>
-                    <a href="index.html">
-                        <span class="logo-mark">
-                            <img src="./icon/logo-mark拷貝2.png" alt="" aria-hidden="true">
-                            <span class="logo-text">明前知行</span>
-                        </span>
-                    </a></h1>
-            </div>
-            <ul class="links">
-                <li class="is-current"><a href="market.html">查行情</a></li>
-                <li><a href="appointments.html">我的預約</a></li>
-                <li><a href="vehicle.html">車歷</a></li>
-                <li><a href="login.html">登入</a></li>
-            </ul>
-                    <button type="button" class="nav-toggle" aria-expanded="false" aria-label="開啟選單">
-                <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <line x1="4" y1="6" x2="20" y2="6"/>
-                    <line x1="4" y1="12" x2="20" y2="12"/>
-                    <line x1="4" y1="18" x2="20" y2="18"/>
-                </svg>
-                <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <line x1="6" y1="6" x2="18" y2="18"/>
-                    <line x1="18" y1="6" x2="6" y2="18"/>
-                </svg>
-            </button>
-        </nav>
-        <div class="market-header">
-            <h2>掌握行情 從這裡開始</h2>
+
+<nav>
+    <div class="logo">
+        <h1>
+            <a href="index.html">
+                <span class="logo-mark">
+                    <img src="./icon/logo-mark拷貝2.png" alt="" aria-hidden="true">
+                    <span class="logo-text">明前知行</span>
+                </span>
+            </a>
+        </h1>
+    </div>
+    <ul class="links">
+        <li class="is-current"><a href="market.html">查行情</a></li>
+        <li><a href="appointments.html">我的預約</a></li>
+        <li><a href="vehicle.html">車歷</a></li>
+        <li><a href="login.html">登入</a></li>
+    </ul>
+    <button type="button" class="nav-toggle" aria-expanded="false" aria-label="開啟選單">
+        <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="4" y1="6" x2="20" y2="6"/>
+            <line x1="4" y1="12" x2="20" y2="12"/>
+            <line x1="4" y1="18" x2="20" y2="18"/>
+        </svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="6" y1="6" x2="18" y2="18"/>
+            <line x1="18" y1="6" x2="6" y2="18"/>
+        </svg>
+    </button>
+</nav>
+
+<main class="market">
+
+    <header class="mk-hero">
+        <div class="mk-inner">
+            <h2>掌握行情　從這裡開始</h2>
+            <p>輸入車款與需求　即時看見全台車行報價分佈</p>
         </div>
-        <div class="search">
+    </header>
+
+    <section class="mk-search">
+        <div class="mk-inner">
             <h3>填入車款與需求</h3>
-            <div class="search-filter">
-                <button class="filter-btn is-active">機車</button>
-                <button class="filter-btn">汽車</button>
+            <div class="mk-tabs" role="tablist" aria-label="車種">
+                <button type="button" class="is-active" role="tab" aria-selected="true">機車</button>
+                <button type="button" role="tab" aria-selected="false">汽車</button>
             </div>
-            <form id="searchForm" action="#">
-                <div class="search-field">
+            <form id="searchForm" novalidate>
+                <div>
                     <label for="model">車款</label>
-                        <select name="model" id="model">
-                            <option value="">請選擇</option>
-                            <option value="yamaha-bwsr">YAMAHA BWS'R</option>
-                            <option value="yamaha-cuxi">YAMAHA CUXI</option>
-                            <option value="kymco-many">光陽 Many 125</option>
-                            <option value="kymco-racing">光陽 Racing S</option>
-                            <option value="sym-jet">三陽 Jet SL</option>
-                        </select>
+                    <select name="model" id="model">
+                        <option value="">請選擇</option>
+                        <option value="yamaha-bwsr">YAMAHA BWS'R</option>
+                        <option value="yamaha-cuxi">YAMAHA CUXI</option>
+                        <option value="kymco-many">光陽 Many 125</option>
+                        <option value="kymco-racing">光陽 Racing S</option>
+                        <option value="sym-jet">三陽 Jet SL</option>
+                    </select>
                 </div>
-                <div class="search-field">
+                <div>
                     <label for="city">城市</label>
-                        <select name="city" id="city">
-                            <option value="">請選擇</option>
-                            <option value="taipei">台北市</option>
-                            <option value="newtaipei">新北市</option>
-                            <option value="taichung">台中市</option>
-                            <option value="tainan">台南市</option>
-                            <option value="kaohsiung">高雄市</option>
-                        </select>
+                    <select name="city" id="city">
+                        <option value="">請選擇</option>
+                        <option value="taipei">台北市</option>
+                        <option value="newtaipei">新北市</option>
+                        <option value="taichung">台中市</option>
+                        <option value="tainan">台南市</option>
+                        <option value="kaohsiung">高雄市</option>
+                    </select>
                 </div>
-                <div class="search-field">
+                <div>
                     <label for="service">保養項目</label>
-                        <select name="service" id="service">
-                            <option value="">請選擇</option>
-                            <option value="oil">機油更換</option>
-                            <option value="airfilter">空濾清洗</option>
-                            <option value="brake">煞車皮更換</option>
-                            <option value="sparkplug">火星塞更換</option>
-                            <option value="tire">輪胎更換</option>
-                        </select>
+                    <select name="service" id="service">
+                        <option value="">請選擇</option>
+                        <option value="oil">機油更換</option>
+                        <option value="airfilter">空濾清洗</option>
+                        <option value="brake">煞車皮更換</option>
+                        <option value="sparkplug">火星塞更換</option>
+                        <option value="tire">輪胎更換</option>
+                    </select>
                 </div>
-                    <button type="submit" class="btn-primary">查詢</button>
-                </form>
+                <button type="submit" class="btn-primary">查詢</button>
+            </form>
         </div>
-        <div class="market-content is-hidden" id="marketContent">
-            <h3 class="market-content-title">你的行情報告</h3>
+    </section>
+
+    <section class="mk-result is-hidden" id="marketContent">
+        <div class="mk-inner">
+            <h3>你的行情報告</h3>
             <div id="spec"></div>
         </div>
-        <div class="market-footer is-hidden" id="marketFooter">
-            <h3>同條件參考</h3>
-            <ul class="card">
-                <li>
-                    <div class="card-title">
-                        <h3>光陽機車行　台北信義</h3>
-                        <p><span>180</span>元</p>
+    </section>
+
+    <section class="mk-recommend is-hidden" id="marketFooter" aria-label="為你推薦">
+        <div class="mk-inner">
+            <h3>為你推薦</h3>
+            <p class="mk-recommend-sub" id="recommendSub"><span>YAMAHA BWS'R</span><span>機油更換</span><span>台北市</span><span>共 5 家</span></p>
+
+            <div class="mk-swiper-wrap">
+                <div class="swiper mk-swiper">
+                    <div class="swiper-wrapper" id="shopList">
+                        <!-- 卡片由 JS 動態生成 -->
                     </div>
-                    <div class="card-content">
-                        <div class="tags">
-                            <span>機油更換</span>
-                        </div>
-                        <p>2025.11.04 · 32,140 km</p>
-                    </div>
-                </li>
-                <li>
-                    <div class="card-title">
-                        <h3>三重保養廠　新北三重</h3>
-                        <p><span>200</span>元</p>
-                    </div>
-                    <div class="card-content">
-                        <div class="tags">
-                            <span>機油更換</span>
-                        </div>
-                        <p>2025.07.18 · 28,600 km</p>
-                    </div>
-                </li>
-                <li>
-                    <div class="card-title">
-                        <h3>順發機車　台北中山</h3>
-                        <p><span>210</span>元</p>
-                    </div>
-                    <div class="card-content">
-                        <div class="tags">
-                            <span>機油更換</span>
-                        </div>
-                        <p>2025.06.12 · 25,300 km</p>
-                    </div>
-                </li>
-            </ul>
-            <div class="market-actions">
-                <button type="button" class="btn-secondary">
-                    複製到 LINE
-                    <img src="./icon/external-link.png" alt="link-icon">
+                    <div class="swiper-pagination"></div>
+                </div>
+                <button type="button" class="mk-swiper-prev" aria-label="上一張">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 6 9 12 15 18"/></svg>
+                </button>
+                <button type="button" class="mk-swiper-next" aria-label="下一張">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg>
                 </button>
             </div>
-        </div>
-        <footer>
-            <p>© 2026 明前知行　版權所有</p>
-            <a href="mailto:992319@gmail.com">992319@gmail.com</a>
-        </footer>
-    </div>
-    <script src="nav.js"></script>
-    <script src="spectrum.js"></script>
-    <script>
-        (function () {
-            var form = document.getElementById('searchForm');
-            var content = document.getElementById('marketContent');
-            var footer = document.getElementById('marketFooter');
-            var rendered = false;
 
-            form.addEventListener('submit', function (e) {
-                e.preventDefault();
-                // demo 階段不擋空值,簡報直接按查詢就出結果
-                content.classList.remove('is-hidden');
-                footer.classList.remove('is-hidden');
-                // 首次才 render,避免重複建立
-                if (!rendered) {
-                    Spectrum.render('#spec', null, { variant: 'detail' });
-                    rendered = true;
-                }
-                // 平滑捲到結果
-                setTimeout(function () {
-                    content.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 50);
-            });
-        })();
-    </script>
+            <div class="mk-share">
+                <button type="button" class="mk-share-btn" id="copyToLine">
+                    <span>複製到 LINE</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                        <polyline points="15 3 21 3 21 9"/>
+                        <line x1="10" y1="14" x2="21" y2="3"/>
+                    </svg>
+                </button>
+                <span class="mk-share-hint" id="copyHint" aria-live="polite"></span>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <p>© 2026 明前知行　版權所有</p>
+    <a href="mailto:992319@gmail.com">992319@gmail.com</a>
+</footer>
+
+<script src="nav.js"></script>
+<script src="spectrum.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="market.js"></script>
 </body>
 </html>
