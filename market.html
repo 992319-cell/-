@@ -6,6 +6,7 @@
     <title>查行情</title>
     <link rel="stylesheet" href="common.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap">
+    <link rel="stylesheet" href="spectrum.css">
     <link rel="stylesheet" href="market.css">
 </head>
 <body>
@@ -47,7 +48,7 @@
                 <button class="filter-btn is-active">機車</button>
                 <button class="filter-btn">汽車</button>
             </div>
-            <form action="#">
+            <form id="searchForm" action="#">
                 <div class="search-field">
                     <label for="model">車款</label>
                         <select name="model" id="model">
@@ -84,36 +85,11 @@
                     <button type="submit" class="btn-primary">查詢</button>
                 </form>
         </div>
-        <div class="market-content">
-            <div class="spectrum-content">
-                <h3>你的行情報告</h3>
-                <p>$<span>240</span></p>
-                <div class="labels">
-                    <div class="track">
-                        <div class="track-dot"></div>
-                        <div class="track-line"></div>
-                    </div>
-                    <ul class="labels-txt">
-                        <li>極低</li>
-                        <li>偏低</li>
-                        <li>合理</li>
-                        <li>偏高</li>
-                        <li>極高</li>
-                    </ul>
-                </div>
-                <p>價格偏高</p>
-            </div>
-            <div class="market-evidence">
-                <h4>分析依據</h4>
-                <div class="market-evidence-stats">
-                    <p>樣本數<span>47</span>筆</p>
-                    <p>中位數<span>$190</span></p>
-                    <p>價格範圍<span>$150 - $280</span></p>
-                </div>
-                <p>採中位數而非平均，避免極端值影響</p>
-            </div>
+        <div class="market-content is-hidden" id="marketContent">
+            <h3 class="market-content-title">你的行情報告</h3>
+            <div id="spec"></div>
         </div>
-        <div class="market-footer">
+        <div class="market-footer is-hidden" id="marketFooter">
             <h3>同條件參考</h3>
             <ul class="card">
                 <li>
@@ -166,5 +142,30 @@
         </footer>
     </div>
     <script src="nav.js"></script>
+    <script src="spectrum.js"></script>
+    <script>
+        (function () {
+            var form = document.getElementById('searchForm');
+            var content = document.getElementById('marketContent');
+            var footer = document.getElementById('marketFooter');
+            var rendered = false;
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                // demo 階段不擋空值,簡報直接按查詢就出結果
+                content.classList.remove('is-hidden');
+                footer.classList.remove('is-hidden');
+                // 首次才 render,避免重複建立
+                if (!rendered) {
+                    Spectrum.render('#spec', null, { variant: 'detail' });
+                    rendered = true;
+                }
+                // 平滑捲到結果
+                setTimeout(function () {
+                    content.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 50);
+            });
+        })();
+    </script>
 </body>
 </html>

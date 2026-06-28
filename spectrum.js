@@ -223,33 +223,41 @@
     var z5 = (p90pos + 100) / 2;
 
     return (
-      '<div class="spec spec--' + opts.variant + '">' +
-        '<div class="spec-wrap">' +
-          '<div class="spec-swarm">' + buildDots(stats, opts) + '</div>' +
-          '<div class="spec-track">' +
-            '<div class="spec-iqr" style="left:' + iqrLeft.toFixed(2) + '%;right:' + iqrRight.toFixed(2) + '%"></div>' +
-            '<div class="spec-median" style="left:' + medPos.toFixed(2) + '%"></div>' +
-            youHTML +
+      '<div class="spec spec--' + opts.variant + (opts.yourPrice == null ? ' spec--no-you' : '') + '">' +
+        '<div class="spec-scroll-host">' +
+          '<div class="spec-scroll">' +
+            '<div class="spec-scroll-inner">' +
+              '<div class="spec-wrap">' +
+                '<div class="spec-swarm">' + buildDots(stats, opts) + '</div>' +
+                '<div class="spec-track">' +
+                  '<div class="spec-iqr" style="left:' + iqrLeft.toFixed(2) + '%;right:' + iqrRight.toFixed(2) + '%"></div>' +
+                  '<div class="spec-median" style="left:' + medPos.toFixed(2) + '%"></div>' +
+                  youHTML +
+                '</div>' +
+              '</div>' +
+              '<div class="spec-anchors">' +
+                '<div class="spec-anchor">' +
+                  '<span class="spec-cap">最低</span>' +
+                  '<span class="spec-val">$' + stats.min + '</span>' +
+                  '<span class="spec-shop">' + buildShopLabel(stats.minRec) + '</span>' +
+                '</div>' +
+                '<div class="spec-anchor spec-anchor--end">' +
+                  '<span class="spec-cap">最高</span>' +
+                  '<span class="spec-val">$' + stats.max + '</span>' +
+                  '<span class="spec-shop">' + buildShopLabel(stats.maxRec) + '</span>' +
+                '</div>' +
+              '</div>' +
+              '<div class="spec-zones">' +
+                '<span style="left:' + z1.toFixed(2) + '%">極低</span>' +
+                '<span style="left:' + z2.toFixed(2) + '%">偏低</span>' +
+                '<span class="ok" style="left:' + z3.toFixed(2) + '%">合理</span>' +
+                '<span style="left:' + z4.toFixed(2) + '%">偏高</span>' +
+                '<span style="left:' + z5.toFixed(2) + '%">極高</span>' +
+              '</div>' +
+            '</div>' +
           '</div>' +
-        '</div>' +
-        '<div class="spec-anchors">' +
-          '<div class="spec-anchor">' +
-            '<span class="spec-cap">最低</span>' +
-            '<span class="spec-val">$' + stats.min + '</span>' +
-            '<span class="spec-shop">' + buildShopLabel(stats.minRec) + '</span>' +
-          '</div>' +
-          '<div class="spec-anchor spec-anchor--end">' +
-            '<span class="spec-cap">最高</span>' +
-            '<span class="spec-val">$' + stats.max + '</span>' +
-            '<span class="spec-shop">' + buildShopLabel(stats.maxRec) + '</span>' +
-          '</div>' +
-        '</div>' +
-        '<div class="spec-zones">' +
-          '<span style="left:' + z1.toFixed(2) + '%">極低</span>' +
-          '<span style="left:' + z2.toFixed(2) + '%">偏低</span>' +
-          '<span class="ok" style="left:' + z3.toFixed(2) + '%">合理</span>' +
-          '<span style="left:' + z4.toFixed(2) + '%">偏高</span>' +
-          '<span style="left:' + z5.toFixed(2) + '%">極高</span>' +
+          '<div class="spec-fade spec-fade-l" aria-hidden="true"></div>' +
+          '<div class="spec-fade spec-fade-r" aria-hidden="true"></div>' +
         '</div>' +
         '<div class="spec-summary">' +
           '<span class="spec-sum-item">' +
@@ -338,8 +346,11 @@
     container.innerHTML = buildHTML(stats, opts);
     var specEl = container.querySelector('.spec');
 
-    // 觸控裝置 tooltip：點擊切換 .is-active，外部點擊關閉
+    // 觸控裝置 tooltip:點擊切換 .is-active,外部點擊關閉
     bindTouchTooltip(specEl);
+
+    // 滑動 fade + nudge 提示
+    bindScrollFades(specEl);
 
     if (opts.animate) {
       observe(specEl);
@@ -371,6 +382,45 @@
         });
       }
     });
+  }
+
+  /* ─── 滑動 fade 控制 + 手機 nudge 提示 ─── */
+  function bindScrollFades(specEl) {
+    var host = specEl.querySelector('.spec-scroll-host');
+    var scroll = specEl.querySelector('.spec-scroll');
+    if (!host || !scroll) return;
+
+    function update() {
+      var max = scroll.scrollWidth - scroll.clientWidth;
+      // max <= 2 表示沒在滑動模式(桌機/平板),兩邊都不顯示
+      if (max <= 2) {
+        host.classList.remove('has-fade-left', 'has-fade-right');
+        return;
+      }
+      host.classList.toggle('has-fade-left', scroll.scrollLeft > 2);
+      host.classList.toggle('has-fade-right', scroll.scrollLeft < max - 2);
+    }
+
+    scroll.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    // 初始判斷
+    update();
+
+    // 手機 nudge 動畫:reveal 完後 800ms 輕滑提示可滑動
+    function nudge() {
+      var max = scroll.scrollWidth - scroll.clientWidth;
+      if (max <= 2) return; // 沒在滑動模式不 nudge
+      var dist = Math.min(40, max);
+      try {
+        scroll.scrollTo({ left: dist, behavior: 'smooth' });
+        setTimeout(function () {
+          scroll.scrollTo({ left: 0, behavior: 'smooth' });
+        }, 600);
+      } catch (e) {
+        // 不支援 smooth scroll 就跳過
+      }
+    }
+    setTimeout(nudge, 1400);
   }
 
   window.Spectrum = {

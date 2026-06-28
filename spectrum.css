@@ -13,10 +13,30 @@
   --spec-iqr-edge: rgba(29, 158, 117, 0.4);
   --spec-green: #1d9e75;
   --spec-warn: #a8442a;
+  --spec-fade-color: var(--white);   /* fade 漸層底色,配合容器背景 */
 
   font-family: 'Inter', 'Noto Sans TC', sans-serif;
   color: var(--ink);
   letter-spacing: -0.01em;
+}
+/* detail 變體放在 --bg-off 容器內,fade 用 bg-off */
+.spec--detail {
+  --spec-fade-color: var(--bg-off);
+}
+
+/* ─── 滑動容器（桌機/平板：透明包裝，不影響版面） ─── */
+.spec-scroll-host {
+  position: relative;
+}
+.spec-scroll {
+  overflow-x: visible;
+  overflow-y: visible;
+}
+.spec-scroll-inner {
+  /* 桌機/平板:自然寬度 */
+}
+.spec-fade {
+  display: none;
 }
 
 /* ─── wrap：散點 + bar ─── */
@@ -356,6 +376,9 @@
   border: 1px solid var(--line);
 }
 
+/* ─── 沒飛鏢時 上方留白縮小（不用預留標籤空間） ─── */
+.spec--no-you .spec-wrap { padding-top: 36px; }
+
 /* ─── 觸控裝置 tooltip：用 .is-active 取代 :hover ─── */
 @media (hover: none) {
   /* 觸控時 :hover 會卡住，改用 click 切換 .is-active */
@@ -396,9 +419,56 @@
 
 /* ─── RWD 手機 ≤768 ─── */
 @media (max-width: 768px) {
+  /* 啟用橫向滑動 */
+  .spec-scroll {
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;        /* Firefox */
+    scroll-behavior: smooth;
+  }
+  .spec-scroll::-webkit-scrollbar { display: none; }  /* Safari/Chrome */
+  .spec-scroll-inner {
+    min-width: 560px;
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* 內部元素百分比定位仍以 inner 寬度為基準,圖表結構不變 */
+  }
+
+  /* 兩側 fade 提示(預設透明,scroll handler 切 class 控制) */
+  .spec-fade {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 36px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.22s ease;
+    z-index: 5;
+  }
+  .spec-fade-l {
+    left: 0;
+    background: linear-gradient(to right, var(--spec-fade-color) 0%, rgba(255,255,255,0) 100%);
+  }
+  .spec-fade-r {
+    right: 0;
+    background: linear-gradient(to left, var(--spec-fade-color) 0%, rgba(255,255,255,0) 100%);
+  }
+  .spec-scroll-host.has-fade-left  .spec-fade-l { opacity: 1; }
+  .spec-scroll-host.has-fade-right .spec-fade-r { opacity: 1; }
+
   .spec-wrap { padding-top: 86px; }
-  .spec-swarm { height: 54px; bottom: 18px; }
+  .spec--no-you .spec-wrap { padding-top: 80px; }
+  .spec-swarm { height: 100px; bottom: 14px; }
   .spec-dot { width: 6px; height: 6px; }
+  .spec-anchors { margin-top: 16px; }
+  .spec-zones { margin-top: 22px; padding-top: 12px; }
+  .spec-zones span { top: 12px; }
+  .spec-summary { margin-top: 22px; padding: 12px 14px; gap: 6px 14px; }
+  .spec-foot { margin-top: 16px; }
   .spec-you-flag { padding: 7px 11px 6px; font-size: 12px; }
   .spec-you-num { font-size: 14px; }
   .spec-you-tag { font-size: 10px; }
@@ -421,5 +491,6 @@
 /* ─── 再更窄 ≤420 ─── */
 @media (max-width: 420px) {
   .spec-wrap { padding-top: 78px; }
-  .spec-swarm { height: 44px; bottom: 16px; }
+  .spec--no-you .spec-wrap { padding-top: 70px; }
+  .spec-swarm { height: 80px; bottom: 12px; }
 }
