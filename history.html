@@ -3,248 +3,248 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>車歷　明前知行</title>
+    <title>車歷</title>
     <link rel="stylesheet" href="common.css">
     <link rel="stylesheet" href="history.css">
     <link rel="stylesheet" href="appeal-modal.css">
 </head>
 <body>
 
-<nav>
-    <div class="logo">
-        <h1>
-            <a href="index.html">
-                <span class="logo-mark">
-                    <img src="./icon/logo-mark拷貝2.png" alt="" aria-hidden="true">
-                    <span class="logo-text">明前知行</span>
-                </span>
-            </a>
-        </h1>
-    </div>
-    <ul class="links">
-        <li><a href="market.html">查行情</a></li>
-        <li><a href="appointments.html">我的預約</a></li>
-        <li class="is-current"><a href="vehicle.html">車歷</a></li>
-        <li><a href="login.html">登入</a></li>
-    </ul>
-    <button type="button" class="nav-toggle" aria-expanded="false" aria-label="開啟選單">
-        <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <line x1="4" y1="6" x2="20" y2="6"/>
-            <line x1="4" y1="12" x2="20" y2="12"/>
-            <line x1="4" y1="18" x2="20" y2="18"/>
-        </svg>
-        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <line x1="6" y1="6" x2="18" y2="18"/>
-            <line x1="18" y1="6" x2="6" y2="18"/>
-        </svg>
-    </button>
-</nav>
-
-<main class="hist">
-
-    <a class="hist-back" href="vehicle.html">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-            <polyline points="15 18 9 12 15 6"/>
-        </svg>
-        返回車庫
-    </a>
-
-    <header class="hist-head">
-        <div class="hist-veh-photo">
-            <img id="hist-veh-img" src="" alt="" onerror="this.style.display='none'">
+    <nav>
+        <div class="logo">
+            <h1>
+                <a href="index.html">
+                    <span class="logo-mark">
+                        <img src="./icon/logo-mark拷貝2.png" alt="" aria-hidden="true">
+                        <span class="logo-text">明前知行</span>
+                    </span>
+                </a>
+            </h1>
         </div>
-        <div class="hist-veh-titles">
-            <div class="hist-veh-title-row">
-                <h1 id="hist-veh-plate">ABC-1234</h1>
-                <button type="button" id="hist-veh-switch-btn" class="hist-veh-switch" aria-haspopup="listbox" aria-expanded="false">
-                    切換車輛
+        <ul class="links">
+            <li><a href="market.html">查行情</a></li>
+            <li><a href="appointments.html">我的預約</a></li>
+            <li class="is-current"><a href="vehicle.html">車歷</a></li>
+            <li><a href="login.html">登入</a></li>
+        </ul>
+        <button type="button" class="nav-toggle" aria-expanded="false" aria-label="開啟選單">
+            <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="4" y1="6" x2="20" y2="6"/>
+                <line x1="4" y1="12" x2="20" y2="12"/>
+                <line x1="4" y1="18" x2="20" y2="18"/>
+            </svg>
+            <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="6" y1="6" x2="18" y2="18"/>
+                <line x1="18" y1="6" x2="6" y2="18"/>
+            </svg>
+        </button>
+    </nav>
+
+    <main class="hist">
+
+        <a class="hist-back" href="vehicle.html">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <polyline points="15 18 9 12 15 6"/>
+            </svg>
+            返回車庫
+        </a>
+
+        <header class="hist-head">
+            <div class="hist-veh-photo">
+                <img id="hist-veh-img" src="" alt="" onerror="this.style.display='none'">
+            </div>
+            <div class="hist-veh-titles">
+                <div class="hist-veh-title-row">
+                    <h1 id="hist-veh-plate">ABC-1234</h1>
+                    <button type="button" id="hist-veh-switch-btn" class="hist-veh-switch" aria-haspopup="listbox" aria-expanded="false">
+                        切換車輛
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </button>
+                    <ul id="hist-veh-menu" role="listbox" hidden></ul>
+                </div>
+                <p id="hist-veh-sub">山羊 VIVA　機車</p>
+            </div>
+            <div class="hist-veh-meter">
+                <p id="hist-veh-meter-num">32,520 <span>km</span></p>
+                <p>目前里程</p>
+            </div>
+        </header>
+
+        <dl class="hist-stats">
+            <div>
+                <dt>總花費</dt>
+                <dd id="hist-stat-total">$0</dd>
+            </div>
+            <div>
+                <dt>筆紀錄</dt>
+                <dd id="hist-stat-count">0</dd>
+            </div>
+            <div>
+                <dt>最近一次保養</dt>
+                <dd id="hist-stat-recent">—</dd>
+            </div>
+        </dl>
+
+        <div class="hist-toolbar" role="toolbar" aria-label="紀錄操作">
+            <div class="hist-sort">
+                <span>排序</span>
+                <button type="button" id="hist-sort-btn" class="hist-sort-pill" aria-haspopup="listbox" aria-expanded="false">
+                    <span id="hist-sort-label">最新到最舊</span>
                     <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
                         <polyline points="6 9 12 15 18 9"/>
                     </svg>
                 </button>
-                <ul id="hist-veh-menu" role="listbox" hidden></ul>
+                <ul id="hist-sort-menu" role="listbox" hidden>
+                    <li data-sort="newest">最新到最舊</li>
+                    <li data-sort="oldest">最舊到最新</li>
+                    <li data-sort="price-high">金額高到低</li>
+                    <li data-sort="price-low">金額低到高</li>
+                </ul>
             </div>
-            <p id="hist-veh-sub">山羊 VIVA　機車</p>
-        </div>
-        <div class="hist-veh-meter">
-            <p id="hist-veh-meter-num">32,520 <span>km</span></p>
-            <p>目前里程</p>
-        </div>
-    </header>
-
-    <dl class="hist-stats">
-        <div>
-            <dt>總花費</dt>
-            <dd id="hist-stat-total">$0</dd>
-        </div>
-        <div>
-            <dt>筆紀錄</dt>
-            <dd id="hist-stat-count">0</dd>
-        </div>
-        <div>
-            <dt>最近一次保養</dt>
-            <dd id="hist-stat-recent">—</dd>
-        </div>
-    </dl>
-
-    <div class="hist-toolbar" role="toolbar" aria-label="紀錄操作">
-        <div class="hist-sort">
-            <span>排序</span>
-            <button type="button" id="hist-sort-btn" class="hist-sort-pill" aria-haspopup="listbox" aria-expanded="false">
-                <span id="hist-sort-label">最新到最舊</span>
-                <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-                    <polyline points="6 9 12 15 18 9"/>
+            <button type="button" id="hist-overflow-btn" class="hist-overflow" aria-label="更多操作" aria-haspopup="menu" aria-expanded="false">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+                    <circle cx="5" cy="12" r="1.5"/>
+                    <circle cx="12" cy="12" r="1.5"/>
+                    <circle cx="19" cy="12" r="1.5"/>
                 </svg>
             </button>
-            <ul id="hist-sort-menu" role="listbox" hidden>
-                <li data-sort="newest">最新到最舊</li>
-                <li data-sort="oldest">最舊到最新</li>
-                <li data-sort="price-high">金額高到低</li>
-                <li data-sort="price-low">金額低到高</li>
-            </ul>
-        </div>
-        <button type="button" id="hist-overflow-btn" class="hist-overflow" aria-label="更多操作" aria-haspopup="menu" aria-expanded="false">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
-                <circle cx="5" cy="12" r="1.5"/>
-                <circle cx="12" cy="12" r="1.5"/>
-                <circle cx="19" cy="12" r="1.5"/>
-            </svg>
-        </button>
-        <div id="hist-overflow-menu" hidden>
-            <button type="button" class="hist-overflow-item" data-action="print">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-                    <polyline points="6 9 6 2 18 2 18 9"/>
-                    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
-                    <rect x="6" y="14" width="12" height="8"/>
-                </svg>
-                <span>列印車歷</span>
-            </button>
-            <button type="button" class="hist-overflow-item" data-action="pdf">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                    <polyline points="7 10 12 15 17 10"/>
-                    <line x1="12" y1="15" x2="12" y2="3"/>
-                </svg>
-                <span>下載 PDF</span>
-            </button>
-        </div>
-    </div>
-
-    <ul id="hist-list"></ul>
-
-    <div id="hist-empty" hidden>
-        <p>這台車還沒有保養紀錄</p>
-        <a href="ticket.html" class="hist-empty-cta">立即預約保養</a>
-    </div>
-
-</main>
-
-<footer>
-    <p>© 2026 明前知行　版權所有</p>
-    <a href="mailto:992319@gmail.com">992319@gmail.com</a>
-</footer>
-
-<div class="appeal-modal" id="appeal-modal" hidden aria-modal="true" role="dialog">
-    <div class="appeal-modal-backdrop" data-close></div>
-    <div class="appeal-modal-card">
-
-        <div class="appeal-state appeal-state-form">
-            <div class="appeal-modal-head">
-                <div>
-                    <p class="appeal-modal-eye">APPEAL</p>
-                    <p class="appeal-modal-title">申訴　<span id="appeal-order-id">#20260304-A07</span></p>
-                </div>
-                <button type="button" class="appeal-modal-close" aria-label="關閉" data-close>
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>
+            <div id="hist-overflow-menu" hidden>
+                <button type="button" class="hist-overflow-item" data-action="print">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                        <polyline points="6 9 6 2 18 2 18 9"/>
+                        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+                        <rect x="6" y="14" width="12" height="8"/>
+                    </svg>
+                    <span>列印車歷</span>
+                </button>
+                <button type="button" class="hist-overflow-item" data-action="pdf">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="7 10 12 15 17 10"/>
+                        <line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                    <span>下載 PDF</span>
                 </button>
             </div>
+        </div>
 
-            <div class="appeal-snap">
-                <p class="appeal-section-eye">服務紀錄</p>
-                <div class="appeal-snap-grid">
-                    <span>日期</span><span id="appeal-snap-date">—</span>
-                    <span>車行</span><span id="appeal-snap-shop">—</span>
-                    <span>車輛</span><span id="appeal-snap-vehicle">—</span>
-                    <span>服務</span><span id="appeal-snap-services">—</span>
-                    <span>里程</span><span id="appeal-snap-mileage">—</span>
-                    <span>金額</span><span id="appeal-snap-price">—</span>
-                </div>
-            </div>
+        <ul id="hist-list"></ul>
 
-            <div class="appeal-evid">
-                <div class="appeal-evid-head">
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 3 L20 6 V12 C20 16 16 19.5 12 21 C8 19.5 4 16 4 12 V6 Z"/><path d="M9 12 L11 14 L15 10"/></svg>
-                    <p class="appeal-section-eye">簽收憑證</p>
-                    <span class="appeal-evid-badge">已驗證</span>
-                </div>
+        <div id="hist-empty" hidden>
+            <p>這台車還沒有保養紀錄</p>
+            <a href="ticket.html" class="hist-empty-cta">立即預約保養</a>
+        </div>
 
-                <div class="appeal-evid-body">
-                    <div class="appeal-sig-box">
-                        <svg viewBox="0 0 140 60" aria-hidden="true">
-                            <path d="M 10 38 Q 18 18, 28 32 T 48 30 Q 55 22, 62 36 Q 68 44, 76 28 Q 84 16, 92 34 T 110 30 Q 118 24, 128 36" fill="none" stroke="#1a1a1a" stroke-width="1.6" stroke-linecap="round"/>
-                            <path d="M 28 42 L 110 44" fill="none" stroke="#1a1a1a" stroke-width=".8" stroke-linecap="round" opacity=".4"/>
-                        </svg>
-                        <p class="appeal-sig-caption">林小華　手寫簽名</p>
+    </main>
+
+    <footer>
+        <p>© 2026 明前知行　版權所有</p>
+        <a href="mailto:992319@gmail.com">992319@gmail.com</a>
+    </footer>
+
+    <div class="appeal-modal" id="appeal-modal" hidden aria-modal="true" role="dialog">
+        <div class="appeal-modal-backdrop" data-close></div>
+        <div class="appeal-modal-card">
+
+            <div class="appeal-state appeal-state-form">
+                <div class="appeal-modal-head">
+                    <div>
+                        <p class="appeal-modal-eye">APPEAL</p>
+                        <p class="appeal-modal-title">申訴　<span id="appeal-order-id">#20260304-A07</span></p>
                     </div>
-                    <table class="appeal-evid-table">
-                        <tr><td>工單 ID</td><td id="appeal-evid-id">#20260304-A07</td></tr>
-                        <tr><td>簽收時間</td><td id="appeal-evid-time">2026 / 03 / 04　14:32:18</td></tr>
-                        <tr><td>認證方式</td><td>手機 OTP　0912-***-678</td></tr>
-                        <tr><td>IP　裝置</td><td>114.32.***.18　iOS Safari</td></tr>
-                        <tr><td>SHA-256</td><td class="appeal-hash">3a7f9c2e&hairsp;4b1d&hairsp;8a35&hairsp;f04c&hairsp;91eb&hairsp;6d2a&hairsp;7c5b&hairsp;e8f3&hairsp;b29e</td></tr>
-                        <tr><td>時間戳</td><td>RFC 3161 TSA　已驗證</td></tr>
-                    </table>
-                </div>
-
-                <p class="appeal-evid-note">
-                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><circle cx="12" cy="16" r=".5" fill="currentColor"/></svg>
-                    <span>此憑證儲存於車行端工單系統　依商業會計法保存 7 年　如有竄改 SHA-256 hash 立即失效</span>
-                </p>
-            </div>
-
-            <div class="appeal-form">
-                <label class="appeal-form-label" for="appeal-textarea">申訴理由</label>
-                <textarea id="appeal-textarea" class="appeal-textarea" placeholder="例如　收到車後發現煞車仍偏軟　請車行協助確認"></textarea>
-                <div class="appeal-actions">
-                    <button type="button" class="appeal-btn-cancel" data-close>取消</button>
-                    <button type="button" class="appeal-btn-send" id="appeal-send">
-                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-                        寄出申訴
+                    <button type="button" class="appeal-modal-close" aria-label="關閉" data-close>
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>
                     </button>
                 </div>
+
+                <div class="appeal-snap">
+                    <p class="appeal-section-eye">服務紀錄</p>
+                    <div class="appeal-snap-grid">
+                        <span>日期</span><span id="appeal-snap-date">—</span>
+                        <span>車行</span><span id="appeal-snap-shop">—</span>
+                        <span>車輛</span><span id="appeal-snap-vehicle">—</span>
+                        <span>服務</span><span id="appeal-snap-services">—</span>
+                        <span>里程</span><span id="appeal-snap-mileage">—</span>
+                        <span>金額</span><span id="appeal-snap-price">—</span>
+                    </div>
+                </div>
+
+                <div class="appeal-evid">
+                    <div class="appeal-evid-head">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 3 L20 6 V12 C20 16 16 19.5 12 21 C8 19.5 4 16 4 12 V6 Z"/><path d="M9 12 L11 14 L15 10"/></svg>
+                        <p class="appeal-section-eye">簽收憑證</p>
+                        <span class="appeal-evid-badge">已驗證</span>
+                    </div>
+
+                    <div class="appeal-evid-body">
+                        <div class="appeal-sig-box">
+                            <svg viewBox="0 0 140 60" aria-hidden="true">
+                                <path d="M 10 38 Q 18 18, 28 32 T 48 30 Q 55 22, 62 36 Q 68 44, 76 28 Q 84 16, 92 34 T 110 30 Q 118 24, 128 36" fill="none" stroke="#1a1a1a" stroke-width="1.6" stroke-linecap="round"/>
+                                <path d="M 28 42 L 110 44" fill="none" stroke="#1a1a1a" stroke-width=".8" stroke-linecap="round" opacity=".4"/>
+                            </svg>
+                            <p class="appeal-sig-caption">林小華　手寫簽名</p>
+                        </div>
+                        <table class="appeal-evid-table">
+                            <tr><td>工單 ID</td><td id="appeal-evid-id">#20260304-A07</td></tr>
+                            <tr><td>簽收時間</td><td id="appeal-evid-time">2026 / 03 / 04　14:32:18</td></tr>
+                            <tr><td>認證方式</td><td>手機 OTP　0912-***-678</td></tr>
+                            <tr><td>IP　裝置</td><td>114.32.***.18　iOS Safari</td></tr>
+                            <tr><td>SHA-256</td><td class="appeal-hash">3a7f9c2e&hairsp;4b1d&hairsp;8a35&hairsp;f04c&hairsp;91eb&hairsp;6d2a&hairsp;7c5b&hairsp;e8f3&hairsp;b29e</td></tr>
+                            <tr><td>時間戳</td><td>RFC 3161 TSA　已驗證</td></tr>
+                        </table>
+                    </div>
+
+                    <p class="appeal-evid-note">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><circle cx="12" cy="16" r=".5" fill="currentColor"/></svg>
+                        <span>此憑證儲存於車行端工單系統　依商業會計法保存 7 年　如有竄改 SHA-256 hash 立即失效</span>
+                    </p>
+                </div>
+
+                <div class="appeal-form">
+                    <label class="appeal-form-label" for="appeal-textarea">申訴理由</label>
+                    <textarea id="appeal-textarea" class="appeal-textarea" placeholder="例如　收到車後發現煞車仍偏軟　請車行協助確認"></textarea>
+                    <div class="appeal-actions">
+                        <button type="button" class="appeal-btn-cancel" data-close>取消</button>
+                        <button type="button" class="appeal-btn-send" id="appeal-send">
+                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                            寄出申訴
+                        </button>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="appeal-state appeal-state-done" hidden>
-            <button type="button" class="appeal-modal-close appeal-modal-close-floating" aria-label="關閉" data-close>
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>
-            </button>
+            <div class="appeal-state appeal-state-done" hidden>
+                <button type="button" class="appeal-modal-close appeal-modal-close-floating" aria-label="關閉" data-close>
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>
+                </button>
 
-            <div class="appeal-done-mark" aria-hidden="true">
-                <svg viewBox="0 0 52 52" width="48" height="48">
-                    <circle cx="26" cy="26" r="24" fill="none" stroke="currentColor" stroke-width="1.5"/>
-                    <path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M14 27 L23 35 L38 18"/>
-                </svg>
+                <div class="appeal-done-mark" aria-hidden="true">
+                    <svg viewBox="0 0 52 52" width="48" height="48">
+                        <circle cx="26" cy="26" r="24" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                        <path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M14 27 L23 35 L38 18"/>
+                    </svg>
+                </div>
+
+                <h2 class="appeal-done-title">申訴已送出</h2>
+                <p class="appeal-done-sub">
+                    車行將直接與您聯繫<br>
+                    通常 3 個工作日內
+                </p>
+
+                <dl class="appeal-done-meta">
+                    <dt>申訴編號</dt>
+                    <dd id="appeal-done-id">#20260304-A07</dd>
+                    <dt>副本已寄至</dt>
+                    <dd id="appeal-done-email">l***@gmail.com</dd>
+                </dl>
+
+                <button type="button" class="appeal-btn-close-final" data-close>關閉</button>
             </div>
 
-            <h2 class="appeal-done-title">申訴已送出</h2>
-            <p class="appeal-done-sub">
-                車行將直接與您聯繫<br>
-                通常 3 個工作日內
-            </p>
-
-            <dl class="appeal-done-meta">
-                <dt>申訴編號</dt>
-                <dd id="appeal-done-id">#20260304-A07</dd>
-                <dt>副本已寄至</dt>
-                <dd id="appeal-done-email">l***@gmail.com</dd>
-            </dl>
-
-            <button type="button" class="appeal-btn-close-final" data-close>關閉</button>
         </div>
-
     </div>
-</div>
 
 <script src="nav.js"></script>
 <script src="history.js"></script>
