@@ -1,26 +1,13 @@
-// ─── history.js v3 ──────────────────────────────────
-// 對齊新版 HTML/CSS:
-//   - 車輛照直接設 #hist-veh-img.src(載失敗 onerror 隱藏 img 顯 gradient 底,不疊 SVG)
-//   - 里程含 <span>km</span> 用 innerHTML 設
-//   - menu 選擇器全改成 id(class 已從 HTML 拿掉)
-//   - 申訴 trigger 改 <button type="button">(語意修正)
-//
-// 核心邏輯維持:
-//   - mock seed 兩台車(ABC 機車 + RAH 汽車)
-//   - 合併 LS mqzx:histRecords(車行端標完工同步)
 //   - 切換 / 排序 / overflow 三個 dropdown 共用 setupDropdown
 //   - 評分動畫 fade + 卡片展開
-// ──────────────────────────────────────────────────
 
 (function () {
   const LS_HIST_RECORDS = "mqzx:histRecords";
   const LS_VEHICLES = "mqzx:vehicles";
 
-  // ═══════════════════════════════════════════════════
   //   demo 車輛清單　seed
   //   ── 跟 vehicle.js 的 SEED 對齊(同步車款 / 暱稱 / avatar)
   //   ── 實際使用時優先讀 mqzx:vehicles LS,讓車庫新增的車也能在這裡出現
-  // ═══════════════════════════════════════════════════
   const VEHICLES_SEED = [
     {
       plate: "ABC-1234",
@@ -55,9 +42,7 @@
 
   const VEHICLES = loadVehicles();
 
-  // ═══════════════════════════════════════════════════
   //   demo mock 紀錄
-  // ═══════════════════════════════════════════════════
   const MOCK_RECORDS = [
     {
       plate: "ABC-1234",
@@ -112,9 +97,7 @@
     },
   ];
 
-  // ═══════════════════════════════════════════════════
   //   state
-  // ═══════════════════════════════════════════════════
   // URL ?plate=XXX 切換預設車輛　無效或不存在 fallback 第一台
   const urlPlate = (() => {
     try {
@@ -171,16 +154,12 @@
     return arr;
   }
 
-  // ═══════════════════════════════════════════════════
   //   render:vehicle header
-  //   - 直接設 img src　載失敗 onerror 已在 HTML 處理(this.style.display='none')
-  //   - 顯示 gradient 底色　不再塞 fallback SVG 圖層
-  // ═══════════════════════════════════════════════════
   function renderHeader() {
     const v = pickVehicle(currentPlate);
     document.getElementById("hist-veh-plate").textContent = v.plate;
 
-    // 副標:有暱稱就顯示　例「狗熊　Gogoro VIVA　機車」
+    // 有暱稱就顯示
     const subParts = [];
     if (v.nickname && v.nickname.trim()) subParts.push(v.nickname);
     subParts.push(v.model, v.kind);
@@ -197,7 +176,7 @@
         img.src = v.avatar;
         img.alt = `${v.plate}　${v.model}`;
       } else {
-        // 沒上傳照片　顯車種對應 silhouette icon(跟車庫卡片對齊)
+        // 沒上傳照片　顯車種對應 silhouette icon
         const silhouette =
           v.kind === "汽車"
             ? "./icon/silhouette-car.png"
@@ -233,9 +212,7 @@
     }
   }
 
-  // ═══════════════════════════════════════════════════
   //   render:stats
-  // ═══════════════════════════════════════════════════
   function renderStats(records) {
     let sum = 0;
     let recentDate = "—";
@@ -256,9 +233,7 @@
       : "—";
   }
 
-  // ═══════════════════════════════════════════════════
   //   render:record list
-  // ═══════════════════════════════════════════════════
   function escapeHtml(s) {
     return String(s == null ? "" : s)
       .replace(/&/g, "&amp;")
@@ -276,7 +251,7 @@
     li.dataset.plate = rec.plate;
 
     // 再次預約 CTA
-    // 註解:ticket.html 目前不支援 ?shop=&services= 預填　功能暫停
+
     // 等預填補上後　把 button 改回 <a href="ticket.html?...">
     // const rebookHref = `ticket.html?shop=${encodeURIComponent(rec.shop)}&services=${encodeURIComponent((rec.services || []).join(","))}`;
 
@@ -347,10 +322,8 @@
     renderStats(filtered);
   }
 
-  // ═══════════════════════════════════════════════════
   //   dropdown 共用
-  //   - selector 從 .class 改 #id(class 已從 HTML 拿掉)
-  // ═══════════════════════════════════════════════════
+  //   - selector 從 .class 改 #id
   function setupDropdown(btn, menu) {
     btn.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -378,9 +351,7 @@
     if (e.key === "Escape") closeAllMenus();
   });
 
-  // ═══════════════════════════════════════════════════
   //   init
-  // ═══════════════════════════════════════════════════
   function init() {
     // 車輛切換
     const switchBtn = document.getElementById("hist-veh-switch-btn");
@@ -472,7 +443,7 @@
         return;
       }
 
-      // 申訴 trigger 由 appeal-modal.js 處理(它監聽 document)
+      // 申訴 trigger 由 appeal-modal.js 處理
       if (e.target.closest(".appeal-trigger")) return;
 
       // 再次預約 暫停　preventDefault 不導頁　不展開卡片

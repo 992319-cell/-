@@ -1,6 +1,6 @@
-/* ============================================
+/* 
    appointments.css — 車主預約追蹤頁
-   ============================================ */
+    */
 
 :root {
   --ink-soft: #2c2c2e;
@@ -20,12 +20,18 @@ body {
   letter-spacing: -.01em;
   color: var(--ink);
   background: var(--white);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
+
+footer { margin-top: auto; }
 
 /* ───── 頁面主容器 ───── */
 .ap {
   padding-top: var(--nav-h);
   max-width: 1280px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -89,15 +95,15 @@ body {
 .ap-add {
   padding: 7px 16px;
   font-size: var(--fs-xs);
-  background: var(--ink);
-  color: var(--white);
+  background: var(--yellow);
+  color: var(--ink);
   border-radius: var(--radius);
   letter-spacing: .04em;
   text-decoration: none;
   transition: background .2s, transform .2s;
 }
 .ap-add:hover {
-  background: var(--ink-soft);
+  background: var(--yellow-dark);
   transform: translateY(-1px);
 }
 
@@ -141,7 +147,7 @@ body {
   box-shadow: none;
 }
 
-/* 左:照片區(沿用 ticket.html .tk-shop-card 視覺) */
+/* 左:照片區 */
 .ap-card .photo {
   position: relative;
   background-size: cover;
@@ -231,7 +237,7 @@ body {
 .ap-card .badge.reject { background: var(--badge-reject-bg); color: var(--badge-reject-fg); }
 .ap-card .badge.cancel { background: var(--badge-cancel-bg); color: var(--badge-cancel-fg); }
 
-/* 服務項目(純文字逗號分隔,沿用 Airbnb / Booking 派) */
+/* 服務項目 */
 .ap-card .services {
   font-size: var(--fs-sm);
   color: var(--ink);
@@ -337,9 +343,9 @@ body {
 }
 .ap-empty a:hover { background: var(--ink-soft); }
 
-/* ============================================
+/* 
    RWD
-   ============================================ */
+    */
 
 @media (max-width: 1024px) {
   .ap-head { padding: 28px 32px 18px; }

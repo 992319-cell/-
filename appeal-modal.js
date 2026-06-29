@@ -1,7 +1,6 @@
 // ─── appeal-modal.js ─────────────────────────────
 // 申訴 modal:點 .appeal-trigger 觸發,從父 .history-item 抓服務資料
 // 流程:表單態 → 點寄出 → 切換到成功態(modal 不關閉)
-// 平台不介入　不存 LS　demo 純展示
 // ──────────────────────────────────────────────────
 
 (function () {
@@ -11,32 +10,36 @@
   const stateForm = modal.querySelector(".appeal-state-form");
   const stateDone = modal.querySelector(".appeal-state-done");
 
-  const snapDate     = document.getElementById("appeal-snap-date");
-  const snapShop     = document.getElementById("appeal-snap-shop");
-  const snapVehicle  = document.getElementById("appeal-snap-vehicle");
+  const snapDate = document.getElementById("appeal-snap-date");
+  const snapShop = document.getElementById("appeal-snap-shop");
+  const snapVehicle = document.getElementById("appeal-snap-vehicle");
   const snapServices = document.getElementById("appeal-snap-services");
-  const snapMileage  = document.getElementById("appeal-snap-mileage");
-  const snapPrice    = document.getElementById("appeal-snap-price");
+  const snapMileage = document.getElementById("appeal-snap-mileage");
+  const snapPrice = document.getElementById("appeal-snap-price");
 
-  const orderIdHead  = document.getElementById("appeal-order-id");
-  const orderIdEvid  = document.getElementById("appeal-evid-id");
-  const orderIdDone  = document.getElementById("appeal-done-id");
-  const doneEmail    = document.getElementById("appeal-done-email");
+  const orderIdHead = document.getElementById("appeal-order-id");
+  const orderIdEvid = document.getElementById("appeal-evid-id");
+  const orderIdDone = document.getElementById("appeal-done-id");
+  const doneEmail = document.getElementById("appeal-done-email");
 
   const textarea = document.getElementById("appeal-textarea");
-  const sendBtn  = document.getElementById("appeal-send");
+  const sendBtn = document.getElementById("appeal-send");
 
-  // ═══════════════════════════════════════════════════
   //   工具:從 .history-item 抓 snapshot 資料
-  // ═══════════════════════════════════════════════════
+
   function escapeJoin(nodes) {
-    return Array.from(nodes).map((n) => n.textContent.trim()).filter(Boolean).join("、");
+    return Array.from(nodes)
+      .map((n) => n.textContent.trim())
+      .filter(Boolean)
+      .join("、");
   }
-  function txt(el) { return el ? el.textContent.trim() : ""; }
+  function txt(el) {
+    return el ? el.textContent.trim() : "";
+  }
 
   function scrapeSnapshot(item) {
     if (!item) return null;
-    // 新 v2 結構:.hist-card
+    // hist-card
     const date = txt(item.querySelector(".hist-card-date"));
     const shop = txt(item.querySelector(".hist-card-shop"));
     const price = txt(item.querySelector(".hist-card-price"));
@@ -55,9 +58,10 @@
     // 取目前車輛(從 v2 header)
     const plateEl = document.getElementById("hist-veh-plate");
     const subEl = document.getElementById("hist-veh-sub");
-    const vehicle = plateEl && subEl
-      ? `${plateEl.textContent.trim()}　${subEl.textContent.trim().split("　")[0]}`
-      : "ABC-1234　Gogoro VIVA";
+    const vehicle =
+      plateEl && subEl
+        ? `${plateEl.textContent.trim()}　${subEl.textContent.trim().split("　")[0]}`
+        : "ABC-1234　Gogoro VIVA";
 
     // 訂單 id:從 data-order-id,否則用日期生成
     let orderId = item.dataset.orderId;
@@ -70,19 +74,18 @@
     return { date, shop, price, services, mileage, vehicle, orderId };
   }
 
-  // ═══════════════════════════════════════════════════
   //   開啟 modal:填資料 + 回到表單態
-  // ═══════════════════════════════════════════════════
+
   function open(item) {
     const snap = scrapeSnapshot(item);
     if (!snap) return;
 
-    snapDate.textContent     = snap.date || "—";
-    snapShop.textContent     = snap.shop || "—";
-    snapVehicle.textContent  = snap.vehicle;
+    snapDate.textContent = snap.date || "—";
+    snapShop.textContent = snap.shop || "—";
+    snapVehicle.textContent = snap.vehicle;
     snapServices.textContent = snap.services || "—";
-    snapMileage.textContent  = snap.mileage || "—";
-    snapPrice.textContent    = snap.price || "—";
+    snapMileage.textContent = snap.mileage || "—";
+    snapPrice.textContent = snap.price || "—";
 
     const tag = "#" + snap.orderId;
     orderIdHead.textContent = tag;
@@ -92,12 +95,16 @@
     // 副本信箱:從 sessionStorage 找,否則 demo 預設
     let email = "l***@gmail.com";
     try {
-      const user = JSON.parse(sessionStorage.getItem("mqzx:currentUser") || "null");
+      const user = JSON.parse(
+        sessionStorage.getItem("mqzx:currentUser") || "null",
+      );
       if (user && user.email) {
         const [name, dom] = user.email.split("@");
         email = (name[0] || "l") + "***@" + (dom || "gmail.com");
       }
-    } catch { /* noop */ }
+    } catch {
+      /* noop */
+    }
     doneEmail.textContent = email;
 
     // 重置表單態
@@ -127,9 +134,8 @@
     if (card) card.scrollTop = 0;
   }
 
-  // ═══════════════════════════════════════════════════
   //   事件
-  // ═══════════════════════════════════════════════════
+
   // 事件代理:點 .appeal-trigger(靜態 / 動態都涵蓋)
   document.addEventListener("click", (e) => {
     const trig = e.target.closest(".appeal-trigger");
