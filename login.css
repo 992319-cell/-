@@ -1,6 +1,4 @@
-/* nav 統一走 common.css 的 dark glass，不在此覆寫 */
 
-/* body 覆寫 Apple 風字體（common.css 是純 Noto Sans TC，沒有 Inter） */
 body {
     font-family: 'Inter','Noto Sans TC',-apple-system,BlinkMacSystemFont,sans-serif;
     letter-spacing: -.01em;
@@ -16,7 +14,7 @@ body {
 }
 
 
-/* ===== 主內容區  */
+/* 主內容區  */
 .login-main {
     padding: 120px 24px 80px;
     display: flex;
