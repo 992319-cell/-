@@ -62,11 +62,10 @@ body {
     overflow-x: hidden;
 }
 
-/* 表單元素 reset
-   只拿掉瀏覽器預設的字體 字色 letter-spacing
-   邊框 邊距 寬度交給各頁自己決定　不全域強加 */
-input, textarea, select, button {
+/* 表單元素 reset*/
+input, textarea, select, button, option {
     font: inherit;
+    font-family: inherit;
     color: inherit;
     letter-spacing: inherit;
 }

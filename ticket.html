@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>預約保養｜明前知行</title>
+    <title>預約保養</title>
     <link rel="stylesheet" href="common.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="ticket.css">
 </head>
@@ -54,56 +53,58 @@
     </svg>
 
     <nav>
-            <div class="logo">
-                <h1>
-                    <a href="index.html">
-                        <span class="logo-mark">
-                            <img src="./icon/logo-mark拷貝2.png" alt="" aria-hidden="true">
-                            <span class="logo-text">明前知行</span>
-                        </span>
-                    </a>
-                </h1>
-            </div>
-            <ul class="links">
-                <li><a href="market.html">查行情</a></li>
-                <li class="is-current"><a href="appointments.html">我的預約</a></li>
-                <li><a href="vehicle.html">車歷</a></li>
-                <li><a href="login.html">登入</a></li>
-            </ul>
-            <button type="button" class="nav-toggle" aria-expanded="false" aria-label="開啟選單">
-                <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <line x1="4" y1="6" x2="20" y2="6"/>
-                    <line x1="4" y1="12" x2="20" y2="12"/>
-                    <line x1="4" y1="18" x2="20" y2="18"/>
-                </svg>
-                <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <line x1="6" y1="6" x2="18" y2="18"/>
-                    <line x1="18" y1="6" x2="6" y2="18"/>
-                </svg>
-            </button>
-        </nav>
-
-        <header class="tk-header">
-            <h2>預約保養</h2>
-            <p class="tk-header-sub">選擇車行、填寫需求，由車行確認後成立</p>
-        </header>
-
-        <div class="tk-steps">
-            <div class="tk-step is-active" data-step="1">
-                <span class="tk-step-num">1</span>
-                <span class="tk-step-label">預約資訊</span>
-            </div>
-            <div class="tk-step" data-step="2">
-                <span class="tk-step-num">2</span>
-                <span class="tk-step-label">保養需求</span>
-            </div>
-            <div class="tk-step" data-step="3">
-                <span class="tk-step-num">3</span>
-                <span class="tk-step-label">確認送出</span>
-            </div>
+        <div class="logo">
+            <h1>
+                <a href="index.html">
+                    <span class="logo-mark">
+                        <img src="./icon/logo-mark拷貝2.png" alt="" aria-hidden="true">
+                        <span class="logo-text">明前知行</span>
+                    </span>
+                </a>
+            </h1>
         </div>
+        <ul class="links">
+            <li><a href="market.html">查行情</a></li>
+            <li class="is-current">
+                <a href="appointments.html">我的預約</a>
+            </li>
+            <li><a href="vehicle.html">車庫</a></li>
+            <li><a href="login.html">登入</a></li>
+        </ul>
+        <button type="button" class="nav-toggle" aria-expanded="false" aria-label="開啟選單">
+            <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="4" y1="6" x2="20" y2="6"/>
+                <line x1="4" y1="12" x2="20" y2="12"/>
+                <line x1="4" y1="18" x2="20" y2="18"/>
+            </svg>
+            <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="6" y1="6" x2="18" y2="18"/>
+                <line x1="18" y1="6" x2="6" y2="18"/>
+            </svg>
+        </button>
+    </nav>
 
-        <div class="tk-layout">
+    <header class="tk-header">
+        <h2>預約保養</h2>
+        <p class="tk-header-sub">選擇車行、填寫需求，由車行確認後成立</p>
+    </header>
+
+    <div class="tk-steps">
+        <div class="tk-step is-active" data-step="1">
+            <span class="tk-step-num">1</span>
+            <span class="tk-step-label">預約資訊</span>
+        </div>
+        <div class="tk-step" data-step="2">
+            <span class="tk-step-num">2</span>
+            <span class="tk-step-label">保養需求</span>
+        </div>
+        <div class="tk-step" data-step="3">
+            <span class="tk-step-num">3</span>
+            <span class="tk-step-label">確認送出</span>
+        </div>
+    </div>
+
+    <div class="tk-layout">
         <form class="tk-form" novalidate>
 
             <!-- Step 1 -->
@@ -341,7 +342,8 @@
                 </div>
                 <dl class="tk-aside-list">
                     <div class="tk-aside-row">
-                        <dt>日期</dt><dd data-aside="date">—</dd>
+                        <dt>日期</dt>
+                        <dd data-aside="date">—</dd>
                     </div>
                     <div class="tk-aside-row">
                         <dt>時段</dt><dd data-aside="slot">—</dd>
@@ -352,12 +354,14 @@
                 </dl>
             </div>
         </aside>
-        </div>
+    </div>
 
-        <footer>
-            <p>© 2026 明前知行　版權所有</p>
-            <a href="mailto:992319@gmail.com">992319@gmail.com</a>
-        </footer>
+    <footer>
+        <p>© 2026 明前知行　版權所有</p>
+        <a href="mailto:992319@gmail.com">
+            992319@gmail.com
+        </a>
+    </footer>
 
     <script src="nav.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
