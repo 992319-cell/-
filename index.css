@@ -64,6 +64,7 @@ img{display:block;max-width:100%}
   color:rgba(255,255,255,.9); line-height:1.5;
   max-width:680px; letter-spacing:-.005em;
 }
+.mob-br{display:none}
 .hero-cta-row{
   margin-top:40px; display:flex; gap:24px; align-items:center;
   flex-wrap:wrap; justify-content:center;
@@ -503,12 +504,6 @@ section > header .lede strong{color:var(--ink); font-weight:600}
 .wl-more:hover{border-bottom-color:var(--accent)}
 
 /* =========== FOOTER =========== */
-footer{
-  background:var(--bg-off); color:var(--muted);
-  padding:40px 22px; text-align:center;
-  font-size:12px; font-weight:400;
-  border-top:1px solid var(--line);
-}
 
 /* =========== RWD 1280 =========== */
 @media (max-width:1280px){
@@ -520,6 +515,15 @@ footer{
   .payoff-content h2{font-size:48px}
   .waitlist h2{font-size:54px}
   .coverage-stat .v{font-size:44px}
+}
+
+/* =========== payoff 堆疊 1100 =========== */
+@media (max-width:1100px){
+  .payoff{grid-template-columns:1fr}
+  .payoff-image{min-height:400px}
+  .payoff-image::after{background:linear-gradient(180deg, transparent 50%, var(--ink) 100%)}
+  .payoff-content{padding:80px 40px}
+  .payoff-content h2{font-size:44px}
 }
 
 /* =========== RWD 1024 =========== */
@@ -545,11 +549,6 @@ footer{
   .feature-overlay,.feature-block.reverse .feature-overlay{
     position:static; max-width:none; margin:-32px 24px 0;
   }
-  .payoff{grid-template-columns:1fr}
-  .payoff-image{min-height:400px}
-  .payoff-image::after{background:linear-gradient(180deg, transparent 50%, var(--ink) 100%)}
-  .payoff-content{padding:80px 40px}
-  .payoff-content h2{font-size:44px}
   .waitlist h2{font-size:44px}
 }
 
@@ -558,6 +557,7 @@ footer{
   .hero{min-height:560px; max-height:none; height:90vh}
   .hero h1{font-size:42px; letter-spacing:-.02em}
   .hero-sub{font-size:16px; margin-top:18px}
+  .mob-br{display:block}
   .hero-cta-row{margin-top:28px; gap:16px}
   .cta-pill{padding:11px 22px; font-size:14px}
   .problem{padding:80px 18px 0}
