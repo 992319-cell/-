@@ -739,9 +739,10 @@ body.no-scroll { overflow: hidden; }
     .fmodal { padding: 0; }
     .fmodal-panel {
         max-width: 100%;
-        max-height: 100vh;
-        height: 100vh;
+        max-height: 100dvh;
+        height: 100dvh;
         border-radius: 0;
+        padding-bottom: env(safe-area-inset-bottom);
     }
     .sign-overlay { padding: 16px; }
     .sign-canvas-wrap { height: 180px; }
