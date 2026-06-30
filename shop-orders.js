@@ -1,11 +1,7 @@
-// ─── shop-orders.js ─────────────────────────────
 // 工單管理頁邏輯
 // 狀態:pending(待接單)/ in_progress(進行中)/ completed(已完成)/ rejected(未接單)
 // 含:tab 切換 + 接單/不接單/客人未到 + 完工 modal + 簽名 canvas
-// 側欄互動已抽到 shop-sidebar.js,本檔不再處理
-// ─────────────────────────────────────────────────
 
-// ═══════════════════════════════════════════════════
 const tabs = document.querySelectorAll(".otab");
 const ordersWrap = document.querySelector(".orders-wrap");
 const emptyState = document.querySelector(".orders-empty");
@@ -53,23 +49,32 @@ const LS_CHECKIN = "mqzx:newCheckin";
 const LS_HIST_RECORDS = "mqzx:histRecords";
 
 function loadHistRecords() {
-  try { return JSON.parse(localStorage.getItem(LS_HIST_RECORDS) || "[]"); }
-  catch { return []; }
+  try {
+    return JSON.parse(localStorage.getItem(LS_HIST_RECORDS) || "[]");
+  } catch {
+    return [];
+  }
 }
 function saveHistRecords(arr) {
   localStorage.setItem(LS_HIST_RECORDS, JSON.stringify(arr));
 }
 
 function loadHistPrice() {
-  try { return JSON.parse(localStorage.getItem(LS_HIST_PRICE) || "{}"); }
-  catch { return {}; }
+  try {
+    return JSON.parse(localStorage.getItem(LS_HIST_PRICE) || "{}");
+  } catch {
+    return {};
+  }
 }
 function saveHistPrice(map) {
   localStorage.setItem(LS_HIST_PRICE, JSON.stringify(map));
 }
 function loadVehicleHist() {
-  try { return JSON.parse(localStorage.getItem(LS_VEHICLE_HIST) || "[]"); }
-  catch { return []; }
+  try {
+    return JSON.parse(localStorage.getItem(LS_VEHICLE_HIST) || "[]");
+  } catch {
+    return [];
+  }
 }
 function saveVehicleHist(arr) {
   localStorage.setItem(LS_VEHICLE_HIST, JSON.stringify(arr));
@@ -102,7 +107,7 @@ ordersWrap.addEventListener("click", (e) => {
   // 客人未到場
   if (btn.classList.contains("bnoshow")) {
     const ok = confirm(
-      "確定標記此工單為「客人未到場」？\n標記後工單將取消,不會進入車歷與行情資料。",
+      "確定標記此工單為「客人未到場」？\n標記後工單將直接刪除",
     );
     if (!ok) return;
     order.classList.add("is-leaving");
@@ -122,7 +127,9 @@ ordersWrap.addEventListener("click", (e) => {
   setTimeout(() => {
     order.dataset.status = newStatus;
     const oact = order.querySelector(".oact");
-    oact.replaceChildren(...(isAccept ? buildInProgressActions() : [buildRejectedPill()]));
+    oact.replaceChildren(
+      ...(isAccept ? buildInProgressActions() : [buildRejectedPill()]),
+    );
     order.classList.remove("is-leaving");
     updateBadges();
     renderOrders();
@@ -293,7 +300,9 @@ function collectItems() {
   const out = [];
   fitems.querySelectorAll(".fitem").forEach((li) => {
     const name = li.querySelector(".fitem-name").value.trim();
-    const priceRaw = li.querySelector(".fitem-price").value.replace(/[^\d]/g, "");
+    const priceRaw = li
+      .querySelector(".fitem-price")
+      .value.replace(/[^\d]/g, "");
     const price = parseInt(priceRaw, 10);
     if (name && !isNaN(price) && price > 0) {
       out.push({ name, price });
@@ -303,9 +312,17 @@ function collectItems() {
 }
 
 function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, (c) => ({
-    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
-  }[c]));
+  return String(s).replace(
+    /[&<>"']/g,
+    (c) =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;",
+      })[c],
+  );
 }
 
 // ═══════════════════════════════════════════════════
@@ -369,7 +386,8 @@ function setupCanvas() {
 }
 
 let drawing = false;
-let lastX = 0, lastY = 0;
+let lastX = 0,
+  lastY = 0;
 function pointerPos(e) {
   const r = signCanvas.getBoundingClientRect();
   return { x: e.clientX - r.left, y: e.clientY - r.top };
@@ -378,7 +396,8 @@ signCanvas.addEventListener("pointerdown", (e) => {
   drawing = true;
   signCanvas.setPointerCapture(e.pointerId);
   const p = pointerPos(e);
-  lastX = p.x; lastY = p.y;
+  lastX = p.x;
+  lastY = p.y;
   signCtx.beginPath();
   signCtx.moveTo(lastX, lastY);
   signCtx.lineTo(lastX + 0.1, lastY + 0.1);
@@ -394,12 +413,15 @@ signCanvas.addEventListener("pointermove", (e) => {
   signCtx.moveTo(lastX, lastY);
   signCtx.lineTo(p.x, p.y);
   signCtx.stroke();
-  lastX = p.x; lastY = p.y;
+  lastX = p.x;
+  lastY = p.y;
 });
 function endStroke(e) {
   if (drawing) {
     drawing = false;
-    try { signCanvas.releasePointerCapture(e.pointerId); } catch {}
+    try {
+      signCanvas.releasePointerCapture(e.pointerId);
+    } catch {}
   }
 }
 signCanvas.addEventListener("pointerup", endStroke);
@@ -460,7 +482,9 @@ signConfirm.addEventListener("click", () => {
     // .oinfo p:時間已搬到 .odate,這裡只寫里程 + 工單 # + 已簽收
     const infoP = ord.querySelector(".oinfo p");
     if (infoP) {
-      const mileNum = Number(String(payload.mileage).replace(/[^\d]/g, "")).toLocaleString();
+      const mileNum = Number(
+        String(payload.mileage).replace(/[^\d]/g, ""),
+      ).toLocaleString();
       infoP.textContent = `${mileNum} km　工單 #${payload.orderId}　已交車`;
     }
     const oact = ord.querySelector(".oact");
@@ -505,8 +529,11 @@ window.addEventListener("resize", () => {
 //   - 監聽 walkin:created 事件(同分頁),新增即時插入
 // ═══════════════════════════════════════════════════
 function loadWalkinOrders() {
-  try { return JSON.parse(localStorage.getItem(LS_WALKIN) || "[]"); }
-  catch { return []; }
+  try {
+    return JSON.parse(localStorage.getItem(LS_WALKIN) || "[]");
+  } catch {
+    return [];
+  }
 }
 
 function buildOrderCard(o) {
@@ -524,14 +551,16 @@ function buildOrderCard(o) {
   if (o.avatar) {
     photoDiv.className = "bike-photo";
     const img = document.createElement("img");
-    img.src = o.avatar; img.alt = "";
+    img.src = o.avatar;
+    img.alt = "";
     photoDiv.appendChild(img);
   } else {
     photoDiv.className = "bike-silhouette";
     const img = document.createElement("img");
-    img.src = o.kind === "汽車"
-      ? "./icon/silhouette-car.png"
-      : "./icon/silhouette-bike.png";
+    img.src =
+      o.kind === "汽車"
+        ? "./icon/silhouette-car.png"
+        : "./icon/silhouette-bike.png";
     img.alt = "";
     photoDiv.appendChild(img);
   }
@@ -540,9 +569,12 @@ function buildOrderCard(o) {
   // odate
   const odate = document.createElement("div");
   odate.className = "odate";
-  const t1 = document.createElement("time"); t1.textContent = o.dateLabel;
-  const t2 = document.createElement("time"); t2.textContent = o.timeLabel;
-  const sp = document.createElement("span"); sp.textContent = o.yearLabel;
+  const t1 = document.createElement("time");
+  t1.textContent = o.dateLabel;
+  const t2 = document.createElement("time");
+  t2.textContent = o.timeLabel;
+  const sp = document.createElement("span");
+  sp.textContent = o.yearLabel;
   odate.append(t1, t2, sp);
   li.appendChild(odate);
 
@@ -575,10 +607,14 @@ function buildOrderCard(o) {
   const oact = document.createElement("div");
   oact.className = "oact";
   const bfill = document.createElement("button");
-  bfill.type = "button"; bfill.className = "bfill"; bfill.textContent = "填寫完工";
+  bfill.type = "button";
+  bfill.className = "bfill";
+  bfill.textContent = "填寫完工";
   const bnoshow = document.createElement("button");
-  bnoshow.type = "button"; bnoshow.className = "bnoshow";
-  bnoshow.title = "客人未到場"; bnoshow.textContent = "客人未到";
+  bnoshow.type = "button";
+  bnoshow.className = "bnoshow";
+  bnoshow.title = "客人未到場";
+  bnoshow.textContent = "客人未到";
   oact.append(bfill, bnoshow);
   li.appendChild(oact);
 
@@ -603,7 +639,9 @@ window.addEventListener("walkin:created", (e) => {
   const card = buildOrderCard(o);
   ordersWrap.prepend(card);
   // 切到「進行中」tab 讓老闆看到新卡
-  tabs.forEach((t) => t.classList.toggle("is-active", t.dataset.status === "in_progress"));
+  tabs.forEach((t) =>
+    t.classList.toggle("is-active", t.dataset.status === "in_progress"),
+  );
   currentTab = "in_progress";
   renderOrders();
   updateBadges();
@@ -616,8 +654,11 @@ window.addEventListener("walkin:created", (e) => {
 //   - 跨分頁(車主手機 → 車行桌機 demo):storage event
 // ═══════════════════════════════════════════════════
 function loadCheckinOrders() {
-  try { return JSON.parse(localStorage.getItem(LS_CHECKIN) || "[]"); }
-  catch { return []; }
+  try {
+    return JSON.parse(localStorage.getItem(LS_CHECKIN) || "[]");
+  } catch {
+    return [];
+  }
 }
 
 function restoreCheckinOrders() {
@@ -635,7 +676,9 @@ function handleNewCheckin(order) {
   if (ordersWrap.querySelector(`[data-order-id="${order.id}"]`)) return;
   const card = buildOrderCard(order);
   ordersWrap.prepend(card);
-  tabs.forEach((t) => t.classList.toggle("is-active", t.dataset.status === "in_progress"));
+  tabs.forEach((t) =>
+    t.classList.toggle("is-active", t.dataset.status === "in_progress"),
+  );
   currentTab = "in_progress";
   renderOrders();
   updateBadges();
@@ -649,7 +692,9 @@ window.addEventListener("storage", (e) => {
     const arr = JSON.parse(e.newValue);
     if (!arr.length) return;
     handleNewCheckin(arr[0]);
-  } catch { /* noop */ }
+  } catch {
+    /* noop */
+  }
 });
 
 // ─── 初始化 ─────────────────────────────────────

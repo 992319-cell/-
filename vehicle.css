@@ -1,8 +1,8 @@
-/* ====================================================
+/* 
    vehicle.css ── v2 卡片格重寫
    對齊 appointments / history 視覺語言:1280 max + page-head + token
    依賴 common.css 的色票 token
-   ==================================================== */
+    */
 
 body {
     font-family: 'Inter', 'Noto Sans TC', sans-serif;
@@ -317,17 +317,17 @@ body {
     .veh-card > figure { aspect-ratio: 16 / 9; }
 }
 
-/* ====================================================
+/* 
    ↓↓↓ 以下為新增 / 編輯車輛 modal 的樣式
    原本獨立 vehicle-modal.css　已合併至此檔
-   ==================================================== */
+    */
 
-/* ====================================================
+/* 
    vehicle-modal.css
    車庫頁「新增 / 編輯車輛」燈箱
    依賴 common.css token
    風格參考 walkin-modal.css 但獨立命名空間 .vm-*
-   ==================================================== */
+    */
 
 .vm-modal {
     position: fixed;
@@ -626,11 +626,11 @@ body {
     .vm-btn { width: 100%; }
 }
 
-/* ====================================================
+/* 
    flatpickr 主題覆寫
    ── 跟 ticket.css 對齊的視覺風格
    ── 未來日期被 disable(maxDate: today)
-   ==================================================== */
+    */
 .flatpickr-calendar {
     font-family: 'Noto Sans TC', sans-serif !important;
     border-radius: 3px !important;

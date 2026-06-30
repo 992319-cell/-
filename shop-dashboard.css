@@ -224,6 +224,19 @@
     letter-spacing: -.02em;
     font-variant-numeric: tabular-nums;
 }
+.trend-scroll-outer {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+}
+.chart-scroll-hint {
+    display: none;
+    font-size: var(--fs-xs);
+    color: var(--muted);
+    justify-content: center;
+    padding-top: 10px;
+    letter-spacing: .04em;
+}
 .trend-chart-wrap {
     position: relative;
     width: 100%;
@@ -259,5 +272,6 @@
 
     .revenue { padding: 16px 16px 20px; }
     .revenue header { flex-direction: column; gap: 4px; align-items: flex-start; }
-    .trend-chart-wrap { height: 220px; }
+    .trend-chart-wrap { height: 220px; min-width: 600px; }
+    .chart-scroll-hint { display: flex; }
 }

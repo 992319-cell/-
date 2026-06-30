@@ -86,6 +86,7 @@
     <!-- ───────── 主內容區 ───────── -->
     <main class="app-main">
         <div class="app-topbar">
+            <span class="topbar-brand">明前知行</span>
             <button type="button" class="icon-btn" aria-label="搜尋">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <circle cx="11" cy="11" r="8"/>
@@ -152,9 +153,12 @@
                     <h2 id="revenue-label">營收趨勢　最近 30 天</h2>
                     <strong>$39,712</strong>
                 </header>
-                <div class="trend-chart-wrap">
-                    <canvas id="trend-chart"></canvas>
+                <div class="trend-scroll-outer">
+                    <div class="trend-chart-wrap">
+                        <canvas id="trend-chart"></canvas>
+                    </div>
                 </div>
+                <p class="chart-scroll-hint">← 左右滑動查看完整趨勢 →</p>
             </section>
 
         </div>

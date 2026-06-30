@@ -293,6 +293,9 @@
     flex-direction: column;
 }
 
+/* 手機 topbar 品牌名，桌機/平板不顯示 */
+.topbar-brand { display: none; }
+
 /* 右上 utility bar */
 .app-topbar {
     display: flex;
@@ -493,14 +496,25 @@
         min-height: 56px;
         align-items: center;
     }
+    .topbar-brand {
+        display: inline-block;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: 'Noto Serif TC', serif;
+        font-size: 15px;
+        letter-spacing: .12em;
+        color: var(--ink);
+        pointer-events: none;
+    }
     .sidebar-burger {
         top: 10px; left: 10px;
         background: var(--white);
         border: 1px solid var(--line);
         color: var(--ink);
     }
-    .page-head { padding: 8px 16px 18px; }
-    .app-body { padding: 0 16px 40px; }
+    .page-head { padding: 8px 16px 12px; }
+    .app-body { padding: 0 16px 40px; min-width: 0; }
 
     .page-head h1 { font-size: 22px; }
 }
