@@ -620,54 +620,111 @@ body {
 
 /* ── RWD ── */
 @media (max-width: 480px) {
-    .vm-modal { padding: 12px; }
-    .vm-card { padding: 18px 18px 14px; }
+    .vm-modal {
+        padding: 0;
+        align-items: flex-end;
+    }
+    .vm-card {
+        max-width: 100%;
+        max-height: 90dvh;
+        border-radius: 6px 6px 0 0;
+        padding: 18px 18px calc(14px + env(safe-area-inset-bottom));
+        overflow-y: auto;
+    }
     .vm-foot { flex-direction: column-reverse; }
     .vm-btn { width: 100%; }
 }
 
-/* 
-   flatpickr 主題覆寫
-   ── 跟 ticket.css 對齊的視覺風格
-   ── 未來日期被 disable(maxDate: today)
-    */
-.flatpickr-calendar {
-    font-family: 'Noto Sans TC', sans-serif !important;
-    border-radius: 3px !important;
-    box-shadow: 0 4px 20px rgba(15, 45, 110, 0.15) !important;
+/* flatpickr 主題覆寫
+   body 前綴提高 specificity，無需 !important（今天邊框除外）
+   maxDate: today → 未來日期自動 disabled
+*/
+body .flatpickr-calendar {
+    font-family: 'Noto Sans TC', sans-serif;
+    border-radius: 3px;
+    box-shadow: 0 4px 20px rgba(15, 45, 110, 0.15);
 }
-.flatpickr-day.selected,
-.flatpickr-day.selected:hover {
-    background: var(--accent-deep) !important;
-    border-color: var(--accent-deep) !important;
+
+body .flatpickr-day {
+    border-color: transparent;
 }
-/* 未來日期不可選(maxDate: today)　明顯灰掉避免誤以為壞掉 */
-.flatpickr-day.flatpickr-disabled,
-.flatpickr-day.flatpickr-disabled:hover {
-    color: var(--muted-light) !important;
-    background: var(--bg-off) !important;
-    border-color: transparent !important;
-    cursor: not-allowed !important;
-    text-decoration: line-through !important;
-    opacity: .55 !important;
+
+body .flatpickr-day:hover,
+body .flatpickr-day.focused {
+    background: rgba(82, 117, 198, 0.12);
+    border-color: transparent;
 }
-/* 上次保養可以是今天　today 視覺保留淡色強調　但不要 yellow 邊框搶戲 */
-.flatpickr-day.today:not(.selected) {
-    border-color: var(--line) !important;
-    color: var(--accent-deep) !important;
+
+/* 今天（上次保養可以是今天） */
+body .flatpickr-day.today,
+body .flatpickr-day.today.focused {
+    border: 1px solid var(--yellow) !important;
+    background: transparent;
 }
-.flatpickr-day:hover {
-    background: rgba(82, 117, 198, 0.12) !important;
+body .flatpickr-day.today:hover {
+    border: 1px solid var(--yellow) !important;
+    background: rgba(82, 117, 198, 0.12);
 }
-.flatpickr-months .flatpickr-month {
-    color: var(--accent-deep) !important;
+
+body .flatpickr-day.selected,
+body .flatpickr-day.selected:hover,
+body .flatpickr-day.selected:focus {
+    background: var(--accent-deep);
+    border-color: var(--accent-deep);
+    color: #fff;
 }
-.flatpickr-current-month .flatpickr-monthDropdown-months,
-.flatpickr-current-month input.cur-year {
-    font-family: 'Noto Serif TC', serif !important;
-    font-weight: 500 !important;
+
+/* 今天 + 已選 → 保留黃框 */
+body .flatpickr-day.today.selected,
+body .flatpickr-day.today.selected:hover {
+    background: var(--accent-deep);
+    border-color: var(--yellow);
+    color: #fff;
+}
+
+body .flatpickr-day.prevMonthDay,
+body .flatpickr-day.nextMonthDay {
+    background: transparent;
+    border-color: transparent;
+    color: var(--muted);
+    opacity: 0.4;
+}
+body .flatpickr-day.prevMonthDay:hover,
+body .flatpickr-day.nextMonthDay:hover {
+    background: transparent;
+}
+body .flatpickr-day.prevMonthDay.selected,
+body .flatpickr-day.prevMonthDay.selected:hover,
+body .flatpickr-day.nextMonthDay.selected,
+body .flatpickr-day.nextMonthDay.selected:hover {
+    background: var(--accent-deep);
+    border-color: var(--accent-deep);
+    color: #fff;
+    opacity: 1;
+}
+
+/* 未來日期不可選 (maxDate: today) */
+body .flatpickr-day.flatpickr-disabled,
+body .flatpickr-day.flatpickr-disabled:hover,
+body .flatpickr-day.flatpickr-disabled.focused,
+body .flatpickr-day.notAllowed,
+body .flatpickr-day.notAllowed:hover {
+    background: transparent;
+    border-color: transparent;
+    color: var(--muted);
+    opacity: 0.4;
+    cursor: default;
+}
+
+body .flatpickr-months .flatpickr-month {
+    color: var(--accent-deep);
+}
+body .flatpickr-current-month .flatpickr-monthDropdown-months,
+body .flatpickr-current-month input.cur-year {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 500;
 }
 span.flatpickr-weekday {
-    color: var(--muted) !important;
-    font-size: var(--fs-xs) !important;
+    color: var(--muted);
+    font-size: var(--fs-xs);
 }

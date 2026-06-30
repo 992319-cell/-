@@ -21,9 +21,6 @@
     --dark: #1a1f2a;
 
     /* 文字尺寸 */
-    --fs-title: 58px;
-    --fs-price: 96px;
-    --fs-date: 48px;
     --fs-page-title: 40px;
     --fs-amount: 32px;
     --fs-label: 24px;
@@ -280,10 +277,9 @@ button{
 }
 .btn-primary{
     width: 124px;
-    display: block;
+    display: flex;
     background-color: var(--yellow);
     padding: 12px 20px;
-    display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 4px;
@@ -301,9 +297,8 @@ button{
 
 .btn-secondary{
     width: 124px;
-    display: block;
-    padding: 12px 20px;
     display: flex;
+    padding: 12px 20px;
     justify-content: space-between;
     align-items: center;
     gap: 4px;
@@ -321,37 +316,6 @@ button{
     }
 }
 
-/* card */
-.card{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-.card-title h3{
-    color: var(--accent-deep);
-}
-.card-title p{
-    color: var(--dark);
-    font-size: var(--fs-sm);
-}
-.card-title p span{
-    font-size: var(--fs-amount);
-    color:var(--ink)
-}
-.tags span{
-    margin-right: 12px;
-    padding: 4px;
-    display: inline-block;
-    font-size: var(--fs-xs);
-    background-color: var(--accent);
-    border-radius: 3px;
-    color: var(--bg-off);
-}
-.card-content p{
-    color: var(--accent-deep);
-    margin-top: 12px;
-    font-size: var(--fs-xs);
-}
 
 /* footer */
 footer {
